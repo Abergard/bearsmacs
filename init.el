@@ -1,3 +1,4 @@
+
 ;; == Disable loading of "default.el" at startup ==============================
 (setq inhibit-default-init t)
 
@@ -14,9 +15,13 @@
 
 ;; == Add line number =========================================================
 (global-linum-mode t)
+(column-number-mode t)
 
 ;; == Disable window's pipe delay =============================================
 (setq w32-pipe-read-delay 0)
+
+;;
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;; == Default to unified diffs ================================================
 (setq diff-switches "-u")
@@ -83,7 +88,7 @@
 ;; == my-cc-style ==============================================================
 (require 'cc-mode)
 (defun my-cc-style()
-  (local-set-key [C-tab] 'ff-find-other-file)
+  (local-set-key [C-tab] 'ff-get-other-file)
   (setq tab-width 4)
   (setq indent-tabs-mode nil)
   (c-set-style "linux")
@@ -167,11 +172,8 @@
 ;; == irony-mode =================================================================
 (use-package irony
   :ensure t
-  :defer t
   :init
   (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'c-mode-hook 'irony-mode)
-  (add-hook 'objc-mode-hook 'irony-mode)
   :config
   ;; replace the `completion-at-point' and `complete-symbol' bindings in
   ;; irony-mode's buffers by irony-mode's function
@@ -187,30 +189,15 @@
 ;; == company-mode ================================================================
 (use-package company
   :ensure t
-  :defer t
-  :init (add-hook 'after-init-hook 'global-company-mode)
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)
   :config
   (use-package company-irony
     :ensure t
-    :defer t
   )
   (use-package company-irony-c-headers
     :ensure t
-    :defer t
-  )
-  (use-package company-go
-    :ensure t
-    :defer t
-    :init
-      (add-hook 'go-mode-hook
-        (lambda ()
-          (set (make-local-variable 'company-backends) '(company-go))
-          (company-mode)
-        )
-      )
-    :config
-
-  )
+    )
   (setq
    company-idle-delay              0
    company-echo-delay              0
@@ -218,7 +205,7 @@
    company-show-numbers            t
    company-tooltip-limit           20
    company-dabbrev-downcase        nil
-   company-backends                '((company-irony company-irony-c-headers auto-complete-config))
+   company-backends                '((company-irony-c-headers company-irony))
    company-begin-commands          '(self-insert-command)
    )
   :bind ("M-RET" . company-complete-common)
@@ -246,6 +233,7 @@
   :ensure t
   :defer t
   :init
+;  (add-hook 'c-mode-common-hook '(lambda () (ggtags-mode 1)))
   (add-hook 'c++-mode-hook '(lambda () (ggtags-mode 1)))
   (add-hook 'c-mode-hook '(lambda () (ggtags-mode 1)))
   :bind ("M-/" . ggtags-find-file)
@@ -263,4 +251,14 @@
 (use-package iedit
   :ensure t
   :defer t
+  :config
+  (iedit-mode)
   )
+
+;; == flycheck-iron ===================================================================
+(use-package flycheck-irony
+  :ensure t
+  :init
+  (eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+)  
