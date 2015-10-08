@@ -1,4 +1,3 @@
-
 ;; == Disable loading of "default.el" at startup ==============================
 (setq inhibit-default-init t)
 
@@ -37,6 +36,12 @@
 ;; == (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) ==
 (set-frame-parameter (selected-frame) 'alpha '(90 50))
 (add-to-list 'default-frame-alist '(alpha 90 50))
+
+;; == use Shift+arrow_keys to move cursor around split panes =====================
+(windmove-default-keybindings)
+
+;; == when cursor is on edge, move to the other side, as in a toroidal space =====
+(setq windmove-wrap-around t )
 
 ;; == Set auto save files directory ===========================================
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/emacs-autosaves/" t)))
@@ -83,7 +88,12 @@
     (setq whitespace-style '(face tabs empty trailing lines-tail))
     (setq whitespace-line-column 100)
     (global-whitespace-mode 1)
-)
+    )
+
+;; == iedit ===========================================================================
+(use-package iedit
+  :ensure t
+  )
 
 ;; == my-cc-style ==============================================================
 (require 'cc-mode)
@@ -115,7 +125,6 @@
 ;; == flx-ido ===================================================================
 (use-package flx-ido
   :ensure t
-  :defer t
   :init
     (ido-mode 1)
     (ido-everywhere 1)
@@ -128,20 +137,17 @@
     (setq ido-use-virtual-buffers t)
     (use-package ido-ubiquitous
       :ensure t
-      :defer t
       :init
         (ido-ubiquitous-mode t)
     )
     (use-package smex
       :ensure t
-      :defer t
       :init
         (setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
         (global-set-key [remap execute-extended-command] 'smex)
     )
     (use-package idomenu
       :ensure t
-      :defer t
       :init
         (setq ido-default-buffer-method 'selected-window)
         (add-hook 'ido-setup-hook
@@ -155,7 +161,6 @@
 ;; == ido-hacks ==================================================================
 (use-package ido-hacks
   :ensure t
-  :defer t
 )
 
 ;; == ido complete for ggtags ====================================================
@@ -194,10 +199,17 @@
   :config
   (use-package company-irony
     :ensure t
+    :config
+    (setq irony-additional-clang-options (quote ("-std=c++14")))
   )
   (use-package company-irony-c-headers
     :ensure t
     )
+  (use-package company-jedi
+    :ensure t
+    :defer t
+    )
+
   (setq
    company-idle-delay              0
    company-echo-delay              0
@@ -205,7 +217,7 @@
    company-show-numbers            t
    company-tooltip-limit           20
    company-dabbrev-downcase        nil
-   company-backends                '((company-irony-c-headers company-irony))
+   company-backends                '((company-jedi company-irony-c-headers company-irony))
    company-begin-commands          '(self-insert-command)
    )
   :bind ("M-RET" . company-complete-common)
@@ -247,18 +259,21 @@
   (yas-global-mode 1)
   )
 
-;; == iedit ===========================================================================
-(use-package iedit
-  :ensure t
-  :defer t
-  :config
-  (iedit-mode)
-  )
-
 ;; == flycheck-iron ===================================================================
 (use-package flycheck-irony
   :ensure t
-  :init
+  :config
+  (require 'flycheck-irony)
   (eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-)  
+    '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+  )
+
+  ;; == flycheck-pyflakes ===================================================================
+(use-package flycheck-pyflakes
+  :ensure t
+  :defer t
+  :init
+  (add-hook 'python-mode-hook 'flycheck-mode)
+  (add-to-list 'flycheck-disabled-checkers 'python-flake8)
+  (add-to-list 'flycheck-disabled-checkers 'python-pylint)
+  )
