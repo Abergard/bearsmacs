@@ -98,6 +98,8 @@
 ;; == my-cc-style ==============================================================
 (require 'cc-mode)
 (defun my-cc-style()
+  (setq ff-search-directories
+      '("." "../Private" "../Public"))
   (local-set-key [C-tab] 'ff-get-other-file)
   (setq tab-width 4)
   (setq indent-tabs-mode nil)
@@ -200,15 +202,15 @@
   (use-package company-irony
     :ensure t
     :config
-    (setq irony-additional-clang-options (quote ("-std=c++14")))
+    (setq irony-additional-clang-options (quote ("-std=c++14 -DWINDOWS")))
   )
   (use-package company-irony-c-headers
     :ensure t
     )
-  (use-package company-jedi
-    :ensure t
-    :defer t
-    )
+  ;; (use-package company-jedi
+  ;;   :ensure t
+  ;;   :defer t
+  ;;   )
 
   (setq
    company-idle-delay              0
@@ -217,7 +219,7 @@
    company-show-numbers            t
    company-tooltip-limit           20
    company-dabbrev-downcase        nil
-   company-backends                '((company-jedi company-irony-c-headers company-irony))
+   company-backends                '((company-irony-c-headers company-irony));company-jedi
    company-begin-commands          '(self-insert-command)
    )
   :bind ("M-RET" . company-complete-common)
@@ -245,7 +247,7 @@
   :ensure t
   :defer t
   :init
-;  (add-hook 'c-mode-common-hook '(lambda () (ggtags-mode 1)))
+  (add-hook 'c-mode-common-hook '(lambda () (ggtags-mode 1)))
   (add-hook 'c++-mode-hook '(lambda () (ggtags-mode 1)))
   (add-hook 'c-mode-hook '(lambda () (ggtags-mode 1)))
   :bind ("M-/" . ggtags-find-file)
@@ -274,6 +276,17 @@
   :defer t
   :init
   (add-hook 'python-mode-hook 'flycheck-mode)
-  (add-to-list 'flycheck-disabled-checkers 'python-flake8)
-  (add-to-list 'flycheck-disabled-checkers 'python-pylint)
+;;  (add-to-list 'flycheck-disabled-checkers 'python-flake8)
+;;  (add-to-list 'flycheck-disabled-checkers 'python-pylint)
+  )
+
+(use-package elpy
+  :ensure t
+  :defer
+  :init
+  (add-hook 'python-mode-hook 'elpy-mode)
+  :config
+  (elpy-enable)
+  (remove-hook 'elpy-modules 'elpy-module-flymake)
+;  (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
   )
