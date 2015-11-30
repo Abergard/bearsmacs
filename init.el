@@ -290,3 +290,8 @@
   (remove-hook 'elpy-modules 'elpy-module-flymake)
 ;  (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
   )
+
+(use-package swift-mode
+  :ensure t
+  :defer
+  )
