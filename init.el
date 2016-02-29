@@ -1,3 +1,7 @@
+;;; init.el --- emacs's initialize file
+;;; Commentary:
+;;; Code:
+
 ;; == Disable loading of "default.el" at startup ==============================
 (setq inhibit-default-init t)
 
@@ -40,16 +44,28 @@
 ;; == use Shift+arrow_keys to move cursor around split panes =====================
 (windmove-default-keybindings)
 
-;; == when cursor is on edge, move to the other side, as in a toroidal space =====
-(setq windmove-wrap-around t )
+;; == set auto-insert header
+(auto-insert-mode)
+(setq auto-insert-query nil)
+
+(defun my/autoinsert-yas-expand()
+      "Replace text in yasnippet template."
+      (yas/expand-snippet (buffer-string) (point-min) (point-max)))
+
+(custom-set-variables
+ '(auto-insert 'other)
+ '(auto-insert-directory "~/.emacs.d/templates/")
+ '(auto-insert-alist '((("\\.hpp\\'" . "C++ header") . ["template.hpp" c++-mode my/autoinsert-yas-expand])
+                       (("\\.cpp\\'" . "C++ source") . ["template.cpp" my/autoinsert-yas-expand]))))
 
 ;; == Set auto save files directory ===========================================
+(setq temporary-file-directory "~/.emacs.d/tmp/")
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/emacs-autosaves/" t)))
 (setq backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups")))
 (setq make-backup-files t
       backup-by-copying t
-      delete-old-version t
-      kept-new-version 6
+      delete-old-versions t
+      kept-new-versions 6
       kept-old-versions 2
       version-control t
       auto-save-timeout 20
@@ -84,23 +100,24 @@
 ;; == whitespace ===============================================================
 (use-package whitespace
   :ensure t
-  :init
-    (setq whitespace-style '(face tabs empty trailing lines-tail))
-    (setq whitespace-line-column 100)
-    (global-whitespace-mode 1)
-    )
+  )
 
-;; == iedit ===========================================================================
-(use-package iedit
+
+(use-package clang-format
   :ensure t
+  :config
+    (setq clang-format-executable "/build/ltesdkroot/Tools/Tools/clang/CLANG_3.6_003/bin/clang-format")
+  :bind ("<C-return>" . clang-format-buffer)
   )
 
 ;; == my-cc-style ==============================================================
 (require 'cc-mode)
 (defun my-cc-style()
-  (setq ff-search-directories
-      '("." "../Private" "../Public"))
+  (setq whitespace-style '(face tabs empty trailing lines-tail))
+  (setq whitespace-line-column 120)
+  (global-whitespace-mode 1)
   (local-set-key [C-tab] 'ff-get-other-file)
+  (setq cc-search-directories '("." "../Include/" "../Source/"))
   (setq tab-width 4)
   (setq indent-tabs-mode nil)
   (c-set-style "linux")
@@ -109,24 +126,27 @@
   (c-set-offset 'inline-open '0)
   (c-set-offset 'label '*)
   (c-set-offset 'case-label '*)
- ;(c-set-offset 'access-label '/)
   (setq c-basic-offset 4)
-  (defvar c-hanging-braces-alist '(
-    (substatement-open)
-    (block-close . c-snug-do-while)
-    (extern-lang-open after)
-    (inexpr-class-open after)
-    (inexpr-class-close before)
-  ))
-  (defvar c-offsets-alist '(
-    (substatement-open . 0)
-  ))
+  (defvar c-hanging-braces-alist '((substatement-open)
+                                   (block-close . c-snug-do-while)
+                                   (extern-lang-open after)
+                                   (inexpr-class-open after)
+                                   (inexpr-class-close before)))
+  (defvar c-offsets-alist '((substatement-open . 0)))
 )
 (add-hook 'c++-mode-hook 'my-cc-style)
+(add-hook 'ttcn-3-mode-hook 'my-cc-style)
+(add-hook 'python-mode-hook
+      (lambda ()
+        (setq indent-tabs-mode t)
+        (setq tab-width 4)
+        (setq python-indent 4)
+        (setq indent-tabs-mode nil)))
 
 ;; == flx-ido ===================================================================
 (use-package flx-ido
   :ensure t
+  :defer t
   :init
     (ido-mode 1)
     (ido-everywhere 1)
@@ -139,17 +159,20 @@
     (setq ido-use-virtual-buffers t)
     (use-package ido-ubiquitous
       :ensure t
+      :defer t
       :init
         (ido-ubiquitous-mode t)
     )
     (use-package smex
       :ensure t
+      :defer t
       :init
         (setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
         (global-set-key [remap execute-extended-command] 'smex)
     )
     (use-package idomenu
       :ensure t
+      :defer t
       :init
         (setq ido-default-buffer-method 'selected-window)
         (add-hook 'ido-setup-hook
@@ -163,6 +186,7 @@
 ;; == ido-hacks ==================================================================
 (use-package ido-hacks
   :ensure t
+  :defer t
 )
 
 ;; == ido complete for ggtags ====================================================
@@ -201,17 +225,11 @@
   :config
   (use-package company-irony
     :ensure t
-    :config
-    (setq irony-additional-clang-options (quote ("-std=c++14 -DWINDOWS")))
   )
   (use-package company-irony-c-headers
     :ensure t
+    :config
     )
-  ;; (use-package company-jedi
-  ;;   :ensure t
-  ;;   :defer t
-  ;;   )
-
   (setq
    company-idle-delay              0
    company-echo-delay              0
@@ -219,10 +237,10 @@
    company-show-numbers            t
    company-tooltip-limit           20
    company-dabbrev-downcase        nil
-   company-backends                '((company-irony-c-headers company-irony));company-jedi
+   company-backends                '((company-irony-c-headers company-irony))
    company-begin-commands          '(self-insert-command)
    )
-  :bind ("M-RET" . company-complete-common)
+  :bind ("<M-return>" . company-complete-common)
   )
 
 (require 'color)
@@ -237,7 +255,7 @@
 ;; == ido-at-point ===================================================================
 
 (use-package ido-at-point
-  :ensure
+  :ensure t
   :config
   (ido-at-point-mode)
   )
@@ -247,9 +265,10 @@
   :ensure t
   :defer t
   :init
-  (add-hook 'c-mode-common-hook '(lambda () (ggtags-mode 1)))
+;  (add-hook 'c-mode-common-hook '(lambda () (ggtags-mode 1)))
   (add-hook 'c++-mode-hook '(lambda () (ggtags-mode 1)))
   (add-hook 'c-mode-hook '(lambda () (ggtags-mode 1)))
+  (add-hook 'ttcn-3-mode-hook '(lambda () (ggtags-mode 0)))
   :bind ("M-/" . ggtags-find-file)
   )
 
@@ -261,37 +280,25 @@
   (yas-global-mode 1)
   )
 
+;; == iedit ===========================================================================
+(use-package iedit
+  :ensure t
+  )
+
 ;; == flycheck-iron ===================================================================
 (use-package flycheck-irony
   :ensure t
-  :config
+  :init
   (require 'flycheck-irony)
+  (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14")))
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-  )
+)
 
-  ;; == flycheck-pyflakes ===================================================================
-(use-package flycheck-pyflakes
-  :ensure t
-  :defer t
-  :init
-  (add-hook 'python-mode-hook 'flycheck-mode)
-;;  (add-to-list 'flycheck-disabled-checkers 'python-flake8)
-;;  (add-to-list 'flycheck-disabled-checkers 'python-pylint)
-  )
+;; == ttcn-mode ===================================================================
+(add-to-list 'load-path "~/.emacs.d/elpa/ttcn3")
+(require 'ttcn3)
+(add-to-list 'auto-mode-alist '("\\.ttcn3?" . ttcn-3-mode) 't)
 
-(use-package elpy
-  :ensure t
-  :defer
-  :init
-  (add-hook 'python-mode-hook 'elpy-mode)
-  :config
-  (elpy-enable)
-  (remove-hook 'elpy-modules 'elpy-module-flymake)
-;  (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
-  )
-
-(use-package swift-mode
-  :ensure t
-  :defer
-  )
