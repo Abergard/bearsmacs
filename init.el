@@ -23,7 +23,7 @@
 ;; == Disable window's pipe delay =============================================
 (setq w32-pipe-read-delay 0)
 
-;;
+;; == Add .h files to c++-mode ================================================
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;; == Default to unified diffs ================================================
@@ -89,26 +89,167 @@
 (require 'diminish)
 (require 'bind-key)
 
+;; == uncomment below line to install all packages =============================
+;;(setq use-package-always-ensure t)
+
 ;; == warm-night theme =========================================================
 (use-package warm-night-theme
-  :ensure t
   :config
     (setq custom-safe-themes t)
     (load-theme 'warm-night)
 )
 
 ;; == whitespace ===============================================================
-(use-package whitespace
-  :ensure t
-  )
-
+(use-package whitespace)
 
 (use-package clang-format
-  :ensure t
+  :defer t
   :config
     (setq clang-format-executable "/build/ltesdkroot/Tools/Tools/clang/CLANG_3.6_003/bin/clang-format")
   :bind ("<C-return>" . clang-format-buffer)
   )
+
+;; == flx-ido ===================================================================
+(use-package flx-ido
+  :defer t
+  :init
+    (ido-mode 1)
+    (ido-everywhere 1)
+    (flx-ido-mode 1)
+  :config
+    (setq ido-enable-flex-matching t)
+    (setq ido-use-faces nil)
+    (setq ido-use-filename-at-point nil)
+    (setq ido-auto-merge-work-directories-length 0)
+    (setq ido-use-virtual-buffers t)
+
+    (use-package ido-ubiquitous
+      :defer t
+      :init
+        (ido-ubiquitous-mode t)
+    )
+    (use-package smex
+      :defer t
+      :init
+        (setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
+        (global-set-key [remap execute-extended-command] 'smex)
+    )
+    (use-package idomenu
+      :defer t
+      :init
+        (setq ido-default-buffer-method 'selected-window)
+        (add-hook 'ido-setup-hook
+          (lambda ()
+            (define-key ido-completion-map [up] 'previous-history-element)
+          )
+        )
+    )
+)
+
+;; == ido-hacks ==================================================================
+(use-package ido-hacks
+  :defer t
+)
+
+;; == ido complete for ggtags ====================================================
+(setq ggtags-completing-read-function
+  (lambda (&rest args)
+    (apply #'ido-completing-read
+     (car args)
+     (all-completions "" ggtags-completion-table)
+     (cddr args)
+    )
+  )
+)
+
+;; == irony-mode =================================================================
+(use-package irony
+  :init
+  (add-hook 'c++-mode-hook 'irony-mode)
+  :config
+  ;; replace the `completion-at-point' and `complete-symbol' bindings in
+  ;; irony-mode's buffers by irony-mode's function
+  (defun my-irony-mode-hook ()
+    (define-key irony-mode-map [remap completion-at-point]
+      'irony-completion-at-point-async)
+    (define-key irony-mode-map [remap complete-symbol]
+      'irony-completion-at-point-async))
+  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+  )
+
+;; == company-mode ================================================================
+(use-package company
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)
+  :config
+  (use-package company-irony)
+  (use-package company-irony-c-headers)
+  (setq
+   company-idle-delay              0
+   company-echo-delay              0
+   company-minimum-prefix-length   1
+   company-show-numbers            t
+   company-tooltip-limit           20
+   company-dabbrev-downcase        nil
+   company-backends                '((company-irony-c-headers company-irony))
+   company-begin-commands          '(self-insert-command)
+   )
+  :bind ("<M-return>" . company-complete-common)
+  )
+
+(require 'color)
+(let ((bg (face-attribute 'default :background)))
+  (custom-set-faces
+   `(company-tooltip ((t (:inherit default :background , (color-lighten-name bg 5)))))
+   `(company-tooltip-search ((t (:background "steelblue" :foreground "white"))))
+   `(company-tooltip-selection ((t (:background "steelblue" :foreground "white"))))
+   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+   `(company-tooltip-annotation ((t (:inherit default :background , (color-lighten-name bg 5) :foreground "medium purple"))))))
+
+;; == ido-at-point ===================================================================
+(use-package ido-at-point
+  :config
+  (ido-at-point-mode)
+  )
+
+;; == ggtags =========================================================================
+(use-package ggtags
+  :defer t
+  :init
+  (add-hook 'c++-mode-hook '(lambda () (ggtags-mode 1)))
+  (add-hook 'c-mode-hook '(lambda () (ggtags-mode 1)))
+  (add-hook 'ttcn-3-mode-hook '(lambda () (ggtags-mode 0)))
+  :bind ("M-/" . ggtags-find-file)
+  )
+
+;; == yasnippet =======================================================================
+(use-package yasnippet
+  :defer t
+  :init
+  (yas-global-mode 1)
+  )
+
+;; == iedit ===========================================================================
+(use-package iedit
+  :defer t
+  )
+
+;; == flycheck-iron ===================================================================
+(use-package flycheck-irony
+  :init
+  (require 'flycheck-irony)
+  (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14")))
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+
+  (eval-after-load 'flycheck
+    '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+)
+
+;; == ttcn-mode ===================================================================
+(add-to-list 'load-path "~/.emacs.d/elpa/ttcn3")
+(require 'ttcn3)
+(add-to-list 'auto-mode-alist '("\\.ttcn3?" . ttcn-3-mode) 't)
 
 ;; == my-cc-style ==============================================================
 (require 'cc-mode)
@@ -136,169 +277,4 @@
 )
 (add-hook 'c++-mode-hook 'my-cc-style)
 (add-hook 'ttcn-3-mode-hook 'my-cc-style)
-(add-hook 'python-mode-hook
-      (lambda ()
-        (setq indent-tabs-mode t)
-        (setq tab-width 4)
-        (setq python-indent 4)
-        (setq indent-tabs-mode nil)))
-
-;; == flx-ido ===================================================================
-(use-package flx-ido
-  :ensure t
-  :defer t
-  :init
-    (ido-mode 1)
-    (ido-everywhere 1)
-    (flx-ido-mode 1)
-  :config
-    (setq ido-enable-flex-matching t)
-    (setq ido-use-faces nil)
-    (setq ido-use-filename-at-point nil)
-    (setq ido-auto-merge-work-directories-length 0)
-    (setq ido-use-virtual-buffers t)
-    (use-package ido-ubiquitous
-      :ensure t
-      :defer t
-      :init
-        (ido-ubiquitous-mode t)
-    )
-    (use-package smex
-      :ensure t
-      :defer t
-      :init
-        (setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
-        (global-set-key [remap execute-extended-command] 'smex)
-    )
-    (use-package idomenu
-      :ensure t
-      :defer t
-      :init
-        (setq ido-default-buffer-method 'selected-window)
-        (add-hook 'ido-setup-hook
-          (lambda ()
-            (define-key ido-completion-map [up] 'previous-history-element)
-          )
-        )
-    )
-)
-
-;; == ido-hacks ==================================================================
-(use-package ido-hacks
-  :ensure t
-  :defer t
-)
-
-;; == ido complete for ggtags ====================================================
-(setq ggtags-completing-read-function
-  (lambda (&rest args)
-    (apply #'ido-completing-read
-     (car args)
-     (all-completions "" ggtags-completion-table)
-     (cddr args)
-    )
-  )
-)
-
-;; == irony-mode =================================================================
-(use-package irony
-  :ensure t
-  :init
-  (add-hook 'c++-mode-hook 'irony-mode)
-  :config
-  ;; replace the `completion-at-point' and `complete-symbol' bindings in
-  ;; irony-mode's buffers by irony-mode's function
-  (defun my-irony-mode-hook ()
-    (define-key irony-mode-map [remap completion-at-point]
-      'irony-completion-at-point-async)
-    (define-key irony-mode-map [remap complete-symbol]
-      'irony-completion-at-point-async))
-  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-  )
-
-;; == company-mode ================================================================
-(use-package company
-  :ensure t
-  :init
-  (add-hook 'after-init-hook 'global-company-mode)
-  :config
-  (use-package company-irony
-    :ensure t
-  )
-  (use-package company-irony-c-headers
-    :ensure t
-    :config
-    )
-  (setq
-   company-idle-delay              0
-   company-echo-delay              0
-   company-minimum-prefix-length   1
-   company-show-numbers            t
-   company-tooltip-limit           20
-   company-dabbrev-downcase        nil
-   company-backends                '((company-irony-c-headers company-irony))
-   company-begin-commands          '(self-insert-command)
-   )
-  :bind ("<M-return>" . company-complete-common)
-  )
-
-(require 'color)
-(let ((bg (face-attribute 'default :background)))
-  (custom-set-faces
-   `(company-tooltip ((t (:inherit default :background , (color-lighten-name bg 5)))))
-   `(company-tooltip-search ((t (:background "steelblue" :foreground "white"))))
-   `(company-tooltip-selection ((t (:background "steelblue" :foreground "white"))))
-   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
-   `(company-tooltip-annotation ((t (:inherit default :background , (color-lighten-name bg 5) :foreground "medium purple"))))))
-
-;; == ido-at-point ===================================================================
-
-(use-package ido-at-point
-  :ensure t
-  :config
-  (ido-at-point-mode)
-  )
-
-;; == ggtags =========================================================================
-(use-package ggtags
-  :ensure t
-  :defer t
-  :init
-;  (add-hook 'c-mode-common-hook '(lambda () (ggtags-mode 1)))
-  (add-hook 'c++-mode-hook '(lambda () (ggtags-mode 1)))
-  (add-hook 'c-mode-hook '(lambda () (ggtags-mode 1)))
-  (add-hook 'ttcn-3-mode-hook '(lambda () (ggtags-mode 0)))
-  :bind ("M-/" . ggtags-find-file)
-  )
-
-;; == yasnippet =======================================================================
-(use-package yasnippet
-  :ensure t
-  :defer t
-  :init
-  (yas-global-mode 1)
-  )
-
-;; == iedit ===========================================================================
-(use-package iedit
-  :ensure t
-  )
-
-;; == flycheck-iron ===================================================================
-(use-package flycheck-irony
-  :ensure t
-  :init
-  (require 'flycheck-irony)
-  (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14")))
-  (add-hook 'after-init-hook #'global-flycheck-mode)
-
-  (eval-after-load 'flycheck
-    '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-)
-
-;; == ttcn-mode ===================================================================
-(add-to-list 'load-path "~/.emacs.d/elpa/ttcn3")
-(require 'ttcn3)
-(add-to-list 'auto-mode-alist '("\\.ttcn3?" . ttcn-3-mode) 't)
 
