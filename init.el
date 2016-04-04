@@ -94,7 +94,7 @@
 (require 'bind-key)
 
 ;; == uncomment below line to install all packages =============================
-(setq use-package-always-ensure t)
+;(setq use-package-always-ensure t)
 
 ;; == warm-night theme =========================================================
 (use-package warm-night-theme
@@ -106,6 +106,7 @@
 ;; == whitespace ===============================================================
 (use-package whitespace)
 
+;; == clang-format ===========================================================
 (use-package clang-format
   :defer t
   :config
