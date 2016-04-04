@@ -23,6 +23,9 @@
 ;; == Disable window's pipe delay =============================================
 (setq w32-pipe-read-delay 0)
 
+;; Short confirm
+(fset 'yes-or-no-p 'y-or-n-p)
+
 ;; == Add .h files to c++-mode ================================================
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
@@ -76,9 +79,9 @@
 ;; == package & package-archives ===============================================
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -91,7 +94,7 @@
 (require 'bind-key)
 
 ;; == uncomment below line to install all packages =============================
-;;(setq use-package-always-ensure t)
+(setq use-package-always-ensure t)
 
 ;; == warm-night theme =========================================================
 (use-package warm-night-theme
@@ -233,7 +236,6 @@
 
 ;; == iedit ===========================================================================
 (use-package iedit
-  :defer t
   )
 
 ;; == flycheck-iron ===================================================================
