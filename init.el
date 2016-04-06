@@ -79,9 +79,9 @@
 ;; == package & package-archives ===============================================
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -110,7 +110,7 @@
 (use-package clang-format
   :defer t
   :config
-    (setq clang-format-executable "/build/ltesdkroot/Tools/Tools/clang/CLANG_3.6_003/bin/clang-format")
+    (setq clang-format-executable "~/bin/clang-format")
   :bind ("<C-return>" . clang-format-buffer)
   )
 
