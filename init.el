@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
+;; == uncomment below line to install all packages =============================
+;; (setq use-package-always-ensure t)
+
 ;; == Disable loading of "default.el" at startup ==============================
 (setq inhibit-default-init t)
 
@@ -18,6 +21,7 @@
 
 ;; == Add line number =========================================================
 (global-linum-mode t)
+(global-hl-line-mode t)
 (column-number-mode t)
 
 ;; == Disable window's pipe delay =============================================
@@ -48,18 +52,18 @@
 (windmove-default-keybindings)
 
 ;; == set auto-insert header
-(auto-insert-mode)
-(setq auto-insert-query nil)
+;; (auto-insert-mode)
+;; (setq auto-insert-query nil)
 
-(defun my/autoinsert-yas-expand()
-      "Replace text in yasnippet template."
-      (yas/expand-snippet (buffer-string) (point-min) (point-max)))
+;; (defun my/autoinsert-yas-expand()
+;;       "Replace text in yasnippet template."
+;;       (yas/expand-snippet (buffer-string) (point-min) (point-max)))
 
-(custom-set-variables
- '(auto-insert 'other)
- '(auto-insert-directory "~/.emacs.d/templates/")
- '(auto-insert-alist '((("\\.hpp\\'" . "C++ header") . ["template.hpp" c++-mode my/autoinsert-yas-expand])
-                       (("\\.cpp\\'" . "C++ source") . ["template.cpp" my/autoinsert-yas-expand]))))
+;; (custom-set-variables
+;;  '(auto-insert 'other)
+;;  '(auto-insert-directory "~/.emacs.d/templates/")
+;;  '(auto-insert-alist '((("\\.hpp\\'" . "C++ header") . ["template.hpp" c++-mode my/autoinsert-yas-expand])
+;;                        (("\\.cpp\\'" . "C++ source") . ["template.cpp" my/autoinsert-yas-expand]))))
 
 ;; == Set auto save files directory ===========================================
 (setq temporary-file-directory "~/.emacs.d/tmp/")
@@ -79,9 +83,10 @@
 ;; == package & package-archives ===============================================
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -93,22 +98,21 @@
 (require 'diminish)
 (require 'bind-key)
 
-;; == uncomment below line to install all packages =============================
-;(setq use-package-always-ensure t)
+;; == paradox package =========================================================
+(use-package paradox)
+(add-to-list 'load-path "~/.emacs.d/local")
+(require 'keys)
 
 ;; == warm-night theme =========================================================
-(use-package warm-night-theme
-  :config
-    (setq custom-safe-themes t)
-    (load-theme 'warm-night)
-)
+(setq custom-safe-themes t)
+(use-package warm-night-theme)
+(load-theme 'warm-night t)
 
 ;; == whitespace ===============================================================
 (use-package whitespace)
 
 ;; == clang-format ===========================================================
 (use-package clang-format
-  :defer t
   :config
     (setq clang-format-executable "~/bin/clang-format")
   :bind ("<C-return>" . clang-format-buffer)
@@ -116,7 +120,6 @@
 
 ;; == flx-ido ===================================================================
 (use-package flx-ido
-  :defer t
   :init
     (ido-mode 1)
     (ido-everywhere 1)
@@ -129,18 +132,15 @@
     (setq ido-use-virtual-buffers t)
 
     (use-package ido-ubiquitous
-      :defer t
       :init
         (ido-ubiquitous-mode t)
     )
     (use-package smex
-      :defer t
       :init
         (setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
         (global-set-key [remap execute-extended-command] 'smex)
     )
     (use-package idomenu
-      :defer t
       :init
         (setq ido-default-buffer-method 'selected-window)
         (add-hook 'ido-setup-hook
@@ -151,12 +151,10 @@
     )
 )
 
-;; == ido-hacks ==================================================================
-(use-package ido-hacks
-  :defer t
-)
+;; == ido-hacks =============================================================
+(use-package ido-hacks)
 
-;; == ido complete for ggtags ====================================================
+;; == ido complete for ggtags ===============================================
 (setq ggtags-completing-read-function
   (lambda (&rest args)
     (apply #'ido-completing-read
@@ -167,7 +165,7 @@
   )
 )
 
-;; == irony-mode =================================================================
+;; == irony-mode ============================================================
 (use-package irony
   :init
   (add-hook 'c++-mode-hook 'irony-mode)
@@ -212,7 +210,7 @@
    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
    `(company-tooltip-annotation ((t (:inherit default :background , (color-lighten-name bg 5) :foreground "medium purple"))))))
 
-;; == ido-at-point ===================================================================
+;; == ido-at-point =========================================================
 (use-package ido-at-point
   :config
   (ido-at-point-mode)
@@ -220,7 +218,6 @@
 
 ;; == ggtags =========================================================================
 (use-package ggtags
-  :defer t
   :init
   (add-hook 'c++-mode-hook '(lambda () (ggtags-mode 1)))
   (add-hook 'c-mode-hook '(lambda () (ggtags-mode 1)))
@@ -228,41 +225,49 @@
   :bind ("M-/" . ggtags-find-file)
   )
 
-;; == yasnippet =======================================================================
+;; == yasnippet =============================================================
 (use-package yasnippet
-  :defer t
   :init
   (yas-global-mode 1)
   )
 
-;; == iedit ===========================================================================
-(use-package iedit
-  )
+;; == iedit ====================================================================
+(use-package iedit)
 
-;; == flycheck-iron ===================================================================
+;; == flycheck-iron ============================================================
 (use-package flycheck-irony
   :init
   (require 'flycheck-irony)
-  (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++14")))
+  (add-hook 'c++-mode-hook (lambda ()
+			     (setq flycheck-clang-language-standard "c++14")))
   (add-hook 'after-init-hook #'global-flycheck-mode)
 
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 )
 
-;; == ttcn-mode ===================================================================
+;; == ttcn-mode ================================================================
 (add-to-list 'load-path "~/.emacs.d/elpa/ttcn3")
-(require 'ttcn3)
-(add-to-list 'auto-mode-alist '("\\.ttcn3?" . ttcn-3-mode) 't)
+(when (require 'ttcn3 nil 'noerror)
+  (add-to-list 'auto-mode-alist '("\\.ttcn3?" . ttcn-3-mode) 't)
+  (add-hook 'ttcn-3-mode-hook 'my-cc-style)
+  )
 
 ;; == my-cc-style ==============================================================
 (require 'cc-mode)
 (defun my-cc-style()
   (setq whitespace-style '(face tabs empty trailing lines-tail))
   (setq whitespace-line-column 120)
-  (global-whitespace-mode 1)
+  (whitespace-mode 1)
+  (hs-minor-mode 1)
   (local-set-key [C-tab] 'ff-get-other-file)
-  (setq cc-search-directories '("." "../Include/" "../Source/"))
+  (local-set-key (kbd "C-M-]") 'end-of-defun)
+  (local-set-key (kbd "C-M-[") 'beginning-of-defun)
+  (local-set-key (kbd "<C-M-return>") 'hs-toggle-hiding)
+  (setq cc-search-directories '("." "../Include/"
+				"../Source/"
+				"../../Include/configUpdate"
+				"../../Source/configUpdate"))
   (setq tab-width 4)
   (setq indent-tabs-mode nil)
   (c-set-style "linux")
@@ -280,5 +285,5 @@
   (defvar c-offsets-alist '((substatement-open . 0)))
 )
 (add-hook 'c++-mode-hook 'my-cc-style)
-(add-hook 'ttcn-3-mode-hook 'my-cc-style)
 
+;;; init.el ends here
