@@ -114,7 +114,7 @@
 ;; == clang-format ===========================================================
 (use-package clang-format
   :config
-    (setq clang-format-executable "~/bin/clang-format")
+;;    (setq clang-format-executable "clang-format.exe")
   :bind ("<C-return>" . clang-format-buffer)
   )
 
