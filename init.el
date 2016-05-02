@@ -1,3 +1,4 @@
+
 ;;; init.el --- emacs's initialize file
 ;;; Commentary:
 ;;; Code:
@@ -100,8 +101,19 @@
 
 ;; == paradox package =========================================================
 (use-package paradox)
+
 (add-to-list 'load-path "~/.emacs.d/local")
-(require 'keys)
+(when (require 'keys nil 'noerror))
+
+(require 'bears-style)
+(require 'bears-bind)
+
+(defun c++-style()
+  (bears-c++-style)
+  (bears-c++-bind)
+  )
+(add-hook 'c++-mode-hook 'c++-style)
+
 
 ;; == warm-night theme =========================================================
 (setq custom-safe-themes t)
@@ -252,38 +264,5 @@
   (add-to-list 'auto-mode-alist '("\\.ttcn3?" . ttcn-3-mode) 't)
   (add-hook 'ttcn-3-mode-hook 'my-cc-style)
   )
-
-;; == my-cc-style ==============================================================
-(require 'cc-mode)
-(defun my-cc-style()
-  (setq whitespace-style '(face tabs empty trailing lines-tail))
-  (setq whitespace-line-column 120)
-  (whitespace-mode 1)
-  (hs-minor-mode 1)
-  (local-set-key [C-tab] 'ff-get-other-file)
-  (local-set-key (kbd "C-M-]") 'end-of-defun)
-  (local-set-key (kbd "C-M-[") 'beginning-of-defun)
-  (local-set-key (kbd "<C-M-return>") 'hs-toggle-hiding)
-  (setq cc-search-directories '("." "../Include/"
-				"../Source/"
-				"../../Include/configUpdate"
-				"../../Source/configUpdate"))
-  (setq tab-width 4)
-  (setq indent-tabs-mode nil)
-  (c-set-style "linux")
-  (c-set-offset 'innamespace '0)
-  (c-set-offset 'inextern-lang '0)
-  (c-set-offset 'inline-open '0)
-  (c-set-offset 'label '*)
-  (c-set-offset 'case-label '*)
-  (setq c-basic-offset 4)
-  (defvar c-hanging-braces-alist '((substatement-open)
-                                   (block-close . c-snug-do-while)
-                                   (extern-lang-open after)
-                                   (inexpr-class-open after)
-                                   (inexpr-class-close before)))
-  (defvar c-offsets-alist '((substatement-open . 0)))
-)
-(add-hook 'c++-mode-hook 'my-cc-style)
 
 ;;; init.el ends here
