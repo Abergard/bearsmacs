@@ -1,4 +1,3 @@
-
 ;;; init.el --- emacs's initialize file
 ;;; Commentary:
 ;;; Code:
@@ -101,19 +100,6 @@
 
 ;; == paradox package =========================================================
 (use-package paradox)
-
-(add-to-list 'load-path "~/.emacs.d/local")
-(when (require 'keys nil 'noerror))
-
-(require 'bears-style)
-(require 'bears-bind)
-
-(defun c++-style()
-  (bears-c++-style)
-  (bears-c++-bind)
-  )
-(add-hook 'c++-mode-hook 'c++-style)
-
 
 ;; == warm-night theme =========================================================
 (setq custom-safe-themes t)
@@ -264,5 +250,27 @@
   (add-to-list 'auto-mode-alist '("\\.ttcn3?" . ttcn-3-mode) 't)
   (add-hook 'ttcn-3-mode-hook 'my-cc-style)
   )
+
+;;; == load bears private config file ==
+(add-to-list 'load-path "~/.emacs.d/private")
+
+;;; == load user config file ==
+(unless (file-exists-p "~/.bearsmacs.el")
+  (write-region
+   ";;; .bearsmacs.el --- user config file
+;;; Commentary:
+;;; Code:
+
+(require 'bears-style)
+(require 'bears-bind)
+
+(defun c++-style()
+  (bears-c++-style)
+  (bears-c++-bind)
+  )
+(add-hook 'c++-mode-hook 'c++-style)
+
+;;; .bearsmacs.el ends here" nil "~/.bearsmacs.el" nil))
+(load-file "~/.bearsmacs.el")
 
 ;;; init.el ends here
