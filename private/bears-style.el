@@ -31,6 +31,7 @@
 
   (whitespace-mode 1)
   (hs-minor-mode 1)
+  (show-paren-mode 1)
   )
 
 (defun bears-c++-style()
