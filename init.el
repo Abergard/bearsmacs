@@ -2,32 +2,38 @@
 ;;; Commentary:
 ;;; Code:
 
-;; == Disable loading of "default.el" at startup ==============================
+;; (setq my-list (make-list 3 '(cos tocs plu)))
+
+;; (dolist (elem 'my-list)
+;;   (message "hello world"))
+(defvar bears-packages nil)
+
+;; == Disable loading of "default.el" at startup ===========================
 (setq inhibit-default-init t)
 
-;; == Turn off mouse interface early in startup to avoid momentary display ====
+;; == Turn off mouse interface early in startup to avoid momentary display =
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-;; == Enable visual feedback on selections ====================================
+;; == Enable visual feedback on selections =================================
 (setq transient-mark-mode t)
 
-;; == No splash screen please... jeez =========================================
+;; == No splash screen please... jeez ======================================
 (setq inhibit-startup-screen t)
 
-;; == Add line number =========================================================
+;; == Add line number ======================================================
 (global-linum-mode t)
 (global-hl-line-mode t)
 (column-number-mode t)
 
-;; == Disable window's pipe delay =============================================
+;; == Disable window's pipe delay ==========================================
 (setq w32-pipe-read-delay 0)
 
-;; Short confirm
+;; == Short confirm ==
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; == Add .h files to c++-mode ================================================
+;; == Add .h files to c++-mode =============================================
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;; == Default to unified diffs ================================================
@@ -77,41 +83,14 @@
       delete-old-versions t
       )
 
-;; == package & package-archives ===============================================
-(require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(package-initialize)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(eval-when-compile
-  (require 'use-package))
-(require 'diminish)
-(require 'bind-key)
-
-(defun bears-check-packages (switch)
-"Use SWITCH -check_packages to install packages by use-package."
-(setq use-package-always-ensure t))
-
-(add-to-list 'command-switch-alist '("-check_packages" . bears-check-packages))
-
-;; == paradox package =========================================================
-(use-package paradox)
+;;; == load bears private config file ==
+(add-to-list 'load-path "~/.emacs.d/private")
+(require 'bears-packages)
 
 ;; == warm-night theme =========================================================
 (setq custom-safe-themes t)
 (use-package warm-night-theme)
 (load-theme 'warm-night t)
-
-;; == whitespace ===============================================================
-(use-package whitespace
-  :diminish whitespace-mode)
 
 ;; == clang-format ===========================================================
 (use-package clang-format
@@ -120,7 +99,7 @@
   :bind ("<C-return>" . clang-format-buffer)
   )
 
-;; == flx-ido ===================================================================
+;; == flx-ido =================================================================
 (use-package flx-ido
   :init
     (ido-mode 1)
@@ -191,8 +170,6 @@
   :config
   (use-package company-irony)
   (use-package company-irony-c-headers)
-  (add-to-list 'load-path "~/.emacs.d/elpa/company-glsl")
-  (require 'company-glsl)
   (setq
    company-idle-delay              0
    company-echo-delay              0
@@ -200,7 +177,7 @@
    company-show-numbers            t
    company-tooltip-limit           20
    company-dabbrev-downcase        nil
-   company-backends                '((company-irony-c-headers company-irony company-elisp company-glsl))
+   company-backends                '((company-irony-c-headers company-irony company-elisp))
    company-begin-commands          '(self-insert-command)
    )
   :bind ("<M-return>" . company-complete-common)
@@ -231,44 +208,23 @@
   :diminish ggtags-mode
   )
 
-;; == yasnippet =============================================================
-(use-package yasnippet
-  :init
-  (yas-global-mode 1)
-  :diminish yas-minor-mode
-  )
-
-;; == iedit ====================================================================
-(use-package iedit)
-
 ;; == flycheck-iron ============================================================
 (use-package flycheck-irony
   :init
   (require 'flycheck-irony)
   (add-hook 'c++-mode-hook (lambda ()
-			     (setq flycheck-clang-language-standard "c++14")))
+                 (setq flycheck-clang-language-standard "c++14")))
   (add-hook 'after-init-hook #'global-flycheck-mode)
 
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-  (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-glsl")
-  (require 'flycheck-glsl)
-  ()
-  )
-
-;; == ninja-mode ==
-(use-package ninja-mode)
-(use-package glsl-mode)
-
-;; == ttcn-mode ================================================================
-(add-to-list 'load-path "~/.emacs.d/elpa/ttcn3")
-(when (require 'ttcn3 nil 'noerror)
-  (add-to-list 'auto-mode-alist '("\\.ttcn3?" . ttcn-3-mode) 't)
-  (add-hook 'ttcn-3-mode-hook 'my-cc-style)
   )
 
 ;;; == load bears private config file ==
-(add-to-list 'load-path "~/.emacs.d/private")
+(require 'bears-style)
+(require 'bears-bind)
+
+(add-hook 'emacs-lisp-mode-hook 'bears-lisp-style)
 
 ;;; == load user config file ==
 (unless (file-exists-p "~/.bearsmacs.el")
@@ -277,19 +233,33 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'bears-style)
-(require 'bears-bind)
+(setq bears-packages '())
 
-(defun c++-style()
-  (bears-c++-style)
-  (bears-c++-bind)
+(defun bears-user-config()
+  (defun c++-style()
+    (bears-c++-style)
+    (bears-c++-bind)
+    (setq cc-search-directories '(\".\"
+                                  \"../Include/\"
+                                  \"../Source/\"
+                                  \"../../Include/configUpdate\"
+                                  \"../../Source/configUpdate\")
+      )
+    )
+  (add-hook 'c++-mode-hook 'c++-style)
   )
-(add-hook 'c++-mode-hook 'c++-style)
+
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars)
+;; End:
 
 ;;; .bearsmacs.el ends here" nil "~/.bearsmacs.el" nil))
 (load-file "~/.bearsmacs.el")
 
-;; == diminish ==
-(diminish 'hs-minor-mode)
+(while bears-packages
+  (load-file
+   (format "~/.emacs.d/private/packages/bears-%s.el" (pop bears-packages))))
+
+(bears-user-config)
 
 ;;; init.el ends here
