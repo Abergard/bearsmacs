@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; == uncomment below line to install all packages =============================
-;; (setq use-package-always-ensure t)
-
 ;; == Disable loading of "default.el" at startup ==============================
 (setq inhibit-default-init t)
 
@@ -98,6 +95,12 @@
 (require 'diminish)
 (require 'bind-key)
 
+(defun bears-check-packages (switch)
+"Use SWITCH -check_packages to install packages by use-package."
+(setq use-package-always-ensure t))
+
+(add-to-list 'command-switch-alist '("-check_packages" . bears-check-packages))
+
 ;; == paradox package =========================================================
 (use-package paradox)
 
@@ -107,7 +110,8 @@
 (load-theme 'warm-night t)
 
 ;; == whitespace ===============================================================
-(use-package whitespace)
+(use-package whitespace
+  :diminish whitespace-mode)
 
 ;; == clang-format ===========================================================
 (use-package clang-format
@@ -177,6 +181,7 @@
       'irony-completion-at-point-async))
   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+  :diminish irony-mode
   )
 
 ;; == company-mode ================================================================
@@ -186,6 +191,8 @@
   :config
   (use-package company-irony)
   (use-package company-irony-c-headers)
+  (add-to-list 'load-path "~/.emacs.d/elpa/company-glsl")
+  (require 'company-glsl)
   (setq
    company-idle-delay              0
    company-echo-delay              0
@@ -193,7 +200,7 @@
    company-show-numbers            t
    company-tooltip-limit           20
    company-dabbrev-downcase        nil
-   company-backends                '((company-irony-c-headers company-irony))
+   company-backends                '((company-irony-c-headers company-irony company-elisp company-glsl))
    company-begin-commands          '(self-insert-command)
    )
   :bind ("<M-return>" . company-complete-common)
@@ -221,12 +228,14 @@
   (add-hook 'c-mode-hook '(lambda () (ggtags-mode 1)))
   (add-hook 'ttcn-3-mode-hook '(lambda () (ggtags-mode 0)))
   :bind ("M-/" . ggtags-find-file)
+  :diminish ggtags-mode
   )
 
 ;; == yasnippet =============================================================
 (use-package yasnippet
   :init
   (yas-global-mode 1)
+  :diminish yas-minor-mode
   )
 
 ;; == iedit ====================================================================
@@ -242,7 +251,14 @@
 
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-)
+  (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-glsl")
+  (require 'flycheck-glsl)
+  ()
+  )
+
+;; == ninja-mode ==
+(use-package ninja-mode)
+(use-package glsl-mode)
 
 ;; == ttcn-mode ================================================================
 (add-to-list 'load-path "~/.emacs.d/elpa/ttcn3")
@@ -272,5 +288,8 @@
 
 ;;; .bearsmacs.el ends here" nil "~/.bearsmacs.el" nil))
 (load-file "~/.bearsmacs.el")
+
+;; == diminish ==
+(diminish 'hs-minor-mode)
 
 ;;; init.el ends here
