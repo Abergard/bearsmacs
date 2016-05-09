@@ -14,6 +14,7 @@
   (hs-minor-mode 1)
   (show-paren-mode 1)
   (diminish 'hs-minor-mode)
+  (diminish 'abbrev-mode)
   )
 
 (defun bears-c-style()

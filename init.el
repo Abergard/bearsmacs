@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; (setq my-list (make-list 3 '(cos tocs plu)))
-
-;; (dolist (elem 'my-list)
-;;   (message "hello world"))
 (defvar bears-packages nil)
 
 ;; == Disable loading of "default.el" at startup ===========================
@@ -89,136 +85,6 @@
 
 ;; == warm-night theme =========================================================
 (setq custom-safe-themes t)
-(use-package warm-night-theme)
-(load-theme 'warm-night t)
-
-;; == clang-format ===========================================================
-(use-package clang-format
-  :config
-;;    (setq clang-format-executable "clang-format.exe")
-  :bind ("<C-return>" . clang-format-buffer)
-  )
-
-;; == flx-ido =================================================================
-(use-package flx-ido
-  :init
-    (ido-mode 1)
-    (ido-everywhere 1)
-    (flx-ido-mode 1)
-  :config
-    (setq ido-enable-flex-matching t)
-    (setq ido-use-faces nil)
-    (setq ido-use-filename-at-point nil)
-    (setq ido-auto-merge-work-directories-length 0)
-    (setq ido-use-virtual-buffers t)
-
-    (use-package ido-ubiquitous
-      :init
-        (ido-ubiquitous-mode t)
-    )
-    (use-package smex
-      :init
-        (setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
-        (global-set-key [remap execute-extended-command] 'smex)
-    )
-    (use-package idomenu
-      :init
-        (setq ido-default-buffer-method 'selected-window)
-        (add-hook 'ido-setup-hook
-          (lambda ()
-            (define-key ido-completion-map [up] 'previous-history-element)
-          )
-        )
-    )
-)
-
-;; == ido-hacks =============================================================
-(use-package ido-hacks)
-
-;; == ido complete for ggtags ===============================================
-(setq ggtags-completing-read-function
-  (lambda (&rest args)
-    (apply #'ido-completing-read
-     (car args)
-     (all-completions "" ggtags-completion-table)
-     (cddr args)
-    )
-  )
-)
-
-;; == irony-mode ============================================================
-(use-package irony
-  :init
-  (add-hook 'c++-mode-hook 'irony-mode)
-  :config
-  ;; replace the `completion-at-point' and `complete-symbol' bindings in
-  ;; irony-mode's buffers by irony-mode's function
-  (defun my-irony-mode-hook ()
-    (define-key irony-mode-map [remap completion-at-point]
-      'irony-completion-at-point-async)
-    (define-key irony-mode-map [remap complete-symbol]
-      'irony-completion-at-point-async))
-  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-  :diminish irony-mode
-  )
-
-;; == company-mode ================================================================
-(use-package company
-  :init
-  (add-hook 'after-init-hook 'global-company-mode)
-  :config
-  (use-package company-irony)
-  (use-package company-irony-c-headers)
-  (setq
-   company-idle-delay              0
-   company-echo-delay              0
-   company-minimum-prefix-length   1
-   company-show-numbers            t
-   company-tooltip-limit           20
-   company-dabbrev-downcase        nil
-   company-backends                '((company-irony-c-headers company-irony company-elisp))
-   company-begin-commands          '(self-insert-command)
-   )
-  :bind ("<M-return>" . company-complete-common)
-  )
-
-(require 'color)
-(let ((bg (face-attribute 'default :background)))
-  (custom-set-faces
-   `(company-tooltip ((t (:inherit default :background , (color-lighten-name bg 5)))))
-   `(company-tooltip-search ((t (:background "steelblue" :foreground "white"))))
-   `(company-tooltip-selection ((t (:background "steelblue" :foreground "white"))))
-   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
-   `(company-tooltip-annotation ((t (:inherit default :background , (color-lighten-name bg 5) :foreground "medium purple"))))))
-
-;; == ido-at-point =========================================================
-(use-package ido-at-point
-  :config
-  (ido-at-point-mode)
-  )
-
-;; == ggtags =========================================================================
-(use-package ggtags
-  :init
-  (add-hook 'c++-mode-hook '(lambda () (ggtags-mode 1)))
-  (add-hook 'c-mode-hook '(lambda () (ggtags-mode 1)))
-  (add-hook 'ttcn-3-mode-hook '(lambda () (ggtags-mode 0)))
-  :bind ("M-/" . ggtags-find-file)
-  :diminish ggtags-mode
-  )
-
-;; == flycheck-iron ============================================================
-(use-package flycheck-irony
-  :init
-  (require 'flycheck-irony)
-  (add-hook 'c++-mode-hook (lambda ()
-                 (setq flycheck-clang-language-standard "c++14")))
-  (add-hook 'after-init-hook #'global-flycheck-mode)
-
-  (eval-after-load 'flycheck
-    '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-  )
 
 ;;; == load bears private config file ==
 (require 'bears-style)
@@ -233,20 +99,25 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq bears-packages '())
+(setq bears-packages '(company
+                       irony
+                       ido
+                       clang-format
+                       ggtags))
 
 (defun bears-user-config()
   (defun c++-style()
     (bears-c++-style)
     (bears-c++-bind)
-    (setq cc-search-directories '(\".\"
-                                  \"../Include/\"
-                                  \"../Source/\"
-                                  \"../../Include/configUpdate\"
-                                  \"../../Source/configUpdate\")
+    (setq cc-search-directories '(\".\")
       )
     )
   (add-hook 'c++-mode-hook 'c++-style)
+  )
+
+(defun bears-user-theme()
+  (use-package warm-night-theme)
+  (load-theme 'warm-night t)
   )
 
 ;; Local Variables:
@@ -254,12 +125,12 @@
 ;; End:
 
 ;;; .bearsmacs.el ends here" nil "~/.bearsmacs.el" nil))
-(load-file "~/.bearsmacs.el")
 
+(load-file "~/.bearsmacs.el")
+(bears-user-theme)
 (while bears-packages
   (load-file
    (format "~/.emacs.d/private/packages/bears-%s.el" (pop bears-packages))))
-
 (bears-user-config)
 
 ;;; init.el ends here
