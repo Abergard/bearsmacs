@@ -25,6 +25,9 @@
 (use-package whitespace
   :diminish whitespace-mode)
 
+(use-package volatile-highlights
+  :diminish volatile-highlights-mode)
+
 (provide 'bears-packages)
 
 ;; Local Variables:

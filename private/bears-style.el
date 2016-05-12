@@ -13,6 +13,8 @@
   (whitespace-mode 1)
   (hs-minor-mode 1)
   (show-paren-mode 1)
+  (volatile-highlights-mode 1)
+  (electric-pair-mode 1)
   (diminish 'hs-minor-mode)
   (diminish 'abbrev-mode)
   )

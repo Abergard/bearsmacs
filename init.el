@@ -18,7 +18,8 @@
 
 (defun bears-themes ()
   (interactive)
-  (message (concat "[warm-night]")
+  (message (concat "[warm-night]"
+                   "[zenburn]")
            )
   )
 
@@ -69,8 +70,8 @@
       split-width-threshold nil)
 
 ;; == (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) ==
-(set-frame-parameter (selected-frame) 'alpha '(90 50))
-(add-to-list 'default-frame-alist '(alpha 90 50))
+;(set-frame-parameter (selected-frame) 'alpha '(90 50))
+;(add-to-list 'default-frame-alist '(alpha 90 50))
 
 ;; == use Shift+arrow_keys to move cursor around split panes =========
 (windmove-default-keybindings)
@@ -123,8 +124,13 @@
 ;;; Commentary:
 ;;; Code:
 
+;;; to see list of packages run: M-x bears-packages
 (setq bears-packages '())
+
+;;; to see list of themes run: M-x bears-themes
 (setq bears-theme \"\")
+
+;;; to update configuration run: M-x bears-update
 
 (defun bears-user-config()
   (defun c++-style()
