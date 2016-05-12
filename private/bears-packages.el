@@ -20,7 +20,10 @@
 
 (setq use-package-always-ensure t)
 
-(use-package paradox)
+(use-package paradox
+  :config
+  (setq paradox-github-token t))
+
 (use-package iedit)
 (use-package whitespace
   :diminish whitespace-mode)
