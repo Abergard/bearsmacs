@@ -4,11 +4,11 @@
 ;;; Code:
 
 (use-package flx-ido
-  :init
+  :config
   (ido-mode 1)
   (ido-everywhere 1)
   (flx-ido-mode 1)
-  :config
+
   (setq ido-enable-flex-matching t)
   (setq ido-use-faces nil)
   (setq ido-use-filename-at-point nil)
@@ -16,16 +16,16 @@
   (setq ido-use-virtual-buffers t)
 
   (use-package ido-ubiquitous
-    :init
+    :config
     (ido-ubiquitous-mode t)
     )
   (use-package smex
-    :init
+    :config
     (setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
     (global-set-key [remap execute-extended-command] 'smex)
     )
   (use-package idomenu
-    :init
+    :config
     (setq ido-default-buffer-method 'selected-window)
     (add-hook 'ido-setup-hook
               (lambda ()

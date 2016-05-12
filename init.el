@@ -2,9 +2,34 @@
 ;;; Commentary:
 ;;; Code:
 
-(defvar bears-packages nil)
+(defun bears-packages ()
+  (interactive)
+  (message (concat "[clang-format]"
+                   "[company]"
+                   "[ggtags]"
+                   "[glsl]"
+                   "[ido]"
+                   "[irony]"
+                   "[ninja]"
+                   "[ttcn3]"
+                   "[yasnippet]")
+           )
+  )
 
-;; == Disable loading of "default.el" at startup ===========================
+(defun bears-themes ()
+  (interactive)
+  (message (concat "[warm-night]")
+           )
+  )
+
+(defun bears-update ()
+  (interactive)
+  (load-file "~/.emacs.d/init.el"))
+
+(defvar bears-packages nil)
+(defvar bears-theme "")
+
+;; == Disable loading of "default.el" at startup ======================
 (setq inhibit-default-init t)
 
 ;; == Turn off mouse interface early in startup to avoid momentary display =
@@ -12,34 +37,34 @@
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-;; == Enable visual feedback on selections =================================
+;; == Enable visual feedback on selections =============================
 (setq transient-mark-mode t)
 
-;; == No splash screen please... jeez ======================================
+;; == No splash screen please... jeez ==================================
 (setq inhibit-startup-screen t)
 
-;; == Add line number ======================================================
+;; == Add line number ==================================================
 (global-linum-mode t)
 (global-hl-line-mode t)
 (column-number-mode t)
 
-;; == Disable window's pipe delay ==========================================
+;; == Disable window's pipe delay =====================================
 (setq w32-pipe-read-delay 0)
 
 ;; == Short confirm ==
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; == Add .h files to c++-mode =============================================
+;; == Add .h files to c++-mode ========================================
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-;; == Default to unified diffs ================================================
+;; == Default to unified diffs ========================================
 (setq diff-switches "-u")
 
-;; == Default to better frame titles ==========================================
+;; == Default to better frame titles ================================
 (setq frame-title-format
       (concat  "%b - emacs@" (system-name)))
 
-;; == open window disable =====================================================
+;; == open window disable ==========================================
 (setq split-height-threshold nil
       split-width-threshold nil)
 
@@ -47,7 +72,7 @@
 (set-frame-parameter (selected-frame) 'alpha '(90 50))
 (add-to-list 'default-frame-alist '(alpha 90 50))
 
-;; == use Shift+arrow_keys to move cursor around split panes =====================
+;; == use Shift+arrow_keys to move cursor around split panes =========
 (windmove-default-keybindings)
 
 ;; == set auto-insert header
@@ -64,7 +89,7 @@
 ;;  '(auto-insert-alist '((("\\.hpp\\'" . "C++ header") . ["template.hpp" c++-mode my/autoinsert-yas-expand])
 ;;                        (("\\.cpp\\'" . "C++ source") . ["template.cpp" my/autoinsert-yas-expand]))))
 
-;; == Set auto save files directory ===========================================
+;; == Set auto save files directory =================================
 (setq temporary-file-directory "~/.emacs.d/tmp/")
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/emacs-autosaves/" t)))
 (setq backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups")))
@@ -79,12 +104,11 @@
       delete-old-versions t
       )
 
+(setq custom-safe-themes t)
+
 ;;; == load bears private config file ==
 (add-to-list 'load-path "~/.emacs.d/private")
 (require 'bears-packages)
-
-;; == warm-night theme =========================================================
-(setq custom-safe-themes t)
 
 ;;; == load bears private config file ==
 (require 'bears-style)
@@ -99,11 +123,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq bears-packages '(company
-                       irony
-                       ido
-                       clang-format
-                       ggtags))
+(setq bears-packages '())
+(setq bears-theme \"\")
 
 (defun bears-user-config()
   (defun c++-style()
@@ -115,11 +136,6 @@
   (add-hook 'c++-mode-hook 'c++-style)
   )
 
-(defun bears-user-theme()
-  (use-package warm-night-theme)
-  (load-theme 'warm-night t)
-  )
-
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
 ;; End:
@@ -127,10 +143,14 @@
 ;;; .bearsmacs.el ends here" nil "~/.bearsmacs.el" nil))
 
 (load-file "~/.bearsmacs.el")
-(bears-user-theme)
+
+(unless (string= bears-theme "")
+  (load-file (format "~/.emacs.d/private/themes/bears-%s.el" bears-theme)))
+
 (while bears-packages
   (load-file
    (format "~/.emacs.d/private/packages/bears-%s.el" (pop bears-packages))))
+
 (bears-user-config)
 
 ;;; init.el ends here

@@ -7,6 +7,7 @@
   :init
   (add-hook 'after-init-hook 'global-company-mode)
 
+  :config
   (require 'color)
   (let ((bg (face-attribute 'default :background)))
     (custom-set-faces
@@ -25,7 +26,6 @@
      `(company-tooltip-annotation
        ((t (:inherit default :background ,
                      (color-lighten-name bg 5) :foreground "medium purple"))))))
-  :config
   (setq
    company-idle-delay              0
    company-echo-delay              0

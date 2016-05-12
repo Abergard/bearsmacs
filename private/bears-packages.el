@@ -18,22 +18,12 @@
 (eval-when-compile
   (require 'use-package))
 
-(add-to-list 'command-switch-alist '("-check_packages" .
-                     (lambda (switch)
-                       ((setq use-package-always-ensure t)))))
-
-(require 'diminish)
-(require 'bind-key)
+(setq use-package-always-ensure t)
 
 (use-package paradox)
 (use-package iedit)
 (use-package whitespace
   :diminish whitespace-mode)
-
-(use-package yasnippet
-  :init
-  (yas-global-mode 1)
-  :diminish yas-minor-mode)
 
 (provide 'bears-packages)
 
