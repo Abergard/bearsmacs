@@ -5,7 +5,9 @@
 
 (use-package yasnippet
   :config
-  (yas-global-mode 1)
+  (defadvice bears-prog-style (after bears-yasnippet activate)
+    (yas-global-mode 1)
+    )
   :diminish yas-minor-mode)
 
 ;; Local Variables:

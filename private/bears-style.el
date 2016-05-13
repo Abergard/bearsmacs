@@ -11,9 +11,7 @@
         whitespace-style '(face tabs empty trailing lines-tail)
         whitespace-line-column 120)
 
-
   (whitespace-mode t)
-  (hs-minor-mode t)
   (show-paren-mode t)
   (volatile-highlights-mode t)
   (electric-pair-mode t)
@@ -22,14 +20,15 @@
   (linum-mode t)
   (diminish 'hs-minor-mode)
   (diminish 'abbrev-mode)
-
-  
   (bears-color-style)
   )
 
-(defun bears-c-style()
+(defun bears-prog-style()
   (bears-base-style)
+  (hs-minor-mode t)
+  )
 
+(defun bears-c-style()
   (c-set-style "linux")
   (c-set-offset 'innamespace '0)
   (c-set-offset 'inextern-lang '0)
@@ -47,9 +46,17 @@
   (setq c-basic-offset 4)
   )
 
+(defun bears-text-style ()
+  (message "bears-text-style")
+  (bears-base-style))
+
 (defun bears-lisp-style()
   (message "bears-lisp-style")
-  (bears-base-style))
+  (bears-prog-style))
+
+(defun bears-ninja-style()
+  (message "bears-ninja-style")
+  (bears-prog-style))
 
 (defun bears-ttcn3-style()
   (message "bears-ttcn3-style")
@@ -58,10 +65,6 @@
 (defun bears-c++-style()
   (message "bears-c++-style")
   (bears-c-style))
-
-(defun bears-ninja-style()
-  (message "bears-ninja-style")
-  (bears-base-style))
 
 (defun bears-glsl-style()
   (message "bears-glsl-style")

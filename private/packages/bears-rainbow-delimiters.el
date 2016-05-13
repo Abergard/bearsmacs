@@ -5,8 +5,7 @@
 
 (use-package rainbow-delimiters
   :config
-  (defadvice bears-base-style
-      (after bears-base-style-after activate)
+  (defadvice bears-base-style (after bears-rainbow-delimiters activate)
     (rainbow-delimiters-mode t)))
 
 ;; Local Variables:

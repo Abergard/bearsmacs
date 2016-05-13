@@ -5,27 +5,11 @@
 
 (use-package company
   :init
-  (add-hook 'after-init-hook 'global-company-mode)
+  (defadvice bears-prog-style (after bears-company activate)
+    (company-mode 1)
+    )
 
   :config
-  (require 'color)
-  (let ((bg (face-attribute 'default :background)))
-    (custom-set-faces
-     `(company-tooltip
-       ((t (:inherit default :background , (color-lighten-name bg 5)))))
-
-     `(company-tooltip-search
-       ((t (:background "steelblue" :foreground "white"))))
-
-     `(company-tooltip-selection
-       ((t (:background "steelblue" :foreground "white"))))
-
-     `(company-tooltip-common
-       ((t (:inherit font-lock-constant-face))))
-
-     `(company-tooltip-annotation
-       ((t (:inherit default :background ,
-                     (color-lighten-name bg 5) :foreground "medium purple"))))))
   (setq
    company-idle-delay              0
    company-echo-delay              0

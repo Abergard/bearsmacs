@@ -137,6 +137,7 @@
 (require 'bears-bind)
 
 (add-hook 'emacs-lisp-mode-hook 'bears-lisp-style)
+(add-hook 'text-mode-hook 'bears-text-style)
 
 (while bears-packages
   (load-file

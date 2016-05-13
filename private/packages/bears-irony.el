@@ -4,9 +4,11 @@
 ;;; Code:
 
 (use-package irony
-  :init
-  (add-hook 'c++-mode-hook 'irony-mode)
   :config
+  (defadvice bears-c++-style (after bears-irony activate)
+    (irony-mode 1)
+    )
+
   (defun my-irony-mode-hook ()
     (define-key irony-mode-map [remap completion-at-point]
       'irony-completion-at-point-async)
@@ -20,12 +22,12 @@
 (when (require 'flycheck nil 'noerror)
   (use-package flycheck-irony
     :init
-    (add-hook 'c++-mode-hook (lambda ()
-                               (setq flycheck-clang-language-standard "c++14")))
-    (add-hook 'after-init-hook #'global-flycheck-mode)
-
     (eval-after-load 'flycheck
       '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+    :config
+    (defadvice bears-c++-style (after bears-flycheck-irony activate)
+      (setq flycheck-clang-language-standard "c++14")
+      )
     )
   )
 

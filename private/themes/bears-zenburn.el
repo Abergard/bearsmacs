@@ -5,7 +5,10 @@
 
 (use-package zenburn-theme
   :config
-  (load-theme 'zenburn t))
+  (load-theme 'zenburn t)
+  (defadvice bears-color-style (after bears-theme activate)
+    )
+  )
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
