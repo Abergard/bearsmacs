@@ -5,13 +5,13 @@
 
 (use-package ggtags
   :config
-  (defadvice bears-base-style
-      (after bears-base-style-after activate)
-    (ggtags-mode 1))
+  (defadvice bears-base-style (after bears-base-style-after activate)
+    (ggtags-mode 1)
+    )
 
-  (defadvice bears-ttcn3-style
-      (after bears-ttcn3-style-after activate)
-    (ggtags-mode 0))
+  (defadvice bears-ttcn3-style (after bears-ttcn3-style-after activate)
+    (ggtags-mode 0)
+    )
 
   :bind ("M-/" . ggtags-find-file)
   :diminish ggtags-mode

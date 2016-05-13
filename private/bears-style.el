@@ -4,15 +4,13 @@
 ;;; Code:
 
 (require 'cc-mode)
+(defun bears-color-style())
 (defun bears-base-style()
   (setq tab-width 4
         indent-tabs-mode nil
         whitespace-style '(face tabs empty trailing lines-tail)
         whitespace-line-column 120)
 
-  (set-face-background 'show-paren-match (face-background 'default))
-  (set-face-foreground 'show-paren-match "#def")
-  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 
   (whitespace-mode t)
   (hs-minor-mode t)
@@ -24,6 +22,9 @@
   (linum-mode t)
   (diminish 'hs-minor-mode)
   (diminish 'abbrev-mode)
+
+  
+  (bears-color-style)
   )
 
 (defun bears-c-style()

@@ -86,28 +86,29 @@
 
 ;;; == load bears private config file ==
 (add-to-list 'load-path "~/.emacs.d/private")
-(require 'bears-packages)
-(require 'bears-style)
-(require 'bears-bind)
-
-(add-hook 'emacs-lisp-mode-hook 'bears-lisp-style)
 
 ;;; == load user config file ==
 (unless (file-exists-p "~/.bearsmacs.el")
   (write-region
    ";;; .bearsmacs.el --- user config file
 ;;; Commentary:
+
+;; bears-commands:
+; M-x bears-update   - update configuration
+; M-x bears-packages - get list of packages
+; M-x bears-themes   - get list of themes
+
 ;;; Code:
 
-;;; to see list of packages run: M-x bears-packages
 (setq bears-packages '())
-
-;;; to see list of themes run: M-x bears-themes
 (setq bears-theme \"\")
 
-;;; to update configuration run: M-x bears-update
+(defun bears-user-init()
+  \"This function will be evaluate before loading packages\"
+  )
 
 (defun bears-user-config()
+  \"This function will be evaluate after loading packages\"
   (defun c++-style()
     (bears-c++-style)
     (bears-c++-bind)
@@ -125,8 +126,17 @@
 
 (load-file "~/.bearsmacs.el")
 
+(bears-user-init)
+
+(require 'bears-packages)
+
 (unless (string= bears-theme "")
   (load-file (format "~/.emacs.d/private/themes/bears-%s.el" bears-theme)))
+
+(require 'bears-style)
+(require 'bears-bind)
+
+(add-hook 'emacs-lisp-mode-hook 'bears-lisp-style)
 
 (while bears-packages
   (load-file
