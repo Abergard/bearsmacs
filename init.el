@@ -2,6 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
+;; == Disable loading of "default.el" at startup ======================
+(setq inhibit-default-init t)
+
+;; == Turn off mouse interface early in startup to avoid momentary display =
+(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
 (defun bears-packages ()
   (interactive)
   (message (concat "[clang-format]"
@@ -12,16 +20,13 @@
                    "[irony]"
                    "[ninja]"
                    "[ttcn3]"
-                   "[yasnippet]")
-           )
-  )
+                   "[yasnippet]"
+                   "[rainbow-delimiters]")))
 
 (defun bears-themes ()
   (interactive)
   (message (concat "[warm-night]"
-                   "[zenburn]")
-           )
-  )
+                   "[zenburn]")))
 
 (defun bears-update ()
   (interactive)
@@ -30,24 +35,11 @@
 (defvar bears-packages nil)
 (defvar bears-theme "")
 
-;; == Disable loading of "default.el" at startup ======================
-(setq inhibit-default-init t)
-
-;; == Turn off mouse interface early in startup to avoid momentary display =
-(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-
 ;; == Enable visual feedback on selections =============================
 (setq transient-mark-mode t)
 
 ;; == No splash screen please... jeez ==================================
 (setq inhibit-startup-screen t)
-
-;; == Add line number ==================================================
-(global-linum-mode t)
-(global-hl-line-mode t)
-(column-number-mode t)
 
 ;; == Disable window's pipe delay =====================================
 (setq w32-pipe-read-delay 0)
@@ -70,31 +62,17 @@
       split-width-threshold nil)
 
 ;; == (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) ==
-;(set-frame-parameter (selected-frame) 'alpha '(90 50))
-;(add-to-list 'default-frame-alist '(alpha 90 50))
+(set-frame-parameter (selected-frame) 'alpha '(90 50))
+(add-to-list 'default-frame-alist '(alpha 90 50))
 
 ;; == use Shift+arrow_keys to move cursor around split panes =========
 (windmove-default-keybindings)
 
-;; == set auto-insert header
-;; (auto-insert-mode)
-;; (setq auto-insert-query nil)
-
-;; (defun my/autoinsert-yas-expand()
-;;       "Replace text in yasnippet template."
-;;       (yas/expand-snippet (buffer-string) (point-min) (point-max)))
-
-;; (custom-set-variables
-;;  '(auto-insert 'other)
-;;  '(auto-insert-directory "~/.emacs.d/templates/")
-;;  '(auto-insert-alist '((("\\.hpp\\'" . "C++ header") . ["template.hpp" c++-mode my/autoinsert-yas-expand])
-;;                        (("\\.cpp\\'" . "C++ source") . ["template.cpp" my/autoinsert-yas-expand]))))
-
 ;; == Set auto save files directory =================================
-(setq temporary-file-directory "~/.emacs.d/tmp/")
-(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/emacs-autosaves/" t)))
-(setq backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups")))
-(setq make-backup-files t
+(setq temporary-file-directory "~/.emacs.d/tmp/"
+      auto-save-file-name-transforms '((".*" "~/.emacs.d/emacs-autosaves/" t))
+      backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups"))
+      make-backup-files t
       backup-by-copying t
       delete-old-versions t
       kept-new-versions 6
@@ -102,16 +80,13 @@
       version-control t
       auto-save-timeout 20
       auto-save-interval 200
-      delete-old-versions t
-      )
+      delete-old-versions t)
 
 (setq custom-safe-themes t)
 
 ;;; == load bears private config file ==
 (add-to-list 'load-path "~/.emacs.d/private")
 (require 'bears-packages)
-
-;;; == load bears private config file ==
 (require 'bears-style)
 (require 'bears-bind)
 

@@ -4,7 +4,7 @@
 ;;; Code:
 
 (use-package ggtags
-  :init
+  :config
   (defadvice bears-base-style
       (after bears-base-style-after activate)
     (ggtags-mode 1))
