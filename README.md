@@ -3,6 +3,10 @@
 **How to Start:**
 
     git clone https://github.com/Abergard/emacs.git ~/.emacs.d
+    
+**User configuration file:**
+
+  To make any configuration changes use: ~/.bearsmacs.el
 
 **Hierarchy of files:**
   - init.el
