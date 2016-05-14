@@ -1,4 +1,18 @@
 # Emacs
 
-## irony-server installation (visual studio 2015):
-cmake -DCMAKE_INSTALL_PREFIX="~/.emacs.d/irony/" -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON C:/src/irony-mode/server -DLIBCLANG_LIBRARY="C:/src/clang/build/Release/lib/libclang.lib" -DLIBCLANG_INCLUDE_DIR="C:/src/clang/llvm/tools/clang/include" -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 14 Win64" ..
+**How to Start:**
+
+    git clone https://github.com/Abergard/emacs.git ~/.emacs.d
+
+**Hierarchy of files:**
+  - init.el
+  - private/
+    - bears-bind.el
+    - bears-packages.el
+    - bears-style.el
+    - packages/
+      - bears-package-name.el
+      - ...
+    - themes/
+      - bears-theme-name.el
+      - ...
