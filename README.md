@@ -1,4 +1,4 @@
-# Emacs
+# Bearsmacs
 
 **How to Start:**
 
