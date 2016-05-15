@@ -21,12 +21,16 @@
                    "[ninja]"
                    "[ttcn3]"
                    "[yasnippet]"
-                   "[rainbow-delimiters]")))
+                   "[rainbow-delimiters]"
+                   "[powerline]")))
 
 (defun bears-themes ()
   (interactive)
   (message (concat "[warm-night]"
-                   "[zenburn]")))
+                   "[zenburn]"
+                   "[dracula]"
+                   "[solarized-light]"
+                   "[solarized-dark]")))
 
 (defun bears-update ()
   (interactive)
@@ -34,6 +38,21 @@
 
 (defvar bears-packages nil)
 (defvar bears-theme "")
+
+(defadvice load-theme (before disable-themes-first activate)
+  "disable all active themes."
+  (dolist (i custom-enabled-themes)
+    (disable-theme i)))
+
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
+
+(define-abbrev-table 'global-abbrev-table '(
+    ("alpha" "α")
+    ("inf" "∞")
+    ("ar" "→")
+    ("lambda" "λ")
+    ))
 
 ;; == Enable visual feedback on selections =============================
 (setq transient-mark-mode t)
