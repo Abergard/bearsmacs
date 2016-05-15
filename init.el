@@ -100,8 +100,8 @@
 
 ;;; Code:
 
-(setq bears-packages '())
 (setq bears-theme \"\")
+(setq bears-packages '())
 
 (defun bears-user-init()
   \"This function will be evaluate before loading packages\"

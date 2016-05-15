@@ -4,12 +4,11 @@
 ;;; Code:
 
 (use-package company
-  :init
+  :config
   (defadvice bears-prog-style (after bears-company activate)
     (company-mode 1)
     )
 
-  :config
   (setq
    company-idle-delay              0
    company-echo-delay              0
@@ -17,9 +16,11 @@
    company-show-numbers            t
    company-tooltip-limit           20
    company-dabbrev-downcase        nil
-   company-backends                '((company-elisp))
    company-begin-commands          '(self-insert-command)
    )
+
+  (add-to-list 'company-backends '(company-elisp))
+
   :bind ("<M-return>" . company-complete-common)
   )
 

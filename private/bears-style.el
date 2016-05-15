@@ -29,6 +29,7 @@
   )
 
 (defun bears-c-style()
+  (bears-prog-style)
   (c-set-style "linux")
   (c-set-offset 'innamespace '0)
   (c-set-offset 'inextern-lang '0)
@@ -47,27 +48,21 @@
   )
 
 (defun bears-text-style ()
-  (message "bears-text-style")
   (bears-base-style))
 
 (defun bears-lisp-style()
-  (message "bears-lisp-style")
   (bears-prog-style))
 
 (defun bears-ninja-style()
-  (message "bears-ninja-style")
   (bears-prog-style))
 
 (defun bears-ttcn3-style()
-  (message "bears-ttcn3-style")
   (bears-c-style))
 
 (defun bears-c++-style()
-  (message "bears-c++-style")
   (bears-c-style))
 
 (defun bears-glsl-style()
-  (message "bears-glsl-style")
   (bears-c-style))
 
 (provide 'bears-style)
