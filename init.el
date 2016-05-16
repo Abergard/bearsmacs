@@ -47,13 +47,6 @@
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
-(define-abbrev-table 'global-abbrev-table '(
-    ("alpha" "α")
-    ("inf" "∞")
-    ("ar" "→")
-    ("lambda" "λ")
-    ))
-
 ;; == Enable visual feedback on selections =============================
 (setq transient-mark-mode t)
 
@@ -119,8 +112,8 @@
 
 ;;; Code:
 
-(setq bears-packages '())
 (setq bears-theme \"\")
+(setq bears-packages '())
 
 (defun bears-user-init()
   \"This function will be evaluate before loading packages\"
