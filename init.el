@@ -37,6 +37,15 @@
   (load-file "~/.emacs.d/init.el"))
 
 (defvar bears-packages nil)
+(defvar bears-default-packages '(clang-format
+                                 company
+                                 ggtags
+                                 ido
+                                 flycheck
+                                 irony
+                                 yasnippet
+                                 rainbow-delimiters
+                                 powerline))
 (defvar bears-theme "")
 
 (defadvice load-theme (before disable-themes-first activate)
@@ -106,10 +115,15 @@
    ";;; .bearsmacs.el --- user config file
 ;;; Commentary:
 
-;; bears-commands:
-; M-x bears-update   - update configuration
-; M-x bears-packages - get list of packages
-; M-x bears-themes   - get list of themes
+;;; Version: 1.0.1
+
+;;; bears-commands:
+;; M-x bears-update   - update configuration
+;; M-x bears-packages - get list of packages
+;; M-x bears-themes   - get list of themes
+
+;;; bears-defaults:
+;; bears-default-packages
 
 ;;; Code:
 

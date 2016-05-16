@@ -3,9 +3,6 @@
 **How to Start:**
 
     git clone https://github.com/Abergard/bearsmacs.git ~/.emacs.d
-    cd ~/.emacs.d
-    mkdir emacs-autosaves
-    mkdir tmp
 
 **User configuration file:**
 
