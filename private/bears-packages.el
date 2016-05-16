@@ -24,6 +24,8 @@
   :config
   (setq paradox-github-token t))
 
+(use-package async)
+
 (use-package iedit)
 (use-package whitespace
   :diminish whitespace-mode)

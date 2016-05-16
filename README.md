@@ -6,7 +6,7 @@
     cd ~/.emacs.d
     mkdir emacs-autosaves
     mkdir tmp
-    
+
 **User configuration file:**
 
   To make any configuration changes use: ~/.bearsmacs.el
