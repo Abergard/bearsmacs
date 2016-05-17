@@ -8,12 +8,12 @@
   (load-theme 'warm-night t)
   (defadvice bears-color-style (after bears-theme activate)
     (set-face-attribute 'vhl/default-face nil
-                        :foreground nil
-                        :background "#161616")
+                        :foreground "#262626"
+                        :background "#969696")
 
     (set-face-attribute 'region nil
-                        :foreground nil
-                        :background "#161616")
+                        :foreground "#262626"
+                        :background "#969696")
 
     (set-face-attribute 'show-paren-match nil
                         :foreground "thistle3"
