@@ -12,11 +12,11 @@ If you want you can do it in bears-user-init/config function"
    ;; Set to <t> if you want to use default configurations.
    ;; or <nil> to set up own hooks or mix them with defaults
    ;; <M-x bears-configurations-list> to get list of all build-in configurations
-   use-bears-default-configurations t
+   use-bears-default-configurations nil
    ;; Set to <t> if you want add default packages to install
    ;; If you want to choose ony a few of them use <bears-packages>
    ;; To get list of build-in packages run <M-x bears-packages-list>
-   use-bears-default-packages t
+   use-bears-default-packages nil
    ;; Write here name of theme you want to use.
    ;; To get list of all available themes run <M-x bears-theme-list>
    bears-theme ""
