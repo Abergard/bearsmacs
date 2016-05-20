@@ -2,6 +2,7 @@
 
 !init.el
 !private
+!private/*
 
 !emacs-autosaves/
 emacs-autosaves/*

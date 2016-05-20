@@ -14,6 +14,8 @@
     - bears-bind.el
     - bears-packages.el
     - bears-style.el
+    - bears-configuration.el
+    - bears-user-file.el
     - packages/
       - bears-package-name.el
       - ...
