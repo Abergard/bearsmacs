@@ -4,8 +4,11 @@
 ;;; Code:
 
 (require 'cc-mode)
-(defun bears-color-style())
+(defun bears-color-style()
+  "Use this function only in themes configuration by defadvice.")
+
 (defun bears-base-style()
+  "Base style for all kinds of files."
   (setq tab-width 4
         indent-tabs-mode nil
         whitespace-style '(face tabs empty trailing lines-tail)
@@ -26,11 +29,13 @@
   )
 
 (defun bears-prog-style()
+  "Base style for all kinds of programming files."
   (bears-base-style)
   (hs-minor-mode t)
   )
 
 (defun bears-c-style()
+  "Base style for c-kind files."
   (bears-prog-style)
   (c-set-style "linux")
   (c-set-offset 'innamespace '0)
@@ -50,21 +55,31 @@
   )
 
 (defun bears-text-style ()
+  "Style for text files."
   (bears-base-style))
 
 (defun bears-lisp-style()
+  "Style for lisp files/"
   (bears-prog-style))
 
 (defun bears-ninja-style()
+  "Style for ninja files."
+  (bears-prog-style))
+
+(defun bears-python-style()
+  "Style python files."
   (bears-prog-style))
 
 (defun bears-ttcn3-style()
+  "Style for ttcn3 files."
   (bears-c-style))
 
 (defun bears-c++-style()
+  "Style for c++ files."
   (bears-c-style))
 
 (defun bears-glsl-style()
+  "Style for glsl files."
   (bears-c-style))
 
 (provide 'bears-style)

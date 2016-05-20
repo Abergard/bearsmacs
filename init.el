@@ -10,10 +10,12 @@
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-(defun bears-packages ()
+(defun bears-package-list ()
+  "Function display all available packages."
   (interactive)
   (message (concat "[clang-format]"
                    "[company]"
+                   "[flycheck]"
                    "[ggtags]"
                    "[glsl]"
                    "[ido]"
@@ -22,9 +24,11 @@
                    "[ttcn3]"
                    "[yasnippet]"
                    "[rainbow-delimiters]"
-                   "[powerline]")))
+                   "[powerline]"
+                   "[elpy]")))
 
-(defun bears-themes ()
+(defun bears-theme-list ()
+  "Function display all available themes."
   (interactive)
   (message (concat "[warm-night]"
                    "[zenburn]"
@@ -32,16 +36,27 @@
                    "[solarized-light]"
                    "[solarized-dark]")))
 
+(defun bears-configuration-list ()
+  "Dispplay all available configurations."
+  (interactive)
+  (message (concat "[bears-lisp-configuration]"
+                   "[bears-text-configuration]"
+                   "[bears-c++-configuration]"
+                   "[bears-python-configuration]")))
+
 (defun bears-update ()
+  "Function update packages."
   (interactive)
   (load-file "~/.emacs.d/init.el"))
 
+(defvar use-bears-default-packages nil)
+(defvar use-bears-default-configurations nil)
 (defvar bears-packages nil)
 (defvar bears-default-packages '(clang-format
                                  company
+                                 flycheck
                                  ggtags
                                  ido
-                                 flycheck
                                  irony
                                  yasnippet
                                  rainbow-delimiters
@@ -49,6 +64,7 @@
 (defvar bears-theme "")
 
 (defadvice load-theme (before disable-themes-first activate)
+  "Disable theme before load new one."
   "disable all active themes."
   (dolist (i custom-enabled-themes)
     (disable-theme i)))
@@ -109,50 +125,13 @@
 ;;; == load bears private config file ==
 (add-to-list 'load-path "~/.emacs.d/private")
 
-;;; == load user config file ==
+;;; == user config file ==
 (unless (file-exists-p "~/.bearsmacs.el")
-  (write-region
-   ";;; .bearsmacs.el --- user config file
-;;; Commentary:
-
-;;; Version: 1.0.1
-
-;;; bears-commands:
-;; M-x bears-update   - update configuration
-;; M-x bears-packages - get list of packages
-;; M-x bears-themes   - get list of themes
-
-;;; bears-defaults:
-;; bears-default-packages
-
-;;; Code:
-
-(setq bears-theme \"\")
-(setq bears-packages '())
-
-(defun bears-user-init()
-  \"This function will be evaluate before loading packages\"
-  )
-
-(defun bears-user-config()
-  \"This function will be evaluate after loading packages\"
-  (defun c++-style()
-    (bears-c++-style)
-    (bears-c++-bind)
-    (setq cc-search-directories '(\".\")
-      )
-    )
-  (add-hook 'c++-mode-hook 'c++-style)
-  )
-
-;; Local Variables:
-;; byte-compile-warnings: (not free-vars)
-;; End:
-
-;;; .bearsmacs.el ends here" nil "~/.bearsmacs.el" nil))
+  (copy-file "~/.emacs.d/private/bears-user-file.el" "~/.bearsmacs.el"))
 
 (load-file "~/.bearsmacs.el")
 
+(bears-configurations)
 (bears-user-init)
 
 (require 'bears-packages)
@@ -162,9 +141,19 @@
 
 (require 'bears-style)
 (require 'bears-bind)
+(require 'bears-configuration)
 
-(add-hook 'emacs-lisp-mode-hook 'bears-lisp-style)
-(add-hook 'text-mode-hook 'bears-text-style)
+(when use-bears-default-configurations
+  (add-hook 'emacs-lisp-mode-hook 'bears-lisp-configuration)
+  (add-hook 'text-mode-hook 'bears-text-configuration)
+  (add-hook 'c++-mode-hook 'bears-c++-configuration)
+  (add-hook 'python-mode-hook 'bears-python-configuration))
+
+(when use-bears-default-packages
+  (while bears-default-packages
+    (load-file
+     (format "~/.emacs.d/private/packages/bears-%s.el"
+             (pop bears-default-packages)))))
 
 (while bears-packages
   (load-file
