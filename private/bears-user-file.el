@@ -1,7 +1,7 @@
 ;;; .bearsmacs.el --- user config file
 ;;; Commentary:
 
-;;; Version: 1.0.2
+;;; Version: 1.0.3
 
 ;;; Code:
 
@@ -23,8 +23,6 @@ If you want you can do it in bears-user-init/config function"
    ;; Write here the all packages you want to have installed.
    ;; To get list of all avaiable packages run <M-bears-package-list>
    ;; Command: <M-bears-update> will update emacs files and install packages.
-   ;; However it is only a experimental command.
-   ;; The themes will be not loaded fully. For now you must restart emacs.
    bears-packages '()
    )
   )

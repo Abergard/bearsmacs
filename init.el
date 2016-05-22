@@ -39,59 +39,6 @@
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-(defun bears-package-list ()
-  "Function display all available packages."
-  (interactive)
-  (message (concat "[clang-format]"
-                   "[company]"
-                   "[flycheck]"
-                   "[ggtags]"
-                   "[glsl]"
-                   "[ido]"
-                   "[irony]"
-                   "[ninja]"
-                   "[ttcn3]"
-                   "[yasnippet]"
-                   "[rainbow-delimiters]"
-                   "[powerline]"
-                   "[elpy]")))
-
-(defun bears-theme-list ()
-  "Function display all available themes."
-  (interactive)
-  (message (concat "[warm-night]"
-                   "[zenburn]"
-                   "[dracula]"
-                   "[solarized-light]"
-                   "[solarized-dark]")))
-
-(defun bears-configuration-list ()
-  "Dispplay all available configurations."
-  (interactive)
-  (message (concat "[bears-lisp-configuration]"
-                   "[bears-text-configuration]"
-                   "[bears-c++-configuration]"
-                   "[bears-python-configuration]")))
-
-(defun bears-update ()
-  "Function update packages."
-  (interactive)
-  (load-file "~/.emacs.d/init.el"))
-
-(defvar use-bears-default-packages nil)
-(defvar use-bears-default-configurations nil)
-(defvar bears-packages nil)
-(defvar bears-default-packages '(clang-format
-                                 company
-                                 flycheck
-                                 ggtags
-                                 ido
-                                 irony
-                                 yasnippet
-                                 rainbow-delimiters
-                                 powerline))
-(defvar bears-theme "")
-
 (defadvice load-theme (before disable-themes-first activate)
   "Disable theme before load new one."
   "disable all active themes."
@@ -114,6 +61,20 @@
 
 ;; == use Shift+arrow_keys to move cursor around split panes =========
 (windmove-default-keybindings)
+
+(defvar use-bears-default-packages nil)
+(defvar use-bears-default-configurations nil)
+(defvar bears-packages nil)
+(defvar bears-default-packages '(clang-format
+                                 company
+                                 flycheck
+                                 ggtags
+                                 ido
+                                 irony
+                                 yasnippet
+                                 rainbow-delimiters
+                                 powerline))
+(defvar bears-theme "")
 
 ;;; == load bears private config file ==
 (add-to-list 'load-path "~/.emacs.d/private")
@@ -153,5 +114,45 @@
    (format "~/.emacs.d/private/packages/bears-%s.el" (pop bears-packages))))
 
 (bears-user-config)
+
+(defun bears-package-list ()
+  "Function display all available packages."
+  (interactive)
+  (message (concat "[clang-format]"
+                   "[company]"
+                   "[flycheck]"
+                   "[ggtags]"
+                   "[glsl]"
+                   "[ido]"
+                   "[irony]"
+                   "[ninja]"
+                   "[ttcn3]"
+                   "[yasnippet]"
+                   "[rainbow-delimiters]"
+                   "[powerline]"
+                   "[elpy]")))
+
+(defun bears-theme-list ()
+  "Function display all available themes."
+  (interactive)
+  (message (concat "[warm-night]"
+                   "[zenburn]"
+                   "[dracula]"
+                   "[solarized-light]"
+                   "[solarized-dark]")))
+
+(defun bears-configuration-list ()
+  "Dispplay all available configurations."
+  (interactive)
+  (message (concat "[bears-lisp-configuration]"
+                   "[bears-text-configuration]"
+                   "[bears-c++-configuration]"
+                   "[bears-python-configuration]")))
+
+(defun bears-update ()
+  "Function update packages."
+  (interactive)
+  (load-file "~/.emacs.d/init.el")
+  (bears-color-style))
 
 ;;; init.el ends here
