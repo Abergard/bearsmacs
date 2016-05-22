@@ -29,6 +29,9 @@
 
 (use-package iedit)
 (use-package whitespace
+  :config
+  (setq whitespace-style '(face tabs empty trailing lines-tail)
+        whitespace-line-column 80)
   :diminish whitespace-mode)
 
 (use-package volatile-highlights

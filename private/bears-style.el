@@ -9,11 +9,6 @@
 
 (defun bears-base-style()
   "Base style for all kinds of files."
-  (setq tab-width 4
-        indent-tabs-mode nil
-        whitespace-style '(face tabs empty trailing lines-tail)
-        whitespace-line-column 120)
-
   (whitespace-mode t)
   (show-paren-mode t)
   (volatile-highlights-mode t)
