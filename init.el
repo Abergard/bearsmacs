@@ -2,37 +2,39 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq tab-width 4
-      ;;Disable loading of "default.el" at startup
-      inhibit-default-init t
-      indent-tabs-mode nil
-      ;;Enable visual feedback on selection.
-      transient-mark-mode t
-      ;; == No splash screen please... jeez.
-      inhibit-startup-screen t
-      ;; == Disable window's pipe delay.
-      w32-pipe-read-delay 0
-      ;; == Default to unified diffs.
-      diff-switches "-u"
-      ;; == Default to better frame titles.
-      frame-title-format (concat  "%b - emacs@" (system-name))
-      ;; == open window disable.
-      split-height-threshold nil
-      split-width-threshold nil
-      ;;Set auto save files directory.
-      temporary-file-directory "~/.emacs.d/tmp/"
-      auto-save-file-name-transforms '((".*" "~/.emacs.d/emacs-autosaves/" t))
-      backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups"))
-      make-backup-files t
-      backup-by-copying t
-      delete-old-versions t
-      kept-new-versions 6
-      kept-old-versions 2
-      version-control t
-      auto-save-timeout 20
-      auto-save-interval 200
-      delete-old-versions t
-      custom-safe-themes t)
+(setq-default
+ tab-width 4
+ ;;Disable loading of "default.el" at startup
+ inhibit-default-init t
+ indent-tabs-mode nil
+ ;;Enable visual feedback on selection.
+ transient-mark-mode t
+ ;; == No splash screen please... jeez.
+ inhibit-startup-screen t
+ ;; == Disable window's pipe delay.
+ w32-pipe-read-delay 0
+ ;; == Default to unified diffs.
+ diff-switches "-u"
+ ;; == Default to better frame titles.
+ frame-title-format (concat  "%b - emacs@" (system-name))
+ ;; == open window disable.
+ split-height-threshold nil
+ split-width-threshold nil
+ ;;Set auto save files directory.
+ temporary-file-directory "~/.emacs.d/tmp/"
+ auto-save-file-name-transforms '((".*" "~/.emacs.d/emacs-autosaves/" t))
+ backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups"))
+ make-backup-files t
+ backup-by-copying t
+ delete-old-versions t
+ kept-new-versions 6
+ kept-old-versions 2
+ version-control t
+ auto-save-timeout 20
+ auto-save-interval 200
+ delete-old-versions t
+ custom-safe-themes t
+ major-mode 'text-mode)
 
 ;; == Turn off mouse interface early in startup to avoid momentary display =
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -47,7 +49,6 @@
 
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
-(setq-default major-mode 'text-mode)
 
 ;; == Short confirm ==
 (fset 'yes-or-no-p 'y-or-n-p)

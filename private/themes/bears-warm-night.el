@@ -6,41 +6,42 @@
 (use-package warm-night-theme
   :config
   (load-theme 'warm-night t)
-  (defadvice bears-color-style (after bears-theme activate)
-    (set-face-attribute 'vhl/default-face nil
-                        :foreground "#262626"
-                        :background "#969696")
+  (set-face-attribute 'vhl/default-face nil
+                      :foreground "#262626"
+                      :background "#969696")
 
-    (set-face-attribute 'region nil
-                        :foreground "#262626"
-                        :background "#969696")
+  (set-face-attribute 'region nil
+                      :foreground "#262626"
+                      :background "#969696")
 
-    (set-face-attribute 'show-paren-match nil
-                        :foreground "thistle3"
-                        :background "MediumPurple4"
-                        :weight 'extra-bold)
-    )
+  (set-face-attribute 'show-paren-match nil
+                      :foreground "thistle3"
+                      :background "MediumPurple4"
+                      :weight 'extra-bold)
 
   (when (require 'company nil 'noerror)
-    (require 'color)
-    (let ((bg (face-attribute 'default :background)))
-      (custom-set-faces
-       `(company-tooltip
-         ((t (:inherit default :background , (color-lighten-name bg 5)))))
+    (set-face-attribute 'company-tooltip nil
+                        :foreground "#a1a1a1"
+                        :background "#362f2f"
+                        :weight 'bold
+                        :inherit 'default)
 
-       `(company-tooltip-search
-         ((t (:background "steelblue" :foreground "white"))))
+    (set-face-attribute 'company-tooltip-search nil
+                        :foreground "white"
+                        :background "steelblue")
 
-       `(company-tooltip-selection
-         ((t (:background "steelblue" :foreground "white"))))
+    (set-face-attribute 'company-tooltip-selection nil
+                        :foreground "white"
+                        :background "steelblue")
 
-       `(company-tooltip-common
-         ((t (:inherit font-lock-constant-face))))
+    (set-face-attribute 'company-tooltip-common nil
+                        :foreground "#929292"
+                        :inherit 'font-lock-constant-face)
 
-       `(company-tooltip-annotation
-         ((t (:inherit default :background ,
-                       (color-lighten-name bg 5) :foreground "medium purple")))))
-      )
+    (set-face-attribute 'company-tooltip-annotation nil
+                        :foreground "medium purple"
+                        :background "#362f2f"
+                        :inherit 'default)
     )
   )
 

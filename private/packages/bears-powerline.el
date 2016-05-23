@@ -6,7 +6,7 @@
 (use-package powerline
   :config
   (powerline-default-theme)
-  (defadvice bears-update (before bears-powerline activate)
+  (defadvice bears-update (after bears-powerline activate)
     (powerline-reset)
     )
   )

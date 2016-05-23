@@ -9,7 +9,6 @@
 
 (defun bears-base-style()
   "Base style for all kinds of files."
-  (whitespace-mode t)
   (show-paren-mode t)
   (volatile-highlights-mode t)
   (electric-pair-mode t)
@@ -27,6 +26,7 @@
   "Base style for all kinds of programming files."
   (bears-base-style)
   (hs-minor-mode t)
+  (whitespace-mode t)
   )
 
 (defun bears-c-style()
