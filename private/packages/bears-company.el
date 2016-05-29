@@ -22,6 +22,7 @@
   (add-to-list 'company-backends '(company-elisp))
 
   :bind ("<M-return>" . company-complete-common)
+  :diminish company-mode
   )
 
 ;; Local Variables:
