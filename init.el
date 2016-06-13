@@ -53,14 +53,14 @@
 ;; == Short confirm ==
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; == Add .h files to c++-mode ========================================
+;; == Add .h files to c++-mode =======================================
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;; == (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) ==
 (set-frame-parameter (selected-frame) 'alpha '(90 50))
 (add-to-list 'default-frame-alist '(alpha 90 50))
 
-;; == use Shift+arrow_keys to move cursor around split panes =========
+;; == use Shift+arrow_keys to move cursor around split panes ========
 (windmove-default-keybindings)
 
 (defvar use-bears-default-packages nil)
