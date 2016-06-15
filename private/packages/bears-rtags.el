@@ -3,23 +3,27 @@
 
 ;;; Code:
 
-(use-package rtags)
-
-(when (require 'company nil 'noerror)
-  (setq rtags-autostart-diagnostics t)
-  (rtags-diagnostics)
-  (setq rtags-completions-enabled t)
-  (push 'company-rtags company-backends)
-  (global-company-mode)
-  (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
+(use-package rtags
+  :config
+  (rtags-enable-standard-keybindings)
   )
 
 (when (require 'flycheck nil 'noerror)
   (require 'flycheck-rtags)
+  (require 'color)
   (defadvice bears-c++-style (after bears-flycheck-irony activate)
     (flycheck-select-checker 'rtags)
+    (setq flycheck-clang-language-standard "c++14")
     (setq-local flycheck-highlighting-mode nil)
     (setq-local flycheck-check-syntax-automatically nil)
+    (set-face-attribute 'rtags-warnline nil
+                        :background nil
+                        :underline
+                        '(:color "dark orange" :style wave))
+    (set-face-attribute 'rtags-errline nil
+                        :background nil
+                        :underline
+                        '(:color "red" :style wave) )
     )
   )
 
