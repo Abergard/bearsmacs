@@ -35,7 +35,8 @@
   :diminish whitespace-mode)
 
 (use-package volatile-highlights
-  :diminish volatile-highlights-mode)
+  :diminish volatile-highlights-mode
+  )
 
 (provide 'bears-packages)
 

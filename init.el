@@ -156,4 +156,15 @@
   (load-file "~/.emacs.d/init.el")
   (bears-color-style))
 
+;; (require 'cl-lib)
+;; (defvar my-dependency-alist
+;;   (cl-loop for pkg in package-activated-list
+;;            for pkg-vec = (cdr (assq pkg package-alist))
+;;            when pkg-vec
+;;            collect (cons pkg
+;;                          (cl-loop for req in (package-desc-reqs pkg-vec)
+;;                                   for req-name = (car req)
+;;                                   when (memq req-name package-activated-list)
+;;                                   collect req-name))))
+
 ;;; init.el ends here
