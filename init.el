@@ -66,6 +66,7 @@
 (defvar use-bears-default-packages nil)
 (defvar use-bears-default-configurations nil)
 (defvar bears-packages nil)
+(defvar bears-disabled-packages '())
 (defvar bears-default-packages '(clang-format
                                  company
                                  flycheck
@@ -105,10 +106,11 @@
   (add-hook 'python-mode-hook 'bears-python-configuration))
 
 (when use-bears-default-packages
-  (while bears-default-packages
-    (load-file
-     (format "~/.emacs.d/private/packages/bears-%s.el"
-             (pop bears-default-packages)))))
+  (setq bears-packages (append bears-packages bears-default-packages))
+  )
+
+(require 'cl)
+(setq bears-packages (set-difference bears-packages bears-disabled-packages))
 
 (while bears-packages
   (load-file
