@@ -70,6 +70,7 @@
 (defvar bears-default-packages '(clang-format
                                  company
                                  flycheck
+                                 flycheck-irony
                                  ggtags
                                  ido
                                  irony
@@ -124,6 +125,8 @@
   (message (concat "[clang-format]"
                    "[company]"
                    "[flycheck]"
+                   "[flycheck-irony]"
+                   "[flycheck-rtags]"
                    "[ggtags]"
                    "[glsl]"
                    "[ido]"
