@@ -133,7 +133,8 @@
                    "[yasnippet]"
                    "[rainbow-delimiters]"
                    "[powerline]"
-                   "[elpy]")))
+                   "[elpy]"
+                   "[rtags]")))
 
 (defun bears-theme-list ()
   "Function display all available themes."
@@ -142,7 +143,8 @@
                    "[zenburn]"
                    "[dracula]"
                    "[solarized-light]"
-                   "[solarized-dark]")))
+                   "[solarized-dark]"
+                   "[forest-blue]")))
 
 (defun bears-configuration-list ()
   "Dispplay all available configurations."
