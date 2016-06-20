@@ -5,25 +5,8 @@
 
 (use-package rtags
   :config
-  (rtags-enable-standard-keybindings)
-  )
-
-(when (require 'flycheck nil 'noerror)
-  (require 'flycheck-rtags)
-  (require 'color)
-  (defadvice bears-c++-style (after bears-flycheck-irony activate)
-    (flycheck-select-checker 'rtags)
-    (setq flycheck-clang-language-standard "c++14")
-    (setq-local flycheck-highlighting-mode nil)
-    (setq-local flycheck-check-syntax-automatically nil)
-    (set-face-attribute 'rtags-warnline nil
-                        :background nil
-                        :underline
-                        '(:color "dark orange" :style wave))
-    (set-face-attribute 'rtags-errline nil
-                        :background nil
-                        :underline
-                        '(:color "red" :style wave) )
+  (defadvice bears-c++-style (after bears-rtags activate)
+    (rtags-enable-standard-keybindings)
     )
   )
 
