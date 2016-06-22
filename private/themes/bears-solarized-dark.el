@@ -3,14 +3,9 @@
 
 ;;; Code:
 
-(use-package color-theme
+(use-package solarized-theme
   :config
-  (use-package color-theme-solarized
-    :config
-    (setq frame-background-mode 'dark)
-    (load-theme 'solarized)
-    (enable-theme 'solarized)
-    )
+  (load-theme 'solarized-dark)
   )
 
 ;; Local Variables:

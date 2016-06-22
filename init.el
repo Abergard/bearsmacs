@@ -53,22 +53,24 @@
 ;; == Short confirm ==
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; == Add .h files to c++-mode ========================================
+;; == Add .h files to c++-mode =======================================
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;; == (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) ==
 (set-frame-parameter (selected-frame) 'alpha '(90 50))
 (add-to-list 'default-frame-alist '(alpha 90 50))
 
-;; == use Shift+arrow_keys to move cursor around split panes =========
+;; == use Shift+arrow_keys to move cursor around split panes ========
 (windmove-default-keybindings)
 
 (defvar use-bears-default-packages nil)
 (defvar use-bears-default-configurations nil)
 (defvar bears-packages nil)
+(defvar bears-disabled-packages '())
 (defvar bears-default-packages '(clang-format
                                  company
                                  flycheck
+                                 flycheck-irony
                                  ggtags
                                  ido
                                  irony
@@ -105,10 +107,11 @@
   (add-hook 'python-mode-hook 'bears-python-configuration))
 
 (when use-bears-default-packages
-  (while bears-default-packages
-    (load-file
-     (format "~/.emacs.d/private/packages/bears-%s.el"
-             (pop bears-default-packages)))))
+  (setq bears-packages (append bears-packages bears-default-packages))
+  )
+
+(require 'cl)
+(setq bears-packages (set-difference bears-packages bears-disabled-packages))
 
 (while bears-packages
   (load-file
@@ -122,6 +125,8 @@
   (message (concat "[clang-format]"
                    "[company]"
                    "[flycheck]"
+                   "[flycheck-irony]"
+                   "[flycheck-rtags]"
                    "[ggtags]"
                    "[glsl]"
                    "[ido]"
@@ -131,7 +136,8 @@
                    "[yasnippet]"
                    "[rainbow-delimiters]"
                    "[powerline]"
-                   "[elpy]")))
+                   "[elpy]"
+                   "[rtags]")))
 
 (defun bears-theme-list ()
   "Function display all available themes."
@@ -140,7 +146,8 @@
                    "[zenburn]"
                    "[dracula]"
                    "[solarized-light]"
-                   "[solarized-dark]")))
+                   "[solarized-dark]"
+                   "[forest-blue]")))
 
 (defun bears-configuration-list ()
   "Dispplay all available configurations."
@@ -155,5 +162,16 @@
   (interactive)
   (load-file "~/.emacs.d/init.el")
   (bears-color-style))
+
+;; (require 'cl-lib)
+;; (defvar my-dependency-alist
+;;   (cl-loop for pkg in package-activated-list
+;;            for pkg-vec = (cdr (assq pkg package-alist))
+;;            when pkg-vec
+;;            collect (cons pkg
+;;                          (cl-loop for req in (package-desc-reqs pkg-vec)
+;;                                   for req-name = (car req)
+;;                                   when (memq req-name package-activated-list)
+;;                                   collect req-name))))
 
 ;;; init.el ends here

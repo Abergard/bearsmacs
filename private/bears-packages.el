@@ -27,6 +27,7 @@
 
 (use-package async)
 
+(use-package window-numbering)
 (use-package iedit)
 (use-package whitespace
   :config
@@ -35,7 +36,8 @@
   :diminish whitespace-mode)
 
 (use-package volatile-highlights
-  :diminish volatile-highlights-mode)
+  :diminish volatile-highlights-mode
+  )
 
 (provide 'bears-packages)
 
