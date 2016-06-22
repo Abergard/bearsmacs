@@ -19,18 +19,6 @@
   :diminish irony-mode
   )
 
-(when (require 'flycheck nil 'noerror)
-  (use-package flycheck-irony
-    :init
-    (eval-after-load 'flycheck
-      '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-    :config
-    (defadvice bears-c++-style (after bears-flycheck-irony activate)
-      (setq flycheck-clang-language-standard "c++14")
-      )
-    )
-  )
-
 (when (require 'company nil 'noerror)
   (use-package company-irony)
   (use-package company-irony-c-headers)
