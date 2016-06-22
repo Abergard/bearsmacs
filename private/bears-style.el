@@ -18,7 +18,7 @@
   (diminish 'hs-minor-mode)
   (diminish 'abbrev-mode)
   (abbrev-mode 1)
-
+  (window-numbering-mode 1)
   (bears-color-style)
   )
 

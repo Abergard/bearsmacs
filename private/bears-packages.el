@@ -27,6 +27,7 @@
 
 (use-package async)
 
+(use-package window-numbering)
 (use-package iedit)
 (use-package whitespace
   :config
