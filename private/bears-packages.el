@@ -27,6 +27,11 @@
 
 (use-package async)
 
+(use-package modern-cpp-font-lock
+  :config
+  (modern-c++-font-lock-global-mode t)
+  )
+
 (use-package window-numbering)
 (use-package iedit)
 (use-package whitespace

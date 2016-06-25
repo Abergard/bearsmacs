@@ -80,6 +80,46 @@
                                  git-gutter-fringe))
 (defvar bears-theme "")
 
+(defun bears-package-list ()
+  "Function display all available packages."
+  (interactive)
+  (message (concat "[clang-format(default)]"
+                   "[company(default)]"
+                   "[flycheck(default)]"
+                   "[flycheck-irony(default)]"
+                   "[flycheck-rtags]"
+                   "[ggtags(default)]"
+                   "[glsl]"
+                   "[ido(default)]"
+                   "[irony(default)]"
+                   "[ninja]"
+                   "[ttcn3]"
+                   "[yasnippet(default)]"
+                   "[rainbow-delimiters(default)]"
+                   "[powerline(default)]"
+                   "[elpy]"
+                   "[rtags]"
+                   "[git-gutter-fringe(default)]"
+                   "[virtual-desktops]")))
+
+(defun bears-theme-list ()
+  "Function display all available themes."
+  (interactive)
+  (message (concat "[warm-night]"
+                   "[zenburn]"
+                   "[dracula]"
+                   "[solarized-light]"
+                   "[solarized-dark]"
+                   "[forest-blue]")))
+
+(defun bears-configuration-list ()
+  "Dispplay all available configurations."
+  (interactive)
+  (message (concat "[bears-lisp-configuration]"
+                   "[bears-text-configuration]"
+                   "[bears-c++-configuration]"
+                   "[bears-python-configuration]")))
+
 ;;; == load bears private config file ==
 (add-to-list 'load-path "~/.emacs.d/private")
 
@@ -119,44 +159,6 @@
    (format "~/.emacs.d/private/packages/bears-%s.el" (pop bears-packages))))
 
 (bears-user-config)
-
-(defun bears-package-list ()
-  "Function display all available packages."
-  (interactive)
-  (message (concat "[clang-format]"
-                   "[company]"
-                   "[flycheck]"
-                   "[flycheck-irony]"
-                   "[flycheck-rtags]"
-                   "[ggtags]"
-                   "[glsl]"
-                   "[ido]"
-                   "[irony]"
-                   "[ninja]"
-                   "[ttcn3]"
-                   "[yasnippet]"
-                   "[rainbow-delimiters]"
-                   "[powerline]"
-                   "[elpy]"
-                   "[rtags]")))
-
-(defun bears-theme-list ()
-  "Function display all available themes."
-  (interactive)
-  (message (concat "[warm-night]"
-                   "[zenburn]"
-                   "[dracula]"
-                   "[solarized-light]"
-                   "[solarized-dark]"
-                   "[forest-blue]")))
-
-(defun bears-configuration-list ()
-  "Dispplay all available configurations."
-  (interactive)
-  (message (concat "[bears-lisp-configuration]"
-                   "[bears-text-configuration]"
-                   "[bears-c++-configuration]"
-                   "[bears-python-configuration]")))
 
 (defun bears-update ()
   "Function update packages."
