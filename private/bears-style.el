@@ -21,6 +21,7 @@
   (window-numbering-mode 1)
   (semantic-mode)
   (semantic-stickyfunc-mode 1)
+  (semantic-idle-summary-mode 1)
   (bears-color-style)
   )
 
