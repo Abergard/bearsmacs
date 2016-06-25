@@ -19,6 +19,8 @@
   (diminish 'abbrev-mode)
   (abbrev-mode 1)
   (window-numbering-mode 1)
+  (semantic-mode)
+  (semantic-stickyfunc-mode 1)
   (bears-color-style)
   )
 

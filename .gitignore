@@ -12,5 +12,7 @@ emacs-backups/*
 auto-save-list/*
 !tmp
 tmp/*
+!semanticdb
+semanticdb/*
 
 !.keep
