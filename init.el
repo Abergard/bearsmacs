@@ -76,7 +76,8 @@
                                  irony
                                  yasnippet
                                  rainbow-delimiters
-                                 powerline))
+                                 powerline
+                                 git-gutter-fringe))
 (defvar bears-theme "")
 
 ;;; == load bears private config file ==
