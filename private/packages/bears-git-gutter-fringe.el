@@ -3,18 +3,20 @@
 
 ;;; Code:
 
-(use-package git-gutter-fringe+
+(use-package git-gutter-fringe
   :config
-  (require 'git-gutter-fringe+)
-  (setq git-gutter-fr+-side 'right-fringe)
-  (fringe-helper-define 'git-gutter-fr+-added nil
+  (setq
+   git-gutter:handled-backends '(git svn)
+   git-gutter-fr:side 'right-fringe
+   )
+  (fringe-helper-define 'git-gutter-fr:added nil
     "..X...."
     "..X...."
     "XXXXX.."
     "..X...."
     "..X....")
 
-  (fringe-helper-define 'git-gutter-fr+-deleted nil
+  (fringe-helper-define 'git-gutter-fr:deleted nil
     "......."
     "......."
     "......."
@@ -23,17 +25,17 @@
     "......."
     ".......")
 
-  (fringe-helper-define 'git-gutter-fr+-modified nil
+  (fringe-helper-define 'git-gutter-fr:modified nil
     "..X...."
     ".XXX..."
     "XX.XX.."
     ".XXX..."
     "..X....")
 
-  (defadvice bears-prog-style (after bears-git-gutter-fringe+ activate)
-    (git-gutter+-mode 1)
+  (defadvice bears-prog-style (after bears-git-gutter-fringe activate)
+    (git-gutter-mode 1)
     )
-  :diminish git-gutter+-mode
+  :diminish git-gutter-mode
   )
 
 ;; Local Variables:
