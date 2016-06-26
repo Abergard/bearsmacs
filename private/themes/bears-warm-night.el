@@ -43,6 +43,10 @@
                         :background "#362f2f"
                         :inherit 'default)
     )
+  (when (require 'anzu nil 'noerror)
+    (set-face-attribute 'anzu-mode-line nil
+                        :foreground "yellow" :weight 'bold)
+    )
   )
 
 ;; Local Variables:
