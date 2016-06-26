@@ -30,6 +30,7 @@
 (use-package modern-cpp-font-lock
   :config
   (modern-c++-font-lock-global-mode t)
+  :diminish modern-c++-font-lock-mode
   )
 
 (use-package window-numbering)

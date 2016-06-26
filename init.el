@@ -77,7 +77,8 @@
                                  yasnippet
                                  rainbow-delimiters
                                  powerline
-                                 git-gutter-fringe))
+                                 git-gutter-fringe
+                                 semantic))
 (defvar bears-theme "")
 
 (defun bears-package-list ()
@@ -100,7 +101,8 @@
                    "[elpy]"
                    "[rtags]"
                    "[git-gutter-fringe(default)]"
-                   "[virtual-desktops]")))
+                   "[virtual-desktops]"
+                   "[semantic(defautlt)]")))
 
 (defun bears-theme-list ()
   "Function display all available themes."
