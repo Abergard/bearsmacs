@@ -6,7 +6,6 @@
 (defadvice bears-prog-style (after bears-semantic activate)
   (ignore-errors
     (semantic-mode 1)
-//    (semantic-idle-summary-mode 1)
     (semantic-stickyfunc-mode 1)
     )
 )
