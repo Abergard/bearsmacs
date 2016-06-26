@@ -78,7 +78,8 @@
                                  rainbow-delimiters
                                  powerline
                                  git-gutter-fringe
-                                 semantic))
+                                 semantic
+                                 anzu))
 (defvar bears-theme "")
 
 (defun bears-package-list ()
@@ -102,7 +103,8 @@
                    "[rtags]"
                    "[git-gutter-fringe(default)]"
                    "[virtual-desktops]"
-                   "[semantic(defautlt)]")))
+                   "[semantic(defautlt)]"
+                   "[anzu(default)]")))
 
 (defun bears-theme-list ()
   "Function display all available themes."
