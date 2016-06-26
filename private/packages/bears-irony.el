@@ -5,6 +5,7 @@
 
 (use-package irony
   :config
+  (use-package irony-eldoc)
   (defadvice bears-c++-style (after bears-irony activate)
     (irony-mode 1)
     )
@@ -13,7 +14,9 @@
     (define-key irony-mode-map [remap completion-at-point]
       'irony-completion-at-point-async)
     (define-key irony-mode-map [remap complete-symbol]
-      'irony-completion-at-point-async))
+      'irony-completion-at-point-async)
+    (irony-eldoc 1))
+
   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
   :diminish irony-mode
