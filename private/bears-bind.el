@@ -15,6 +15,10 @@
   "Binds for python files."
   (bears-base-bind))
 
+(defun bears-c-bind()
+  "Binds for c files."
+  (bears-base-bind))
+
 (defun bears-c++-bind()
   "Binds for c++ files."
   (bears-base-bind))

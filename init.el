@@ -149,6 +149,7 @@
   (add-hook 'emacs-lisp-mode-hook 'bears-lisp-configuration)
   (add-hook 'text-mode-hook 'bears-text-configuration)
   (add-hook 'c++-mode-hook 'bears-c++-configuration)
+  (add-hook 'c-mode-hook 'bears-c-configuration)
   (add-hook 'python-mode-hook 'bears-python-configuration))
 
 (when use-bears-default-packages
