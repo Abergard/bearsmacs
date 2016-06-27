@@ -29,6 +29,11 @@
 
 (use-package modern-cpp-font-lock
   :config
+  (add-to-list 'modern-c++-operators "=")
+  (setq modern-c++-literal-integer t
+        modern-c++-literal-boolean t
+        modern-c++-literal-null-pointer y
+        modern-c++-literal-string t)
   (modern-c++-font-lock-global-mode t)
   :diminish modern-c++-font-lock-mode
   )
