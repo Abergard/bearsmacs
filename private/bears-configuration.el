@@ -11,6 +11,11 @@
   (bears-lisp-style)
   )
 
+(defun bears-c-configuration()
+  (bears-c-style)
+  (bears-c-bind)
+  )
+
 (defun bears-c++-configuration()
   (bears-c++-style)
   (bears-c++-bind)
