@@ -45,7 +45,8 @@
     )
   (when (require 'anzu nil 'noerror)
     (set-face-attribute 'anzu-mode-line nil
-                        :foreground "yellow" :weight 'bold)
+                        :foreground nil 
+                        :weight 'bold)
     )
   )
 
