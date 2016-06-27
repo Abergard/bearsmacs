@@ -8,7 +8,6 @@
   (defadvice bears-prog-style (after bears-flycheck activate)
     (flycheck-mode 1)
     )
-  :diminish flycheck-mode
   )
 
 ;; Local Variables:
