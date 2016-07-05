@@ -7,7 +7,7 @@
   :config
   (setq
    git-gutter:handled-backends '(git svn)
-   git-gutter-fr:side 'right-fringe
+   git-gutter-fr:side 'left-fringe
    )
   (fringe-helper-define 'git-gutter-fr:added nil
     "..X...."
@@ -34,6 +34,7 @@
 
   (defadvice bears-prog-style (after bears-git-gutter-fringe activate)
     (git-gutter-mode 1)
+    (fringe-mode '(4 . 0))
     )
   :diminish git-gutter-mode
   )
