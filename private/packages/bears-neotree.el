@@ -5,8 +5,12 @@
 
 (use-package neotree
   :config
-  (setq neo-window-width 50)
-  (setq neo-persist-show nil)
+  (setq neo-window-width 25
+        neo-window-fixed-size nil
+        neo-persist-show nil
+        neo-smart-open t
+        neo-theme 'classic)
+
   :bind ("<f8>" . neotree-toggle)
   )
 

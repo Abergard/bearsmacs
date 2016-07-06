@@ -15,4 +15,4 @@
 ;; byte-compile-warnings: (not free-vars)
 ;; End:
 
-;;; bears-avy-flycheck.el ends here
+;;; bears-avy.el ends here

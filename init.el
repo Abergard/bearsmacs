@@ -79,32 +79,39 @@
                                  powerline
                                  git-gutter-fringe
                                  semantic
-                                 anzu))
+                                 anzu
+                                 avy
+                                 srefactor
+                                 neotree))
 (defvar bears-theme "")
 
 (defun bears-package-list ()
   "Function display all available packages."
   (interactive)
-  (message (concat "[clang-format(default)]"
+  (message (concat 
+                   "[ninja]"
+                   "[ttcn3]"
+                   "[elpy]"
+                   "[rtags]"
+                   "[flycheck-rtags]"
+                   "[glsl]"
+                   "[clang-format(default)]"
                    "[company(default)]"
                    "[flycheck(default)]"
                    "[flycheck-irony(default)]"
-                   "[flycheck-rtags]"
                    "[ggtags(default)]"
-                   "[glsl]"
                    "[ido(default)]"
                    "[irony(default)]"
-                   "[ninja]"
-                   "[ttcn3]"
                    "[yasnippet(default)]"
                    "[rainbow-delimiters(default)]"
                    "[powerline(default)]"
-                   "[elpy]"
-                   "[rtags]"
                    "[git-gutter-fringe(default)]"
                    "[virtual-desktops]"
                    "[semantic(defautlt)]"
-                   "[anzu(default)]")))
+                   "[anzu(default)]"
+                   "[avy(default)]"
+                   "[srefactor(default)]"
+                   "[neotree(default)]")))
 
 (defun bears-theme-list ()
   "Function display all available themes."
