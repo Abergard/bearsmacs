@@ -154,10 +154,14 @@
 
 (when use-bears-default-configurations
   (add-hook 'emacs-lisp-mode-hook 'bears-lisp-configuration)
-  (add-hook 'text-mode-hook 'bears-text-configuration)
+  (add-hook 'text-mode-hook 'bears-common-configuration)
+  (add-hook 'sh-mode-hook 'bears-common-configuration)
   (add-hook 'c++-mode-hook 'bears-c++-configuration)
   (add-hook 'c-mode-hook 'bears-c-configuration)
-  (add-hook 'python-mode-hook 'bears-python-configuration))
+  (add-hook 'python-mode-hook 'bears-python-configuration)
+  (add-hook 'gitignore-mode-hook 'bears-common-configuration)
+  (add-hook 'gitattributes-mode-hook 'bears-common-configuration)
+  (add-hook 'gitconfig-mode-hook 'bears-common-configuration))
 
 (when use-bears-default-packages
   (setq bears-packages (append bears-packages bears-default-packages))

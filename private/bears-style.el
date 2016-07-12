@@ -48,8 +48,8 @@
   (setq c-basic-offset 4)
   )
 
-(defun bears-text-style ()
-  "Style for text files."
+(defun bears-common-style ()
+  "Style for common files."
   (bears-base-style))
 
 (defun bears-lisp-style()

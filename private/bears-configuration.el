@@ -3,8 +3,8 @@
 
 ;;; Code:
 
-(defun bears-text-configuration()
-  (bears-text-style)
+(defun bears-common-configuration()
+  (bears-common-style)
   )
 
 (defun bears-lisp-configuration()
