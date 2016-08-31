@@ -5,11 +5,16 @@
 
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives '("elpy" . "https://jorgenschaefer.github.io/packages/"))
+(add-to-list 'package-archives '("gnu" .
+                                 "http://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" .
+                                 "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" .
+                                 "http://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" .
+                                 "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("elpy" .
+                                 "https://jorgenschaefer.github.io/packages/"))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -40,11 +45,6 @@
 
 (use-package window-numbering)
 (use-package iedit)
-(use-package whitespace
-  :config
-  (setq whitespace-style '(face tabs empty trailing lines-tail)
-        whitespace-line-column 80)
-  :diminish whitespace-mode)
 
 (use-package volatile-highlights
   :diminish volatile-highlights-mode

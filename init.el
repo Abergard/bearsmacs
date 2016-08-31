@@ -82,13 +82,15 @@
                                  anzu
                                  avy
                                  srefactor
-                                 neotree))
+                                 neotree
+                                 cmake
+                                 whitespace))
 (defvar bears-theme "")
 
 (defun bears-package-list ()
   "Function display all available packages."
   (interactive)
-  (message (concat 
+  (message (concat
                    "[ninja]"
                    "[ttcn3]"
                    "[elpy]"
@@ -111,7 +113,9 @@
                    "[anzu(default)]"
                    "[avy(default)]"
                    "[srefactor(default)]"
-                   "[neotree(default)]")))
+                   "[neotree(default)]"
+                   "[cmake(default)]"
+                   "[whitespace(default)]")))
 
 (defun bears-theme-list ()
   "Function display all available themes."
@@ -126,10 +130,12 @@
 (defun bears-configuration-list ()
   "Dispplay all available configurations."
   (interactive)
-  (message (concat "[bears-lisp-configuration]"
-                   "[bears-text-configuration]"
+  (message (concat "[bears-common-configuration]"
+                   "[bears-prog-configuration]"
+                   "[bears-c-configuration]"
                    "[bears-c++-configuration]"
-                   "[bears-python-configuration]")))
+                   "[bears-python-configuration]"
+                   "[bears-ttcn3-configuration]")))
 
 ;;; == load bears private config file ==
 (add-to-list 'load-path "~/.emacs.d/private")
@@ -153,7 +159,7 @@
 (require 'bears-configuration)
 
 (when use-bears-default-configurations
-  (add-hook 'emacs-lisp-mode-hook 'bears-lisp-configuration)
+  (add-hook 'emacs-lisp-mode-hook 'bears-prog-configuration)
   (add-hook 'text-mode-hook 'bears-common-configuration)
   (add-hook 'sh-mode-hook 'bears-common-configuration)
   (add-hook 'c++-mode-hook 'bears-c++-configuration)
@@ -161,7 +167,11 @@
   (add-hook 'python-mode-hook 'bears-python-configuration)
   (add-hook 'gitignore-mode-hook 'bears-common-configuration)
   (add-hook 'gitattributes-mode-hook 'bears-common-configuration)
-  (add-hook 'gitconfig-mode-hook 'bears-common-configuration))
+  (add-hook 'gitconfig-mode-hook 'bears-common-configuration)
+  (add-hook 'cmake-mode-hook 'bears-prog-configuration)
+  (add-hook 'ninja-mode-hook 'bears-prog-configuration)
+  (add-hook 'ttcn-3-mode-hook 'bears-ttcn3-configuration)
+  (add-hook 'glsl-mode-hook 'bears-c-configuration))
 
 (when use-bears-default-packages
   (setq bears-packages (append bears-packages bears-default-packages))

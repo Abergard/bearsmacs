@@ -7,7 +7,7 @@
 (defun bears-color-style()
   "Use this function only in themes configuration by defadvice.")
 
-(defun bears-base-style()
+(defun bears-common-style()
   "Base style for all kinds of files."
   (show-paren-mode t)
   (volatile-highlights-mode t)
@@ -24,9 +24,8 @@
 
 (defun bears-prog-style()
   "Base style for all kinds of programming files."
-  (bears-base-style)
+  (bears-common-style)
   (hs-minor-mode t)
-  (whitespace-mode t)
   )
 
 (defun bears-c-style()
@@ -48,33 +47,20 @@
   (setq c-basic-offset 4)
   )
 
-(defun bears-common-style ()
-  "Style for common files."
-  (bears-base-style))
-
-(defun bears-lisp-style()
-  "Style for lisp files/"
-  (bears-prog-style))
-
-(defun bears-ninja-style()
-  "Style for ninja files."
-  (bears-prog-style))
-
 (defun bears-python-style()
-  "Style python files."
-  (bears-prog-style))
-
-(defun bears-ttcn3-style()
-  "Style for ttcn3 files."
-  (bears-c-style))
+  "Style for python"
+  (bears-prog-style)
+  )
 
 (defun bears-c++-style()
-  "Style for c++ files."
-  (bears-c-style))
+  "Style for c++"
+  (bears-c-style)
+  )
 
-(defun bears-glsl-style()
-  "Style for glsl files."
-  (bears-c-style))
+(defun bears-ttcn3-style()
+  "Style for ttcn3"
+  (bears-c-style)
+  )
 
 (provide 'bears-style)
 

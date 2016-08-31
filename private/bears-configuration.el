@@ -7,23 +7,27 @@
   (bears-common-style)
   )
 
-(defun bears-lisp-configuration()
-  (bears-lisp-style)
+(defun bears-prog-configuration()
+  (bears-prog-style)
+  (bears-prog-bind)
   )
 
 (defun bears-c-configuration()
   (bears-c-style)
-  (bears-c-bind)
+  (bears-prog-bind)
   )
 
 (defun bears-c++-configuration()
   (bears-c++-style)
-  (bears-c++-bind)
+  (bears-prog-bind)
   )
 
 (defun bears-python-configuration()
-  (bears-python-style)
-  (bears-python-bind)
+  (bears-prog-configuration)
+  )
+
+(defun bears-ttcn3-configuration()
+  (bears-c-configuration)
   )
 
 (provide 'bears-configuration)

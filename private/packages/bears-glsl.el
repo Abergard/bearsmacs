@@ -15,8 +15,6 @@
   (add-to-list 'company-backends '(company-glsl))
   )
 
-(add-hook 'glsl-mode-hook 'bears-glsl-style)
-
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
 ;; End:
