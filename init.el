@@ -63,6 +63,15 @@
 ;; == use Shift+arrow_keys to move cursor around split panes ========
 (windmove-default-keybindings)
 
+(defun toggle-maximize-buffer ()
+  "Maximize buffer."
+  (interactive)
+  (if (= 1 (length (window-list)))
+      (jump-to-register '_)
+    (progn
+      (window-configuration-to-register '_)
+      (delete-other-windows))))
+
 (defvar use-bears-default-packages nil)
 (defvar use-bears-default-configurations nil)
 (defvar bears-packages nil)
@@ -192,15 +201,12 @@
   (load-file "~/.emacs.d/init.el")
   (bears-color-style))
 
-;; (require 'cl-lib)
-;; (defvar my-dependency-alist
-;;   (cl-loop for pkg in package-activated-list
-;;            for pkg-vec = (cdr (assq pkg package-alist))
-;;            when pkg-vec
-;;            collect (cons pkg
-;;                          (cl-loop for req in (package-desc-reqs pkg-vec)
-;;                                   for req-name = (car req)
-;;                                   when (memq req-name package-activated-list)
-;;                                   collect req-name))))
-
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (unless (string= bears-theme "")
+                  (load-file (format "~/.emacs.d/private/themes/bears-%s.el" bears-theme)))
+                )
+              )
+  )
 ;;; init.el ends here
