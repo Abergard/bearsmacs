@@ -93,7 +93,8 @@
                                  srefactor
                                  neotree
                                  cmake
-                                 whitespace))
+                                 whitespace
+                                 git-mode))
 (defvar bears-theme "")
 
 (defun bears-package-list ()
@@ -124,7 +125,8 @@
                    "[srefactor(default)]"
                    "[neotree(default)]"
                    "[cmake(default)]"
-                   "[whitespace(default)]")))
+                   "[whitespace(default)]"
+                   "[git-mode](default)")))
 
 (defun bears-theme-list ()
   "Function display all available themes."
@@ -209,4 +211,5 @@
                 )
               )
   )
+
 ;;; init.el ends here
