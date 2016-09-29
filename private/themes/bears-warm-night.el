@@ -48,7 +48,7 @@
                         :foreground nil 
                         :weight 'bold)
     )
-  )
+  );;todo read http://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
