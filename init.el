@@ -50,6 +50,9 @@
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
+;; == selected region will be deleted ==
+(delete-selection-mode 1)
+
 ;; == Short confirm ==
 (fset 'yes-or-no-p 'y-or-n-p)
 
