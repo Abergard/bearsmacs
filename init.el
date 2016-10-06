@@ -103,53 +103,65 @@
 (defun bears-package-list ()
   "Function display all available packages."
   (interactive)
-  (message (concat
-                   "[ninja]"
-                   "[ttcn3]"
-                   "[elpy]"
-                   "[rtags]"
-                   "[flycheck-rtags]"
-                   "[glsl]"
-                   "[clang-format(default)]"
-                   "[company(default)]"
-                   "[flycheck(default)]"
-                   "[flycheck-irony(default)]"
-                   "[ggtags(default)]"
-                   "[ido(default)]"
-                   "[irony(default)]"
-                   "[yasnippet(default)]"
-                   "[rainbow-delimiters(default)]"
-                   "[powerline(default)]"
-                   "[git-gutter-fringe(default)]"
-                   "[virtual-desktops]"
-                   "[semantic(defautlt)]"
-                   "[anzu(default)]"
-                   "[avy(default)]"
-                   "[srefactor(default)]"
-                   "[neotree(default)]"
-                   "[cmake(default)]"
-                   "[whitespace(default)]"
-                   "[git-mode](default)")))
+  (completing-read
+   "Available packages: "
+   '(("ninja")
+     ("ttcn3")
+     ("elpy")
+     ("rtags")
+     ("flycheck-rtags")
+     ("glsl")
+     ("clang-format(default)")
+     ("company(default)")
+     ("flycheck(default)")
+     ("flycheck-irony(default)")
+     ("ggtags(default)")
+     ("ido(default)")
+     ("irony(default)")
+     ("yasnippet(default)")
+     ("rainbow-delimiters(default)")
+     ("powerline(default)")
+     ("git-gutter-fringe(default)")
+     ("virtual-desktops")
+     ("semantic(defautlt)")
+     ("anzu(default)")
+     ("avy(default)")
+     ("srefactor(default)")
+     ("neotree(default)")
+     ("cmake(default)")
+     ("whitespace(default)")
+     ("git-mode](default)"))nil t "")
+  )
+
+(defun bears-get-theme-list()
+  (completing-read
+   "Available themes: "
+   '(("warm-night")
+     ("zenburn")
+     ("dracula")
+     ("solarized-light")
+     ("solarized-dark")
+     ("forest-blue"))nil t "")
+  )
 
 (defun bears-theme-list ()
   "Function display all available themes."
   (interactive)
-  (message (concat "[warm-night]"
-                   "[zenburn]"
-                   "[dracula]"
-                   "[solarized-light]"
-                   "[solarized-dark]"
-                   "[forest-blue]")))
+  (bears-get-theme-list)
+  )
 
 (defun bears-configuration-list ()
   "Dispplay all available configurations."
   (interactive)
-  (message (concat "[bears-common-configuration]"
-                   "[bears-prog-configuration]"
-                   "[bears-c-configuration]"
-                   "[bears-c++-configuration]"
-                   "[bears-python-configuration]"
-                   "[bears-ttcn3-configuration]")))
+  (completing-read
+   "Available configurations: "
+   '(("bears-common-configuration")
+     ("bears-prog-configuration")
+     ("bears-c-configuration")
+     ("bears-c++-configuration")
+     ("bears-python-configuration")
+     ("bears-ttcn3-configuration"))nil t "")
+  )
 
 ;;; == load bears private config file ==
 (add-to-list 'load-path "~/.emacs.d/private")
@@ -165,8 +177,21 @@
 
 (require 'bears-packages)
 
-(unless (string= bears-theme "")
-  (load-file (format "~/.emacs.d/private/themes/bears-%s.el" bears-theme)))
+(defun bears-load-theme-arg (theme)
+  "Load THEME."
+  (unless (string= theme "")
+    (disable-theme bears-theme)
+    (setq bears-theme theme)
+    (load-file (format "~/.emacs.d/private/themes/bears-%s.el" theme)))
+  )
+
+ ;; (defun bears-load-theme ()
+ ;;   (interactive)
+ ;;   (bears-load-theme-arg (bears-theme-list))
+ ;;   (bears-color-style)
+ ;;   )
+
+(bears-load-theme-arg bears-theme)
 
 (require 'bears-style)
 (require 'bears-bind)
