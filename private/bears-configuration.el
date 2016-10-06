@@ -27,7 +27,8 @@
   )
 
 (defun bears-ttcn3-configuration()
-  (bears-c-configuration)
+  (bears-ttcn3-style)
+  (bears-prog-bind)
   )
 
 (provide 'bears-configuration)
