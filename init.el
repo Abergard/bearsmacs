@@ -34,7 +34,8 @@
  auto-save-interval 200
  delete-old-versions t
  custom-safe-themes t
- major-mode 'text-mode)
+ major-mode 'text-mode
+ compilation-scroll-output 'first-error)
 
 ;; == Turn off mouse interface early in startup to avoid momentary display =
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
