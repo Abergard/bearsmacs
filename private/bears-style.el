@@ -15,10 +15,10 @@
   (column-number-mode t)
   (hl-line-mode t)
   (linum-mode t)
-  (diminish 'hs-minor-mode)
-  (diminish 'abbrev-mode)
   (abbrev-mode 1)
   (window-numbering-mode 1)
+  (diminish 'hs-minor-mode)
+  (diminish 'abbrev-mode)
   (bears-color-style)
   )
 
