@@ -34,7 +34,8 @@
      ("cmake(default)")
      ("whitespace(default)")
      ("git-mode(default)")
-     ("which-key(default)"))nil t "")
+     ("which-key(default)")
+     ("projectile(default)"))nil t "")
   )
 
 (defun bears-get-theme-list()

@@ -26,7 +26,8 @@
                                  cmake
                                  whitespace
                                  git-mode
-                                 which-key))
+                                 which-key
+                                 projectile))
 (defvar bears-theme "")
 
 (provide 'bears-variables)
