@@ -35,7 +35,8 @@
      ("whitespace(default)")
      ("git-mode(default)")
      ("which-key(default)")
-     ("projectile(default)"))nil t "")
+     ("projectile(default)")
+     ("vdiff(default)"))nil t "")
   )
 
 (defun bears-get-theme-list()

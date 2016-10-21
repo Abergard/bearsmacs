@@ -27,7 +27,8 @@
                                  whitespace
                                  git-mode
                                  which-key
-                                 projectile))
+                                 projectile
+                                 vdiff))
 (defvar bears-theme "")
 
 (provide 'bears-variables)
