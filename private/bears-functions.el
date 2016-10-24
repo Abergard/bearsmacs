@@ -25,7 +25,6 @@
      ("rainbow-delimiters(default)")
      ("powerline(default)")
      ("git-gutter-fringe(default)")
-     ("virtual-desktops")
      ("semantic(defautlt)")
      ("anzu(default)")
      ("avy(default)")
@@ -36,7 +35,8 @@
      ("git-mode(default)")
      ("which-key(default)")
      ("projectile(default)")
-     ("vdiff(default)"))nil t "")
+     ("vdiff(default)")
+     ("perspective(default)"))nil t "")
   )
 
 (defun bears-get-theme-list()

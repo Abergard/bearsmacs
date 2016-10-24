@@ -45,7 +45,13 @@
     )
   (when (require 'anzu nil 'noerror)
     (set-face-attribute 'anzu-mode-line nil
-                        :foreground nil 
+                        :foreground nil
+                        :weight 'bold)
+    )
+
+    (when (require 'perspective nil 'noerror)
+    (set-face-attribute 'persp-selected-face nil
+                        :inherit mode-line-buffer-id
                         :weight 'bold)
     )
   );;todo read http://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once

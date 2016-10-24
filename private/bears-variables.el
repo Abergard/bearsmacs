@@ -28,7 +28,8 @@
                                  git-mode
                                  which-key
                                  projectile
-                                 vdiff))
+                                 vdiff
+                                 perspective))
 (defvar bears-theme "")
 
 (provide 'bears-variables)
