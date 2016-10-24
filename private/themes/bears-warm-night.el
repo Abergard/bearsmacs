@@ -51,7 +51,7 @@
 
     (when (require 'perspective nil 'noerror)
     (set-face-attribute 'persp-selected-face nil
-                        :inherit mode-line-buffer-id
+                        :inherit 'mode-line-buffer-id
                         :weight 'bold)
     )
   );;todo read http://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once

@@ -29,7 +29,8 @@
                                  which-key
                                  projectile
                                  vdiff
-                                 perspective))
+                                 perspective
+                                 multiple-cursors))
 (defvar bears-theme "")
 
 (provide 'bears-variables)

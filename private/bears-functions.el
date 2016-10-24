@@ -36,7 +36,8 @@
      ("which-key(default)")
      ("projectile(default)")
      ("vdiff(default)")
-     ("perspective(default)"))nil t "")
+     ("perspective(default)")
+     ("multiple-cursors"))nil t "")
   )
 
 (defun bears-get-theme-list()
