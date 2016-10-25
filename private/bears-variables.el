@@ -30,7 +30,8 @@
                                  projectile
                                  vdiff
                                  perspective
-                                 multiple-cursors))
+                                 multiple-cursors
+                                 irony-eldoc))
 (defvar bears-theme "")
 
 (provide 'bears-variables)

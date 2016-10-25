@@ -37,7 +37,8 @@
      ("projectile(default)")
      ("vdiff(default)")
      ("perspective(default)")
-     ("multiple-cursors"))nil t "")
+     ("multiple-cursors")
+     ("irony-eldoc(default)"))nil t "")
   )
 
 (defun bears-get-theme-list()
