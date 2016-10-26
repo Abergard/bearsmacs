@@ -49,8 +49,9 @@
                         :weight 'bold)
     )
 
-    (when (require 'perspective nil 'noerror)
+  (when (require 'perspective nil 'noerror)
     (set-face-attribute 'persp-selected-face nil
+                        :foreground nil
                         :inherit 'mode-line-buffer-id
                         :weight 'bold)
     )

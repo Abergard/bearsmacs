@@ -6,7 +6,6 @@
 (use-package projectile
   :config
   (projectile-mode 1)
-  :bind ("<C-tab>" . projectile-find-other-file)
   :diminish projectile-mode
   )
 
