@@ -31,7 +31,8 @@
                                  vdiff
                                  perspective
                                  multiple-cursors
-                                 irony-eldoc))
+                                 irony-eldoc
+                                 company-irony))
 (defvar bears-theme "")
 
 (provide 'bears-variables)

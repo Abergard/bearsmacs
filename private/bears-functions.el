@@ -38,7 +38,9 @@
      ("vdiff(default)")
      ("perspective(default)")
      ("multiple-cursors")
-     ("irony-eldoc(default)"))nil t "")
+     ("irony-eldoc(default)")
+     ("company-irony(default)")
+     ("company-rtags"))nil t "")
   )
 
 (defun bears-get-theme-list()
