@@ -15,7 +15,6 @@
                                  "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("elpy" .
                                  "https://jorgenschaefer.github.io/packages/"))
-(package-initialize)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -31,21 +30,8 @@
   (setq paradox-github-token t))
 
 (use-package async)
-
-(use-package modern-cpp-font-lock
-  :config
-  (add-to-list 'modern-c++-operators "=")
-  (setq modern-c++-literal-integer t
-        modern-c++-literal-boolean t
-        modern-c++-literal-null-pointer t
-        modern-c++-literal-string t)
-  (modern-c++-font-lock-global-mode t)
-  :diminish modern-c++-font-lock-mode
-  )
-
 (use-package window-numbering)
 (use-package iedit)
-
 (use-package volatile-highlights
   :diminish volatile-highlights-mode
   )

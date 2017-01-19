@@ -11,6 +11,8 @@
   (local-set-key (kbd "<C-M-return>") 'hs-toggle-hiding)
   )
 
+(global-set-key (kbd "<f12>") 'toggle-maximize-buffer)
+
 (provide 'bears-bind)
 
 ;; Local Variables:

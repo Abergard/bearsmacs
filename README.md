@@ -12,13 +12,16 @@
   - init.el
   - private/
     - bears-bind.el
+    - bears-configuration.el
+    - bears-defaults.el
+    - bears-functions.el
     - bears-packages.el
     - bears-style.el
-    - bears-configuration.el
     - bears-user-file.el
+    - bears-variables.el
     - packages/
-      - bears-package-name.el
+      - bears-(package-name).el
       - ...
     - themes/
-      - bears-theme-name.el
+      - bears-(theme-name).el
       - ...
