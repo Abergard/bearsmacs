@@ -26,18 +26,18 @@
      ("powerline(default)")
      ("git-gutter-fringe(default)")
      ("semantic(defautlt)")
-     ("anzu(default)")
-     ("avy(default)")
-     ("srefactor(default)")
-     ("neotree(default)")
-     ("cmake(default)")
-     ("whitespace(default)")
-     ("git-mode(default)")
-     ("which-key(default)")
-     ("projectile(default)")
-     ("vdiff(default)")
-     ("perspective(default)")
-     ("multiple-cursors")
+     ("anzu(default)")                ; displays current match and total matches information
+     ("avy(default)")                 ; go to char
+     ("srefactor(default)")           ; c++ refactoring tool
+     ("neotree(default)")             ; directories tree
+     ("cmake(default)")               ;
+     ("whitespace(default)")          ;
+     ("git-mode(default)")            ;
+     ("which-key(default)")           ; display pop-up information about avaiable function for clicked keys
+     ("projectile(default)")          ; manage projects
+     ("vdiff(default)")               ;
+     ("perspective(default)")         ; manage workplaces
+     ("multiple-cursors")             ;
      ("irony-eldoc(default)")
      ("company-irony(default)")
      ("company-rtags"))nil t "")
@@ -146,6 +146,22 @@
              (set-window-start w1 s2)
              (set-window-start w2 s1)
              (setq i (1+ i)))))))
+
+(defun uniquify-all-lines-region (start end)
+    "Find duplicate lines in region START to END keeping first occurrence."
+    (interactive "*r")
+    (save-excursion
+      (let ((end (copy-marker end)))
+        (while
+            (progn
+              (goto-char start)
+              (re-search-forward "^\\(.*\\)\n\\(\\(.*\n\\)*\\)\\1\n" end t))
+          (replace-match "\\1\n\\2")))))
+
+  (defun uniquify-all-lines-buffer ()
+    "Delete duplicate lines in buffer and keep first occurrence."
+    (interactive "*")
+    (uniquify-all-lines-region (point-min) (point-max)))
 
  ;; (defun bears-load-theme ()
  ;;   (interactive)

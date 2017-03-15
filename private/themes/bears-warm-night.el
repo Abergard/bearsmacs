@@ -55,6 +55,8 @@
                         :inherit 'mode-line-buffer-id
                         :weight 'bold)
     )
+
+  (setq grep-hit-face 'hydra-face-teal)
   );;todo read http://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once
 
 ;; Local Variables:

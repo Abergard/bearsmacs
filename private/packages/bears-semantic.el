@@ -7,6 +7,7 @@
   (ignore-errors
     (semantic-mode 1)
     (semantic-stickyfunc-mode 1)
+    (global-semanticdb-minor-mode nil)
     )
 )
 

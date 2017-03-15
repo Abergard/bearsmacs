@@ -9,7 +9,6 @@
 (add-to-list 'load-path "~/.emacs.d/private")
 
 (require 'bears-defaults)
-(require 'bears-variables)
 (require 'bears-functions)
 
 ;;; == user config file ==
@@ -70,3 +69,5 @@
 (load custom-file 'noerror 'nomessage)
 
 ;;; init.el ends here
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
