@@ -72,22 +72,17 @@
 ;; == use Shift+arrow_keys to move cursor around split panes ========
 (windmove-default-keybindings)
 
-
 (setq bears-default-packages '(clang-format
                                company
                                flycheck
-                               flycheck-irony
                                ggtags
                                ido
-                               irony
                                yasnippet
                                rainbow-delimiters
                                powerline
                                git-gutter-fringe
-                               semantic
                                anzu
                                avy
-                               srefactor
                                neotree
                                cmake
                                whitespace
@@ -97,8 +92,7 @@
                                vdiff
                                perspective
                                multiple-cursors
-                               irony-eldoc
-                               company-irony))
+                               ))
 
 (provide 'bears-defaults)
 

@@ -3,61 +3,41 @@
 
 ;;; Code:
 
-(defun bears-package-list ()
-  "Function display all available packages."
-  (interactive)
-  (completing-read
-   "Available packages: "
-   '(("ninja")
-     ("ttcn3")
-     ("elpy")
-     ("rtags")
-     ("flycheck-rtags")
-     ("glsl")
-     ("clang-format(default)")
-     ("company(default)")
-     ("flycheck(default)")
-     ("flycheck-irony(default)")
-     ("ggtags(default)")
-     ("ido(default)")
-     ("irony(default)")
-     ("yasnippet(default)")
-     ("rainbow-delimiters(default)")
-     ("powerline(default)")
-     ("git-gutter-fringe(default)")
-     ("semantic(defautlt)")
-     ("anzu(default)")                ; displays current match and total matches information
-     ("avy(default)")                 ; go to char
-     ("srefactor(default)")           ; c++ refactoring tool
-     ("neotree(default)")             ; directories tree
-     ("cmake(default)")               ;
-     ("whitespace(default)")          ;
-     ("git-mode(default)")            ;
-     ("which-key(default)")           ; display pop-up information about avaiable function for clicked keys
-     ("projectile(default)")          ; manage projects
-     ("vdiff(default)")               ;
-     ("perspective(default)")         ; manage workplaces
-     ("multiple-cursors")             ;
-     ("irony-eldoc(default)")
-     ("company-irony(default)")
-     ("company-rtags"))nil t "")
+(defun bears-get-packages-names(packages-dir)
+  "Function return all packages names located in packages directory"
+  (let ((bears-packages-names nil))
+    (let ((bears-packages-files
+           (directory-files
+            (concat "~/.emacs.d/private/" packages-dir)
+            nil "^\\([^.]\\|\\.[^.]\\|\\.\\..\\)" 'nosort)))
+      (while bears-packages-files
+        (push (intern (substring (pop bears-packages-files) 6 -3))
+              bears-packages-names)))
+    bears-packages-names)
   )
 
-(defun bears-get-theme-list()
-  (completing-read
-   "Available themes: "
-   '(("warm-night")
-     ("zenburn")
-     ("dracula")
-     ("solarized-light")
-     ("solarized-dark")
-     ("forest-blue"))nil t "")
+(defun bears-mark-default-packages(packages)
+  "Function mark default packages with tag (default)"
+    (let ((packages (set-difference packages bears-default-packages)))
+      (let ((bears-default-tmp bears-default-packages))
+        (while bears-default-tmp
+          (push (concat (symbol-name (pop bears-default-tmp)) " [default]")
+                packages)))
+      packages)
+  )
+
+(defun bears-packages-list ()
+  "Function display all available packages."
+  (interactive)
+  (completing-read "Available packages: "
+                   (bears-mark-default-packages
+                    (bears-get-packages-names "packages")))
   )
 
 (defun bears-theme-list ()
   "Function display all available themes."
   (interactive)
-  (bears-get-theme-list)
+  (completing-read "Available themes: " (bears-get-packages-names "themes"))
   )
 
 (defun bears-configuration-list ()
