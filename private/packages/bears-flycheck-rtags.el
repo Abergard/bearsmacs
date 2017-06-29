@@ -4,6 +4,7 @@
 ;;; Code:
 
 (when (require 'flycheck nil 'noerror)
+  (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-rtags")
   (require 'flycheck-rtags)
   (require 'color)
   (defadvice bears-c++-style (after bears-flycheck-irony activate)

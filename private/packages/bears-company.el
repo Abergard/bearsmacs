@@ -5,9 +5,10 @@
 
 (use-package company
   :config
-  (defadvice bears-prog-style (after bears-company activate)
-    (company-mode 1)
-    )
+  ;; (defadvice bears-prog-style (after bears-company activate)
+  ;;   (company-mode 1)
+  ;;   )
+  (global-company-mode 1)
 
   (setq
    company-idle-delay              0
