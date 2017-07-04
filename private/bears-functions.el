@@ -29,28 +29,35 @@
 (defun bears-packages-list ()
   "Function display all available packages."
   (interactive)
-  (completing-read "Available packages: "
+  (insert-before-markers
+   (completing-read "Available packages: "
                    (bears-mark-default-packages
                     (bears-get-packages-names "packages")))
+   )
   )
 
 (defun bears-theme-list ()
   "Function display all available themes."
   (interactive)
-  (completing-read "Available themes: " (bears-get-packages-names "themes"))
+  (insert-before-markers
+   (completing-read "Available themes: "
+                    (bears-get-packages-names "themes"))
+   )
   )
 
 (defun bears-configuration-list ()
   "Dispplay all available configurations."
   (interactive)
-  (completing-read
-   "Available configurations: "
-   '(("bears-common-configuration")
-     ("bears-prog-configuration")
-     ("bears-c-configuration")
-     ("bears-c++-configuration")
-     ("bears-python-configuration")
-     ("bears-ttcn3-configuration"))nil t "")
+  (insert-before-markers
+   (completing-read
+    "Available configurations: "
+    '(("bears-common-configuration")
+      ("bears-prog-configuration")
+      ("bears-c-configuration")
+      ("bears-c++-configuration")
+      ("bears-python-configuration")
+      ("bears-ttcn3-configuration"))nil t "")
+   )
   )
 
 (defun bears-update ()
