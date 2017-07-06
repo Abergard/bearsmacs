@@ -62,8 +62,8 @@
 ;; == Short confirm ==
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; == Add .h files to c++-mode =======================================
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+;; == Add .c .h .hpp .cpp files to c++-mode ===================================
+(add-to-list 'auto-mode-alist '("\\.[ch]\\(pp\\|\\|\\+\\+\\)\\'" . c++-mode))
 
 ;; == (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) ==
 (set-frame-parameter (selected-frame) 'alpha '(90 30))
