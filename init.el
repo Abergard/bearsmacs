@@ -29,6 +29,8 @@
 (require 'bears-configuration)
 
 (when use-bears-default-configurations
+  (add-hook 'prog-mode-hook 'bears-prog-configuration)
+  (add-hook 'markdown-mode-hook 'bears-prog-configuration)
   (add-hook 'lisp-interaction-mode-hook 'bears-common-configuration)
   (add-hook 'emacs-lisp-mode-hook 'bears-prog-configuration)
   (add-hook 'text-mode-hook 'bears-common-configuration)

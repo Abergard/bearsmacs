@@ -88,9 +88,10 @@
                                whitespace
                                git-mode
                                which-key
-                               projectile
                                vdiff
                                perspective
+                               projectile
+                               persp-projectile
                                multiple-cursors
                                ))
 
