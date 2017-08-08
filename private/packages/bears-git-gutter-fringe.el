@@ -34,7 +34,7 @@
 
   (defadvice bears-prog-style (after bears-git-gutter-fringe activate)
     (git-gutter-mode 1)
-    (fringe-mode '(4 . 0))
+    (fringe-mode '(8 . 0))
     )
   :diminish git-gutter-mode
   )
