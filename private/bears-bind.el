@@ -12,6 +12,10 @@
   )
 
 (global-set-key (kbd "<f12>") 'toggle-maximize-buffer)
+(global-set-key "\M-n" "\C-u1\C-v")
+(global-set-key "\M-p" "\C-u1\M-v")
+(global-set-key (kbd "C-c SPC") 'rotate-windows)
+(global-set-key (kbd "C-c C-SPC ") 'toggle-window-split)
 
 (provide 'bears-bind)
 

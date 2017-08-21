@@ -83,7 +83,7 @@
                                git-gutter-fringe
                                anzu
                                avy
-                               neotree
+                               treemacs
                                cmake
                                whitespace
                                git-mode
