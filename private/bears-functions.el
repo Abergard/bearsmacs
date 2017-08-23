@@ -85,6 +85,7 @@
 
 (defun toggle-window-split ()
   "Toggle window split."
+  (interactive)
   (if (= (count-windows) 2)
       (let* ((this-win-buffer (window-buffer))
              (next-win-buffer (window-buffer (next-window)))
@@ -110,6 +111,7 @@
 
 (defun rotate-windows ()
   "Rotate your windows."
+  (interactive)
   (cond ((not (> (count-windows)1))
          (message "You can't rotate a single window!"))
         (t
