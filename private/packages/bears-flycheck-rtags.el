@@ -4,7 +4,6 @@
 ;;; Code:
 
 (when (require 'flycheck nil 'noerror)
-  (require 'flycheck-rtags)
   (require 'color)
   (defadvice bears-c++-style (after bears-flycheck-irony activate)
     (flycheck-select-checker 'rtags)
