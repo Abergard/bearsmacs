@@ -9,7 +9,6 @@
 (add-to-list 'load-path "~/.emacs.d/private")
 
 (require 'bears-defaults)
-(require 'bears-variables)
 (require 'bears-functions)
 
 ;;; == user config file ==
@@ -30,6 +29,8 @@
 (require 'bears-configuration)
 
 (when use-bears-default-configurations
+  (add-hook 'prog-mode-hook 'bears-prog-configuration)
+  (add-hook 'markdown-mode-hook 'bears-prog-configuration)
   (add-hook 'lisp-interaction-mode-hook 'bears-common-configuration)
   (add-hook 'emacs-lisp-mode-hook 'bears-prog-configuration)
   (add-hook 'text-mode-hook 'bears-common-configuration)
@@ -70,3 +71,5 @@
 (load custom-file 'noerror 'nomessage)
 
 ;;; init.el ends here
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)

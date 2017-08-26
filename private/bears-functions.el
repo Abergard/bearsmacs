@@ -3,74 +3,61 @@
 
 ;;; Code:
 
-(defun bears-package-list ()
-  "Function display all available packages."
-  (interactive)
-  (completing-read
-   "Available packages: "
-   '(("ninja")
-     ("ttcn3")
-     ("elpy")
-     ("rtags")
-     ("flycheck-rtags")
-     ("glsl")
-     ("clang-format(default)")
-     ("company(default)")
-     ("flycheck(default)")
-     ("flycheck-irony(default)")
-     ("ggtags(default)")
-     ("ido(default)")
-     ("irony(default)")
-     ("yasnippet(default)")
-     ("rainbow-delimiters(default)")
-     ("powerline(default)")
-     ("git-gutter-fringe(default)")
-     ("semantic(defautlt)")
-     ("anzu(default)")
-     ("avy(default)")
-     ("srefactor(default)")
-     ("neotree(default)")
-     ("cmake(default)")
-     ("whitespace(default)")
-     ("git-mode(default)")
-     ("which-key(default)")
-     ("projectile(default)")
-     ("vdiff(default)")
-     ("perspective(default)")
-     ("multiple-cursors")
-     ("irony-eldoc(default)")
-     ("company-irony(default)")
-     ("company-rtags"))nil t "")
+(defun bears-get-packages-names(packages-dir)
+  "Function return all packages names located in packages directory"
+  (let ((bears-packages-names nil))
+    (let ((bears-packages-files
+           (directory-files
+            (concat "~/.emacs.d/private/" packages-dir)
+            nil "^\\([^.]\\|\\.[^.]\\|\\.\\..\\)" 'nosort)))
+      (while bears-packages-files
+        (push (intern (substring (pop bears-packages-files) 6 -3))
+              bears-packages-names)))
+    bears-packages-names)
   )
 
-(defun bears-get-theme-list()
-  (completing-read
-   "Available themes: "
-   '(("warm-night")
-     ("zenburn")
-     ("dracula")
-     ("solarized-light")
-     ("solarized-dark")
-     ("forest-blue"))nil t "")
+(defun bears-mark-default-packages(packages)
+  "Function mark default packages with tag (default)"
+    (let ((packages (set-difference packages bears-default-packages)))
+      (let ((bears-default-tmp bears-default-packages))
+        (while bears-default-tmp
+          (push (concat (symbol-name (pop bears-default-tmp)) " [default]")
+                packages)))
+      packages)
+  )
+
+(defun bears-packages-list ()
+  "Function display all available packages."
+  (interactive)
+  (insert-before-markers
+   (completing-read "Available packages: "
+                   (bears-mark-default-packages
+                    (bears-get-packages-names "packages")))
+   )
   )
 
 (defun bears-theme-list ()
   "Function display all available themes."
   (interactive)
-  (bears-get-theme-list)
+  (insert-before-markers
+   (completing-read "Available themes: "
+                    (bears-get-packages-names "themes"))
+   )
   )
 
 (defun bears-configuration-list ()
   "Dispplay all available configurations."
   (interactive)
-  (completing-read
-   "Available configurations: "
-   '(("bears-common-configuration")
-     ("bears-prog-configuration")
-     ("bears-c-configuration")
-     ("bears-c++-configuration")
-     ("bears-python-configuration")
-     ("bears-ttcn3-configuration"))nil t "")
+  (insert-before-markers
+   (completing-read
+    "Available configurations: "
+    '(("bears-common-configuration")
+      ("bears-prog-configuration")
+      ("bears-c-configuration")
+      ("bears-c++-configuration")
+      ("bears-python-configuration")
+      ("bears-ttcn3-configuration"))nil t "")
+   )
   )
 
 (defun bears-update ()
@@ -147,11 +134,39 @@
              (set-window-start w2 s1)
              (setq i (1+ i)))))))
 
+(defun uniquify-all-lines-region (start end)
+    "Find duplicate lines in region START to END keeping first occurrence."
+    (interactive "*r")
+    (save-excursion
+      (let ((end (copy-marker end)))
+        (while
+            (progn
+              (goto-char start)
+              (re-search-forward "^\\(.*\\)\n\\(\\(.*\n\\)*\\)\\1\n" end t))
+          (replace-match "\\1\n\\2")))))
+
+  (defun uniquify-all-lines-buffer ()
+    "Delete duplicate lines in buffer and keep first occurrence."
+    (interactive "*")
+    (uniquify-all-lines-region (point-min) (point-max)))
+
  ;; (defun bears-load-theme ()
  ;;   (interactive)
  ;;   (bears-load-theme-arg (bears-theme-list))
  ;;   (bears-color-style)
- ;;   )
+;;   )
+
+(defun bears-get-current-dir ()
+  "Put the current file name on the clipboard."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (with-temp-buffer
+        (insert filename)
+        (clipboard-kill-region (point-min) (point-max)))
+      (message filename))))
 
 (provide 'bears-functions)
 

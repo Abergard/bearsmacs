@@ -3,6 +3,8 @@
 
 ;;; Code:
 
+(require 'bears-variables)
+
 (setq-default
  tab-width 4
  ;;Disable loading of "default.el" at startup
@@ -60,15 +62,38 @@
 ;; == Short confirm ==
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; == Add .h files to c++-mode =======================================
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+;; == Add .c .h .hpp .cpp files to c++-mode ===================================
+(add-to-list 'auto-mode-alist '("\\.[ch]\\(pp\\|\\|\\+\\+\\)\\'" . c++-mode))
 
 ;; == (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) ==
-(set-frame-parameter (selected-frame) 'alpha '(90 50))
-(add-to-list 'default-frame-alist '(alpha 90 50))
+(set-frame-parameter (selected-frame) 'alpha '(90 30))
+(add-to-list 'default-frame-alist '(alpha 90 30))
 
 ;; == use Shift+arrow_keys to move cursor around split panes ========
 (windmove-default-keybindings)
+
+(setq bears-default-packages '(clang-format
+                               company
+                               flycheck
+                               ggtags
+                               ido
+                               yasnippet
+                               rainbow-delimiters
+                               powerline
+                               git-gutter-fringe
+                               anzu
+                               avy
+                               treemacs
+                               cmake
+                               whitespace
+                               git-mode
+                               which-key
+                               vdiff
+                               perspective
+                               projectile
+                               persp-projectile
+                               multiple-cursors
+                               ))
 
 (provide 'bears-defaults)
 

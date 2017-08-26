@@ -5,7 +5,9 @@
 
 (when (require 'company nil 'noerror)
   (when (require 'rtags nil 'noerror)
-    (add-to-list 'company-backends '(company-rtags))
+    (setq rtags-autostart-diagnostics t
+          rtags-completions-enabled t)
+    (add-to-list 'company-backends '(company-irony-c-headers company-rtags))
     )
   )
 
