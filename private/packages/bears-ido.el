@@ -15,7 +15,7 @@
   (setq ido-auto-merge-work-directories-length 0)
   (setq ido-use-virtual-buffers t)
 
-  (use-package ido-ubiquitous
+  (use-package ido-completing-read+
     :config
     (ido-ubiquitous-mode t)
     )
