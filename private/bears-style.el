@@ -14,7 +14,6 @@
   (electric-pair-mode t)
   (column-number-mode t)
   (hl-line-mode t)
-  (linum-mode t)
   (abbrev-mode 1)
   (window-numbering-mode 1)
   (diminish 'hs-minor-mode)

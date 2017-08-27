@@ -71,5 +71,3 @@
 (load custom-file 'noerror 'nomessage)
 
 ;;; init.el ends here
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
