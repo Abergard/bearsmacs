@@ -32,7 +32,7 @@
                           projectile
                           persp-projectile
                           multiple-cursors
-			  beacon)
+                          beacon)
  compilation-scroll-output 'first-error
  custom-file "~/.emacs.d/custom.el"
  custom-safe-themes t
