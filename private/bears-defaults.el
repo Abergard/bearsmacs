@@ -57,7 +57,9 @@
  transient-mark-mode t ;;Enable visual feedback on selection.
  version-control t
  w32-pipe-read-delay 0 ;Disable window's pipe delay.
- )
+ utf-translate-cjk-mode nil ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
+ locale-coding-system 'utf-8
+  )
 
 ;Turn off mouse interface early in startup to avoid momentary display
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -67,6 +69,14 @@
 (delete-selection-mode 1) ;selected region will be deleted
 (global-linum-mode t) ;enable global line numer
 (windmove-default-keybindings) ;use Shift+arrow_keys to move cursor around split panes
+
+(set-language-environment 'utf-8)
+(set-keyboard-coding-system 'utf-8-mac) ; For old Carbon emacs on OS X only
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(unless (eq system-type 'windows-nt)
+  (set-selection-coding-system 'utf-8))
+(prefer-coding-system 'utf-8)
 
 (fset 'yes-or-no-p 'y-or-n-p) ;Short confirm
 (set-frame-parameter (selected-frame) 'alpha '(90 30)) ;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
