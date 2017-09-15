@@ -24,15 +24,19 @@
           (push (concat (symbol-name (pop bears-default-tmp)) " [default]")
                 packages)))
       packages)
-  )
+    )
+
+(defun bears-remove-mark-default(name-with-mark)
+  "Function remove '[default]' mark from string."
+  (car (delete "[default]" (split-string name-with-mark))))
 
 (defun bears-packages-list ()
   "Function display all available packages."
   (interactive)
   (insert-before-markers
-   (completing-read "Available packages: "
+   (bears-remove-mark-default (completing-read "Available packages: "
                    (bears-mark-default-packages
-                    (bears-get-packages-names "packages")))
+                    (bears-get-packages-names "packages"))))
    )
   )
 
