@@ -26,15 +26,15 @@
       packages)
     )
 
-(defun bears-remove-mark-default(name-with-mark)
+(defun bears-get-package-name(name-with-additional-info)
   "Function remove '[default]' mark from string."
-  (car (delete "[default]" (split-string name-with-mark))))
+  (car (split-string name-with-additional-info)))
 
 (defun bears-packages-list ()
   "Function display all available packages."
   (interactive)
   (insert-before-markers
-   (bears-remove-mark-default (completing-read "Available packages: "
+   (bears-get-package-name (completing-read "Available packages: "
                    (bears-mark-default-packages
                     (bears-get-packages-names "packages"))))
    )
