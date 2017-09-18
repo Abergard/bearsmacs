@@ -26,13 +26,14 @@
                           cmake
                           whitespace
                           git-mode
-                          which-key
                           vdiff
                           perspective
                           projectile
                           persp-projectile
                           multiple-cursors
-                          beacon)
+                          beacon
+                          vlf
+                          which-key)
  compilation-scroll-output 'first-error
  custom-file "~/.emacs.d/custom.el"
  custom-safe-themes t
