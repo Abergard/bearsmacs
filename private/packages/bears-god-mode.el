@@ -6,15 +6,15 @@
 (use-package god-mode
   :demand
   :commands (god-mode-all)
-  :bind (("M-SPC" . god-mode-all)
+  :bind (("M-i" . god-mode-all)
          ("C-x C-1" . delete-other-windows)
          ("C-x C-2" . split-window-below)
          ("C-x C-3" . split-window-right)
          ("C-x C-0" . delete-window)
          :map isearch-mode-map
-         ("M-SPC" . god-mode-isearch-activate)
+         ("M-i" . god-mode-isearch-activate)
          :map god-mode-isearch-map
-         ("M-SPC" . god-mode-isearch-disable))
+         ("M-i" . god-mode-isearch-disable))
   :init
   (require 'god-mode-isearch)
   :config
