@@ -33,6 +33,7 @@
                           multiple-cursors
                           beacon
                           vlf
+                          latex-preview-pane
                           which-key)
  compilation-scroll-output 'first-error
  custom-file "~/.emacs.d/custom.el"
@@ -60,6 +61,7 @@
  w32-pipe-read-delay 0 ;Disable window's pipe delay.
  utf-translate-cjk-mode nil ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
  locale-coding-system 'utf-8
+ doc-view-continuous t
   )
 
 ;Turn off mouse interface early in startup to avoid momentary display
@@ -67,8 +69,9 @@
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-(delete-selection-mode 1) ;selected region will be deleted
+(delete-selection-mode 1) ;selected region will
 (global-linum-mode t) ;enable global line numer
+(add-hook 'doc-view-mode-hook (lambda ()(linum-mode -1))) ;disable global line num for docs
 (windmove-default-keybindings) ;use Shift+arrow_keys to move cursor around split panes
 
 (set-language-environment 'utf-8)

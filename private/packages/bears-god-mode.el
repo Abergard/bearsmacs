@@ -5,7 +5,6 @@
 
 (use-package god-mode
   :demand
-  :commands (god-mode-all)
   :bind (("M-i" . god-mode-all)
          ("C-x C-1" . delete-other-windows)
          ("C-x C-2" . split-window-below)
@@ -19,7 +18,8 @@
   (require 'god-mode-isearch)
   :config
   (setq god-exempt-major-modes nil
-        god-exempt-predicates nil)
+        god-exempt-predicates nil
+        god-global-mode 1)
 
   (defun c/god-mode-update-cursor ()
     (cond (god-local-mode (progn (set-face-background 'cursor "#b680b1")))
@@ -32,8 +32,6 @@
 
   (add-hook 'god-mode-enabled-hook 'my-update-cursor)
   (add-hook 'god-mode-disabled-hook 'my-update-cursor)
-
-  (god-mode-all)
 
   :diminish god-local-mode
   )
