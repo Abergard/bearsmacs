@@ -62,6 +62,7 @@
  utf-translate-cjk-mode nil ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
  locale-coding-system 'utf-8
  doc-view-continuous t
+ x-select-enable-clipboard t
   )
 
 ;Turn off mouse interface early in startup to avoid momentary display
