@@ -5,8 +5,7 @@
 
 (when (require 'flycheck nil 'noerror)
   (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-rtags")
-  (use-package flycheck-rtags
-    :config
+  (when (require 'flycheck-rtags nil 'noerror)
     (require 'color)
     (defadvice bears-c++-style (after bears-flycheck-irony activate)
       (flycheck-select-checker 'rtags)
