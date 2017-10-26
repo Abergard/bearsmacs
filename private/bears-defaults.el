@@ -14,7 +14,6 @@
  bears-default-packages '(clang-format
                           company
                           flycheck
-                          ggtags
                           ido
                           yasnippet
                           rainbow-delimiters
