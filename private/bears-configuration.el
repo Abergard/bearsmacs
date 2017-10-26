@@ -23,6 +23,7 @@
   )
 
 (defun bears-python-configuration()
+  (bears-python-style)
   (bears-prog-configuration)
   )
 
