@@ -23,13 +23,8 @@
         god-exempt-predicates nil
         god-global-mode 1)
 
-  (defun c/god-mode-update-cursor ()
-    (cond (god-local-mode (progn (set-face-background 'cursor "#b680b1")))
-          (t (progn (set-face-background 'cursor "#b680b1")))))
-
   (defun my-update-cursor ()
     (setq cursor-type (if (or god-local-mode buffer-read-only) 'box 'bar))
-    (c/god-mode-update-cursor)
     )
 
   (add-hook 'god-mode-enabled-hook 'my-update-cursor)
