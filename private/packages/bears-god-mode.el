@@ -7,7 +7,6 @@
   :demand
   :bind (("M-i" . god-mode-all)
          ("<escape>" . god-mode-all)
-         ("M-g M-g" . keyboard-quit)
          ("C-x C-1" . delete-other-windows)
          ("C-x C-2" . split-window-below)
          ("C-x C-3" . split-window-right)
