@@ -6,94 +6,92 @@
 (require 'bears-variables)
 
 (setq-default
- tab-width 4
- ;;Disable loading of "default.el" at startup
- inhibit-default-init t
- indent-tabs-mode nil
- ;;Enable visual feedback on selection.
- transient-mark-mode t
- ;; == No splash screen please... jeez.
- inhibit-startup-screen t
- ;; == Disable window's pipe delay.
- w32-pipe-read-delay 0
- ;; == Default to unified diffs.
- diff-switches "-u"
- ;; == Default to better frame titles.
- frame-title-format (concat  "%b - emacs@" (system-name))
- ;; == open window disable.
- split-height-threshold nil
- split-width-threshold nil
- ;;Set auto save files directory.
- temporary-file-directory "~/.emacs.d/tmp/"
  auto-save-file-name-transforms '((".*" "~/.emacs.d/emacs-autosaves/" t))
- backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups"))
- make-backup-files t
- backup-by-copying t
- delete-old-versions t
- kept-new-versions 6
- kept-old-versions 2
- version-control t
- auto-save-timeout 20
  auto-save-interval 200
- delete-old-versions t
- custom-safe-themes t
- major-mode 'text-mode
+ auto-save-timeout 20
+ backup-by-copying t
+ backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups"))
+ bears-default-packages '(clang-format
+                          company
+                          flycheck
+                          ido
+                          yasnippet
+                          rainbow-delimiters
+                          powerline
+                          git-gutter-fringe
+                          anzu
+                          avy
+                          treemacs
+                          cmake
+                          whitespace
+                          git-mode
+                          vdiff
+                          perspective
+                          projectile
+                          persp-projectile
+                          multiple-cursors
+                          beacon
+                          vlf
+                          latex-preview-pane
+                          which-key)
  compilation-scroll-output 'first-error
  custom-file "~/.emacs.d/custom.el"
- package-enable-at-startup nil)
+ custom-safe-themes t
+ delete-old-versions t
+ delete-old-versions t
+ diff-switches "-u" ;Default to unified diffs.
+ frame-title-format (concat  "%b - emacs@" (system-name)) ;Default to better frame titles.
+ indent-tabs-mode nil
+ inhibit-default-init t ;Disable loading of "default.el" at startup
+ inhibit-startup-screen t ;No splash screen please... jeez.
+ kept-new-versions 6
+ kept-old-versions 2
+ major-mode 'text-mode
+ make-backup-files t
+ package-enable-at-startup nil
+ set-default-coding-systems 'utf-8
+ set-language-environment "UTF-8"
+ split-height-threshold nil ;open window disable.
+ split-width-threshold nil
+ tab-width 4
+ temporary-file-directory "~/.emacs.d/tmp/" ;Set auto save files directory.
+ transient-mark-mode t ;;Enable visual feedback on selection.
+ version-control t
+ w32-pipe-read-delay 0 ;Disable window's pipe delay.
+ utf-translate-cjk-mode nil ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
+ locale-coding-system 'utf-8
+ doc-view-continuous t
+ x-select-enable-clipboard t
+  )
 
-;; == Turn off mouse interface early in startup to avoid momentary display =
+;Turn off mouse interface early in startup to avoid momentary display
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+(delete-selection-mode 1) ;selected region will
+(global-linum-mode t) ;enable global line numer
+(add-hook 'doc-view-mode-hook (lambda ()(linum-mode -1))) ;disable global line num for docs
+(windmove-default-keybindings) ;use Shift+arrow_keys to move cursor around split panes
+
+(set-language-environment 'utf-8)
+(set-keyboard-coding-system 'utf-8-mac) ; For old Carbon emacs on OS X only
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(unless (eq system-type 'windows-nt)
+  (set-selection-coding-system 'utf-8))
+(prefer-coding-system 'utf-8)
+
+(fset 'yes-or-no-p 'y-or-n-p) ;Short confirm
+(set-frame-parameter (selected-frame) 'alpha '(90 30)) ;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
+(add-to-list 'default-frame-alist '(alpha 90 30))
+(add-to-list 'auto-mode-alist '("\\.[ch]\\(pp\\|\\|\\+\\+\\)\\'" . c++-mode)) ;Add .c .h .hpp .cpp files to c++-mode
 
 (defadvice load-theme (before disable-themes-first activate)
   "Disable theme before load new one."
   "disable all active themes."
   (dolist (i custom-enabled-themes)
     (disable-theme i)))
-
-(set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8)
-
-;; == selected region will be deleted ==
-(delete-selection-mode 1)
-
-;; == Short confirm ==
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; == Add .c .h .hpp .cpp files to c++-mode ===================================
-(add-to-list 'auto-mode-alist '("\\.[ch]\\(pp\\|\\|\\+\\+\\)\\'" . c++-mode))
-
-;; == (set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>])) ==
-(set-frame-parameter (selected-frame) 'alpha '(90 30))
-(add-to-list 'default-frame-alist '(alpha 90 30))
-
-;; == use Shift+arrow_keys to move cursor around split panes ========
-(windmove-default-keybindings)
-
-(setq bears-default-packages '(clang-format
-                               company
-                               flycheck
-                               ggtags
-                               ido
-                               yasnippet
-                               rainbow-delimiters
-                               powerline
-                               git-gutter-fringe
-                               anzu
-                               avy
-                               treemacs
-                               cmake
-                               whitespace
-                               git-mode
-                               which-key
-                               vdiff
-                               perspective
-                               projectile
-                               persp-projectile
-                               multiple-cursors
-                               ))
 
 (provide 'bears-defaults)
 

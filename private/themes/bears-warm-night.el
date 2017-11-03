@@ -6,57 +6,56 @@
 (use-package warm-night-theme
   :config
   (load-theme 'warm-night t)
-  (set-face-attribute 'vhl/default-face nil
-                      :foreground "#262626"
-                      :background "#969696")
+  (let ((class '((class color) (min-colors 89))))
+  (custom-theme-set-faces
+   'warm-night
+   `(powerline-active1           ((,class (:inherit mode-line
+                                           :foreground nil
+                                           :background "grey17"))))
 
-  (set-face-attribute 'region nil
-                      :foreground "#262626"
-                      :background "#969696")
+   `(powerline-active2           ((,class (:inherit mode-line
+                                           :foreground nil
+                                           :background "grey40"))))
 
-  (set-face-attribute 'show-paren-match nil
-                      :foreground "thistle3"
-                      :background "MediumPurple4"
-                      :weight 'extra-bold)
+   `(cursor                      ((,class (:background "#b680b1"))))
 
-  (when (require 'company nil 'noerror)
-    (set-face-attribute 'company-tooltip nil
-                        :foreground "#a1a1a1"
-                        :background "#362f2f"
-                        :weight 'bold
-                        :inherit 'default)
+   `(vhl/default-face            ((,class (:foreground "#262626"
+                                           :background "#969696"))))
 
-    (set-face-attribute 'company-tooltip-search nil
-                        :foreground "white"
-                        :background "steelblue")
+   `(region                      ((,class (:foreground "#262626"
+                                           :background "#969696"))))
 
-    (set-face-attribute 'company-tooltip-selection nil
-                        :foreground "white"
-                        :background "steelblue")
+   `(show-paren-match            ((,class (:foreground "thistle3"
+                                           :background "MediumPurple4"
+                                           :weight extrabold))))
 
-    (set-face-attribute 'company-tooltip-common nil
-                        :foreground "#929292"
-                        :inherit 'font-lock-constant-face)
+   `(company-tooltip             ((,class (:inherit 'default
+                                           :foreground "#a1a1a1"
+                                           :background "#362f2f"
+                                           :weight bold))))
 
-    (set-face-attribute 'company-tooltip-annotation nil
-                        :foreground "medium purple"
-                        :background "#362f2f"
-                        :inherit 'default)
-    )
-  (when (require 'anzu nil 'noerror)
-    (set-face-attribute 'anzu-mode-line nil
-                        :foreground nil
-                        :weight 'bold)
-    )
+   `(comapny-tooltip-search      ((,class (:foreground "white"
+                                           :background "steelblue"))))
 
-  (when (require 'perspective nil 'noerror)
-    (set-face-attribute 'persp-selected-face nil
-                        :foreground nil
-                        :inherit 'mode-line-buffer-id
-                        :weight 'bold)
-    )
+   `(company-tooltip-selection   ((,class (:foreground "white"
+                                           :background "steelblue"))))
 
-  (setq grep-hit-face 'hydra-face-teal)
+   `(company-tooltip-common      ((,class (:inherit 'font-lock-constant-face
+                                           :foreground "#929292"))))
+
+   `(company-tooltip-annotation  ((,class (:inherit 'default
+                                           :foreground "medium purple"
+                                           :background "#362f2f"))))
+
+   `(anzu-mode-line              ((,class (:foreground nil
+                                           :weight bold))))
+
+   `(persp-selected-face         ((,class (:inherit 'mode-line-buffer-id
+                                           :foreground nil
+                                           :weight bold))))
+
+   ))
+
   );;todo read http://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once
 
 ;; Local Variables:
