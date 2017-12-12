@@ -10,8 +10,9 @@
       (irony-eldoc 1)
       )
     (add-hook 'irony-mode-hook 'my-irony-eldoc-mode-hook)
-    (set-face-attribute 'eldoc-highlight-function-argument nil
-                        :foreground "chartreuse4")
+    ;; (set-face-attribute 'eldoc-highlight-function-argument nil
+    ;;                     :foreground "chartreuse4")
+    (setq irony-eldoc-use-unicode t)
     :diminish eldoc-mode
     )
   )
