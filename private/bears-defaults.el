@@ -41,6 +41,7 @@
  delete-old-versions t
  diff-switches "-u" ;Default to unified diffs.
  frame-title-format (concat  "%b - emacs@" (system-name)) ;Default to better frame titles.
+ setq font-lock-maximum-decoration '((c-mode . t) (c++-mode . 2) (t . 1)) ;speedup  font-lock for c++ mode
  indent-tabs-mode nil
  inhibit-default-init t ;Disable loading of "default.el" at startup
  inhibit-startup-screen t ;No splash screen please... jeez.
@@ -83,8 +84,8 @@
 (prefer-coding-system 'utf-8)
 
 (fset 'yes-or-no-p 'y-or-n-p) ;Short confirm
-(set-frame-parameter (selected-frame) 'alpha '(90 30)) ;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
-(add-to-list 'default-frame-alist '(alpha 90 30))
+(set-frame-parameter (selected-frame) 'alpha '(100 100)) ;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
+(add-to-list 'default-frame-alist '(alpha 100 100))
 (add-to-list 'auto-mode-alist '("\\.[ch]\\(pp\\|\\|\\+\\+\\)\\'" . c++-mode)) ;Add .c .h .hpp .cpp files to c++-mode
 
 (defadvice load-theme (before disable-themes-first activate)
