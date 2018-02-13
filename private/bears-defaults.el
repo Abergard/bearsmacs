@@ -41,7 +41,7 @@
  delete-old-versions t
  diff-switches "-u" ;Default to unified diffs.
  frame-title-format (concat  "%b - emacs@" (system-name)) ;Default to better frame titles.
- setq font-lock-maximum-decoration '((c-mode . t) (c++-mode . 2) (t . 1)) ;speedup  font-lock for c++ mode
+ font-lock-maximum-decoration '((c-mode . t) (c++-mode . 2) (t . 1)) ;speedup  font-lock for c++ mode
  indent-tabs-mode nil
  inhibit-default-init t ;Disable loading of "default.el" at startup
  inhibit-startup-screen t ;No splash screen please... jeez.
