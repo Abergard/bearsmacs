@@ -14,7 +14,7 @@
 (add-to-list 'package-archives '("marmalade" .
                                  "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("elpy" .
-                                 "https://jorgenschaefer.github.io/packages/"))
+                                 "http://jorgenschaefer.github.io/packages/"))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
