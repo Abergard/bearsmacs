@@ -25,20 +25,6 @@
 
 (setq use-package-always-ensure t)
 
-(use-package paradox
-  :config
-  (setq paradox-github-token t))
-
-(use-package async)
-(use-package window-numbering)
-(use-package iedit)
-(use-package popup
-  :config
-  (setq popup-tip-max-width 120))
-(use-package volatile-highlights
-  :diminish volatile-highlights-mode
-  )
-
 (provide 'bears-packages)
 
 ;; Local Variables:

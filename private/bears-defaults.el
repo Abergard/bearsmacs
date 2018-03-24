@@ -11,7 +11,12 @@
  auto-save-timeout 20
  backup-by-copying t
  backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups"))
- bears-default-packages '(clang-format
+ bears-default-packages '(diminish
+                          async
+                          paradox
+                          volatile-highlights
+                          popup
+                          clang-format
                           company
                           flycheck
                           ido
@@ -33,7 +38,10 @@
                           beacon
                           vlf
                           latex-preview-pane
-                          which-key)
+                          which-key
+                          window-numbering
+                          iedit
+                          )
  compilation-scroll-output 'first-error
  custom-file "~/.emacs.d/custom.el"
  custom-safe-themes t
@@ -41,7 +49,7 @@
  delete-old-versions t
  diff-switches "-u" ;Default to unified diffs.
  frame-title-format (concat  "%b - emacs@" (system-name)) ;Default to better frame titles.
- font-lock-maximum-decoration '((c-mode . t) (c++-mode . 2) (t . 1)) ;speedup  font-lock for c++ mode
+ ;; font-lock-maximum-decoration '((c-mode . t) (c++-mode . 2) (t . 1)) ;speedup  font-lock for c++ mode
  indent-tabs-mode nil
  inhibit-default-init t ;Disable loading of "default.el" at startup
  inhibit-startup-screen t ;No splash screen please... jeez.
