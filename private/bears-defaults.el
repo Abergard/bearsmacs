@@ -21,12 +21,12 @@
                           flycheck
                           ido
                           yasnippet
+                          yasnippet-snippets
                           rainbow-delimiters
                           powerline
                           git-gutter-fringe
                           anzu
                           avy
-                          treemacs
                           cmake
                           whitespace
                           git-mode
@@ -34,6 +34,7 @@
                           perspective
                           projectile
                           persp-projectile
+                          treemacs
                           multiple-cursors
                           beacon
                           vlf
@@ -80,6 +81,7 @@
 
 (delete-selection-mode 1) ;selected region will
 (global-linum-mode t) ;enable global line numer
+(global-auto-revert-mode t) ;enable sync files if not modified
 (add-hook 'doc-view-mode-hook (lambda ()(linum-mode -1))) ;disable global line num for docs
 (windmove-default-keybindings) ;use Shift+arrow_keys to move cursor around split panes
 

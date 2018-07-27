@@ -7,7 +7,7 @@
   :config
   (setq whitespace-style '(face tabs empty trailing lines-tail)
         whitespace-line-column 80)
-  (defadvice bears-prog-style (after bears-whitespace activate)
+  (defadvice bears-c-style (after bears-whitespace activate)
     (whitespace-mode t)
     )
   :diminish whitespace-mode

@@ -2,10 +2,11 @@
 ;;; Commentary:
 
 ;;; Code:
+
 (use-package diminish)
 
 ;; Local Variables:
-;; byte-compile-warnings:
+;; byte-compile-warnings: (not free-vars callargs)
 ;; End:
 
 ;;; bears-diminish.el ends here
