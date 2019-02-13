@@ -8,7 +8,7 @@
   (when (require 'company-rtags nil 'noerror)
     (setq rtags-autostart-diagnostics t
           rtags-completions-enabled t)
-    (add-to-list 'company-backends '(company-irony-c-headers company-rtags))
+    (add-to-list 'company-backends '(company-rtags))
     )
   )
 

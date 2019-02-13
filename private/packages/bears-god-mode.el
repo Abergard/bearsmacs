@@ -15,12 +15,11 @@
          ("M-i" . god-mode-isearch-activate)
          :map god-mode-isearch-map
          ("M-i" . god-mode-isearch-disable))
+
   :init
   (require 'god-mode-isearch)
   :config
-  (setq god-exempt-major-modes nil
-        god-exempt-predicates nil
-        god-global-mode 1)
+  (setq god-global-mode 1)
 
   (defun my-update-cursor ()
     (setq cursor-type (if (or god-local-mode buffer-read-only) 'box 'bar))
@@ -28,6 +27,10 @@
 
   (add-hook 'god-mode-enabled-hook 'my-update-cursor)
   (add-hook 'god-mode-disabled-hook 'my-update-cursor)
+
+  (add-to-list 'god-exempt-major-modes 'treemacs-mode)
+
+  (define-key god-local-mode-map (kbd ".") 'repeat)
 
   :diminish god-local-mode
   )
