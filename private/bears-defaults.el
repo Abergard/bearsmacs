@@ -97,6 +97,11 @@
 (set-frame-parameter (selected-frame) 'alpha '(100 100)) ;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
 (add-to-list 'default-frame-alist '(alpha 100 100))
 (add-to-list 'auto-mode-alist '("\\.[ch]\\(pp\\|\\|\\+\\+\\)\\'" . c++-mode)) ;Add .c .h .hpp .cpp files to c++-mode
+(require 'ansi-color)
+(defun my/ansi-colorize-buffer ()
+  (let ((buffer-read-only nil))
+    (ansi-color-apply-on-region (point-min) (point-max))))
+(add-hook 'compilation-filter-hook 'my/ansi-colorize-buffer)
 
 (defadvice load-theme (before disable-themes-first activate)
   "Disable theme before load new one."
