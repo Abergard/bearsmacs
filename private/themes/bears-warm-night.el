@@ -54,6 +54,20 @@
                                            :foreground nil
                                            :weight bold))))
 
+   `(term-color-black            ((,class (:foreground "white smoke"
+                                           :background "white smoke"))))
+
+   `(centaur-tabs-unselected ((,class (:background "gray20" :foreground "grey50"))))
+   `(centaur-tabs-default    ((,class (:background "gray20" :foreground "grey50"))))
+
+   `(centaur-tabs-selected   ((,class (:foreground "#292424"
+                                       :background "#b680b1"))))
+
+   `(centaur-tabs-selected-modified   ((,class (:foreground "#292424"
+                                       :background "#b680b1"))))
+
+   `(centaur-tabs-unselected-modified ((,class (:background "gray20" :foreground "grey50"))))
+
    ))
 
   );;todo read http://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once
