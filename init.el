@@ -22,7 +22,7 @@
 
 (require 'bears-packages)
 
-(bears-load-theme-arg bears-theme)
+(bears-load-theme-args bears-gui-theme bears-terminal-theme)
 
 (require 'bears-style)
 (require 'bears-bind)
@@ -71,3 +71,5 @@
 (load custom-file 'noerror 'nomessage)
 
 ;;; init.el ends here
+(put 'narrow-to-region 'disabled nil)
+(put 'scroll-left 'disabled nil)

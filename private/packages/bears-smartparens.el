@@ -8,11 +8,8 @@
   (require 'smartparens-config)
   (smartparens-global-strict-mode 1)
 
-  :bind ("<M-DEL>" . sp-unwrap-sexp)
+  ;; (setq sp-base-key-bindings (quote sp))
+  ;; :bind ("<C-DEL>" . sp-unwrap-sexp)
   )
-
-;; Local Variables:
-;; byte-compile-warnings: (not free-vars)
-;; End:
 
 ;;; bears-smartparens.el ends here

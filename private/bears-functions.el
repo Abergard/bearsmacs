@@ -78,6 +78,12 @@
     (load-file (format "~/.emacs.d/private/themes/bears-%s.el" theme)))
   )
 
+(defun bears-load-theme-args (gui-theme terminal-theme)
+  "Load GUI-THEME and TERMINAL-THEME."
+  (if (display-graphic-p)
+      (bears-load-theme-arg gui-theme)
+    (bears-load-theme-arg terminal-theme)))
+
 (defun toggle-maximize-buffer ()
   "Maximize buffer."
   (interactive)

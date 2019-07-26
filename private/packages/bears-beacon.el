@@ -9,8 +9,4 @@
   (setq beacon-blink-when-window-scrolls nil)
   )
 
-;; Local Variables:
-;; byte-compile-warnings: (not free-vars)
-;; End:
-
 ;;; bears-beacon.el ends here
