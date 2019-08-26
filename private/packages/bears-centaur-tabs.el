@@ -10,10 +10,12 @@
         centaur-tabs-modified-marker "*"
         centaur-tabs-style "slant"
         centaur-tabs-set-icons t
-        centaur-tabs-cycle-scope 'tabs)
+        centaur-tabs-cycle-scope 'tabs
+        centaur-tabs-adjust-buffer-order t)
 
   (centaur-tabs-mode t)
   (centaur-tabs-group-by-projectile-project)
+  (centaur-tabs-enable-buffer-reordering)
 
   :bind
   ("M-[" . centaur-tabs-backward)
