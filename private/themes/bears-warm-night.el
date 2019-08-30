@@ -68,6 +68,18 @@
 
    `(centaur-tabs-unselected-modified ((,class (:background "gray20" :foreground "grey50"))))
 
+   `(lsp-ui-sideline-current-symbol ((,class (:foreground "#b680b1"
+                                              :box (:line-width -1 :color "white")
+                                              :weight semi-bold
+                                              :height 0.99))))
+   `(lsp-ui-sideline-symbol         ((,class (:foreground "grey"
+                                              :box (:line-width -1 :color "grey")
+                                              :weight semi-bold
+                                              :height 0.99))))
+   `(lsp-ui-sideline-symbol-info    ((,class (:foreground "wheat3"
+                                              :slant italic
+                                              :height 0.99))))
+
    ))
 
   );;todo read http://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once
