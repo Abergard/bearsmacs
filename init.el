@@ -8,8 +8,10 @@
 
 (add-to-list 'load-path "~/.emacs.d/private")
 
+(require 'bears-variables)
 (require 'bears-defaults)
 (require 'bears-functions)
+(require 'bears-packages)
 
 ;;; == user config file ==
 (unless (file-exists-p "~/.bearsmacs.el")
@@ -19,8 +21,6 @@
 
 (bears-configurations)
 (bears-user-init)
-
-(require 'bears-packages)
 
 (bears-load-theme-args bears-gui-theme bears-terminal-theme)
 
@@ -59,16 +59,16 @@
 
 (bears-user-config)
 
-(if (daemonp)
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (unless (string= bears-theme "")
-                  (load-file (format "~/.emacs.d/private/themes/bears-%s.el" bears-theme)))
-                )
-              )
-  )
+;; (if (daemonp)
+;;     (add-hook 'after-make-frame-functions
+;;               (lambda (frame)
+;;                 (unless (string= bears-theme "")
+;;                   (load-file (format "~/.emacs.d/private/themes/bears-%s.el" bears-theme)))
+;;                 )
+;;               )
+;;   )
 
-(load custom-file 'noerror 'nomessage)
+;; (load custom-file 'noerror 'nomessage)
 
 ;;; init.el ends here
 (put 'narrow-to-region 'disabled nil)
