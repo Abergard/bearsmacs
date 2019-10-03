@@ -21,22 +21,29 @@
           treemacs-goto-tag-strategy          'refetch-index)
 
     (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t))
-  :bind
-  (:map global-map
-        ([f8]        . treemacs-toggle)
-        ("M-0"       . treemacs-select-window)
-        ("C-c 1"     . treemacs-delete-other-windows)
-        ("C-c tt"    . treemacs-toggle)
-        ("C-c tT"    . treemacs)
-        ("C-c t C-t" . treemacs-find-file)))
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode t))
+  ;; :bind
+  ;; (:map global-map
+  ;;       ([f8]        . treemacs-toggle)
+  ;;       ("M-0"       . treemacs-select-window)xc
+  ;;       ("C-c 1"     . treemacs-delete-other-windows)
+  ;;       ("C-c tt"    . treemacs-toggle)
+  ;;       ("C-c tT"    . treemacs)
+  ;;       ("C-c t C-t" . treemacs-find-file))
+  )
+
 (use-package treemacs-projectile
+  :after treemacs projectile
   :ensure t
-  :config
-  (setq treemacs-header-function #'treemacs-projectile-create-header)
   :bind (:map global-map
               ("C-c tp" . treemacs-projectile)
               ("C-c tP" . treemacs-projectile-toggle)))
+
+(use-package treemacs-icons-dired
+  :after treemacs dired
+  :ensure t
+  :config (treemacs-icons-dired-mode))
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
