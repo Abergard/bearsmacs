@@ -36,12 +36,12 @@
                           projectile
                           persp-projectile
                           ;; treemacs
-                          multiple-cursors
-                          beacon
-                          vlf
-                          latex-preview-pane
-                          which-key
-                          window-numbering
+                          ;;multiple-cursors
+                          ;;beacon
+                          ;;vlf
+                          ;;latex-preview-pane
+                          ;;which-key
+                          ;;window-numbering
                           iedit
                           )
  ;; compilation-scroll-output 'first-error
