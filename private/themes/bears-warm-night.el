@@ -79,6 +79,8 @@
    `(lsp-ui-sideline-symbol-info    ((,class (:foreground "wheat3"
                                               :slant italic
                                               :height 0.99))))
+   `(iedit-occurrence               ((,class (:inherit highlight
+                                              :foreground "#b680b1"))))
 
    ))
 
