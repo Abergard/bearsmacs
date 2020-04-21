@@ -12,7 +12,7 @@
  backup-by-copying t
  backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups"))
  bears-default-packages '(
-                          ;; diminish
+                          diminish
                           ;; async
                           ;; paradox
                           ;; volatile-highlights
@@ -25,7 +25,7 @@
                           ;; yasnippet-snippets
                           ;; rainbow-delimiters
                           ;; powerline
-                          ;; git-gutter-fringe
+                          git-gutter-fringe
                           ;; anzu
                           avy
                           ;; cmake
@@ -40,7 +40,7 @@
                           ;;beacon
                           ;;vlf
                           ;;latex-preview-pane
-                          ;;which-key
+                          which-key
                           ;;window-numbering
                           iedit
                           )

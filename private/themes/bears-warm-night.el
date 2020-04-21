@@ -80,7 +80,9 @@
                                               :slant italic
                                               :height 0.99))))
    `(iedit-occurrence               ((,class (:inherit highlight
-                                              :foreground "#b680b1"))))
+                                                       :foreground "#b680b1"))))
+
+   `(semantic-highlight-func-current-tag-face  ((,class (:background "gray24"))))
 
    ))
 

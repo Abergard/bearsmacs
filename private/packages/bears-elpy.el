@@ -5,6 +5,7 @@
 
 
 (use-package elpy
+  :init (elpy-enable)
   :config
   ;; (when (require 'company nil 'noerror)
   ;;   ;; (use-package jedi-core)
@@ -13,10 +14,10 @@
   ;;   )
 
   ;; (setq elpy-rpc-backend "jedi")
-  (defadvice bears-python-style (after bears-elpy activate)
-    (elpy-mode 1)
-    ;; (jedi:setup)
-    )
+  ;; (defadvice bears-python-style (after bears-elpy activate)
+  ;;   (elpy-mode 1)
+  ;;   ;; (jedi:setup)
+  ;;   )
 
   (use-package py-autopep8)
   )
