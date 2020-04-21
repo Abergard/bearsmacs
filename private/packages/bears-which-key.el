@@ -4,6 +4,8 @@
 ;;; Code:
 
 (use-package which-key
+  :ensure t
+  :commands which-key
   :config
   (which-key-mode 1)
 
