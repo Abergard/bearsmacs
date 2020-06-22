@@ -4,6 +4,7 @@
 ;;;       - show/hide *compilation* buffer to *auto* hide if not needed
 ;;; Code:
 
+;; use ((nil . ((projectile-project-name . "unique project name"))))  -> .dir-locals.el
 (use-package projectile
   :config
   (projectile-mode 1)
