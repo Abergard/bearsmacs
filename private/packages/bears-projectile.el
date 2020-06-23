@@ -13,9 +13,11 @@
   ;; (defadvice projectile--run-project-cmd (after bears-projectile-compilation-after activate)
   ;;   (toggle-maximize-buffer))
   :diminish projectile-mode
-  :bind
-  ("<f5>" . projectile-compile-project)
-  ("<f7>" . projectile-run-project)
+  :bind-keymap
+  ("C-c C-p" .  projectile-command-map)
+  :bind (:map projectile-command-map
+              ("<f5>" . projectile-compile-project)
+              ("<f7>" . projectile-run-project))
   )
 
 ;; Local Variables:
