@@ -8,8 +8,10 @@
 
 (add-to-list 'load-path "~/.emacs.d/private")
 
+(require 'bears-variables)
 (require 'bears-defaults)
 (require 'bears-functions)
+(require 'bears-packages)
 
 ;;; == user config file ==
 (unless (file-exists-p "~/.bearsmacs.el")
@@ -20,9 +22,7 @@
 (bears-configurations)
 (bears-user-init)
 
-(require 'bears-packages)
-
-(bears-load-theme-arg bears-theme)
+(bears-load-theme-args bears-gui-theme bears-terminal-theme)
 
 (require 'bears-style)
 (require 'bears-bind)
@@ -50,8 +50,8 @@
   (setq bears-packages (append bears-packages bears-default-packages))
   )
 
-(require 'cl)
-(setq bears-packages (set-difference bears-packages bears-disabled-packages))
+(require 'cl-lib)
+(setq bears-packages (cl-set-difference bears-packages bears-disabled-packages))
 
 (while bears-packages
   (load-file
@@ -59,15 +59,15 @@
 
 (bears-user-config)
 
-(if (daemonp)
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (unless (string= bears-theme "")
-                  (load-file (format "~/.emacs.d/private/themes/bears-%s.el" bears-theme)))
-                )
-              )
-  )
+;; (if (daemonp)
+;;     (add-hook 'after-make-frame-functions
+;;               (lambda (frame)
+;;                 (unless (string= bears-theme "")
+;;                   (load-file (format "~/.emacs.d/private/themes/bears-%s.el" bears-theme)))
+;;                 )
+;;               )
+;;   )
 
-(load custom-file 'noerror 'nomessage)
+;; (load custom-file 'noerror 'nomessage)
 
 ;;; init.el ends here

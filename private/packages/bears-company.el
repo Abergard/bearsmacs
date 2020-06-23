@@ -13,16 +13,17 @@
   (setq
    company-idle-delay              0
    company-echo-delay              0
-   company-minimum-prefix-length   1
+   company-minimum-prefix-length   0
    company-show-numbers            t
-   company-tooltip-limit           20
+   company-tooltip-limit           40
    company-dabbrev-downcase        nil
    company-begin-commands          '(self-insert-command)
    )
 
   (add-to-list 'company-backends '(company-elisp))
-
+  
   :bind ("<M-return>" . company-complete-common)
+  :bind ("<M-RET>" . company-complete-common)
   :diminish company-mode
   )
 

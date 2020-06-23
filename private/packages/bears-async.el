@@ -4,8 +4,4 @@
 ;;; Code:
 (use-package async)
 
-;; Local Variables:
-;; byte-compile-warnings:
-;; End:
-
 ;;; bears-async.el ends here

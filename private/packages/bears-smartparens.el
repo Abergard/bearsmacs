@@ -7,10 +7,9 @@
   :config
   (require 'smartparens-config)
   (smartparens-global-strict-mode 1)
-  )
 
-;; Local Variables:
-;; byte-compile-warnings: (not free-vars)
-;; End:
+  ;; (setq sp-base-key-bindings (quote sp))
+  ;; :bind ("<C-DEL>" . sp-unwrap-sexp)
+  )
 
 ;;; bears-smartparens.el ends here

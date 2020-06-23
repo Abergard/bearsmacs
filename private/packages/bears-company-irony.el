@@ -11,8 +11,4 @@
     )
   )
 
-;; Local Variables:
-;; byte-compile-warnings: (not free-vars)
-;; End:
-
 ;;; bears-company-irony.el ends here

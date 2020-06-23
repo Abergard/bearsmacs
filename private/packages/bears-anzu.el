@@ -1,5 +1,9 @@
-;;; bears-anzu.el --- local styles
+;;; bears-anzu.el --- bears configuration file for anzu
+
 ;;; Commentary:
+
+; Counts and displays the number of all occurances of search.
+; During replacing all occurances display new value at the screen.
 
 ;;; Code:
 
@@ -17,9 +21,5 @@
   (define-key isearch-mode-map [remap isearch-query-replace]  #'anzu-isearch-query-replace)
   (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
   )
-
-;; Local Variables:
-;; byte-compile-warnings: (not free-vars)
-;; End:
 
 ;;; bears-anzu.el ends here

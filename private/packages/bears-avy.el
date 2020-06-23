@@ -14,8 +14,4 @@
   ("M-g M-f" . avy-goto-char-timer)
   )
 
-;; Local Variables:
-;; byte-compile-warnings: (not free-vars)
-;; End:
-
 ;;; bears-avy.el ends here
