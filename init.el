@@ -71,5 +71,3 @@
 ;; (load custom-file 'noerror 'nomessage)
 
 ;;; init.el ends here
-(put 'narrow-to-region 'disabled nil)
-(put 'scroll-left 'disabled nil)
