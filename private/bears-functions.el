@@ -181,6 +181,53 @@
         (clipboard-kill-region (point-min) (point-max)))
       (message filename))))
 
+(defun sort-lines-by-length (reverse beg end)
+  "Sort lines by length."
+  (interactive "P\nr")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (let ;; To make `end-of-line' and etc. to ignore fields.
+          ((inhibit-field-text-motion t))
+        (sort-subr reverse 'forward-line 'end-of-line nil nil
+                   (lambda (l1 l2)
+                     (apply #'< (mapcar (lambda (range) (- (cdr range) (car range)))
+                                        (list l1 l2)))))))))
+
+(defun move-text-internal (arg)
+   (cond
+    ((and mark-active transient-mark-mode)
+     (if (> (point) (mark))
+            (exchange-point-and-mark))
+     (let ((column (current-column))
+              (text (delete-and-extract-region (point) (mark))))
+       (forward-line arg)
+       (move-to-column column t)
+       (set-mark (point))
+       (insert text)
+       (exchange-point-and-mark)
+       (setq deactivate-mark nil)))
+    (t
+     (beginning-of-line)
+     (when (or (> arg 0) (not (bobp)))
+       (forward-line)
+       (when (or (< arg 0) (not (eobp)))
+            (transpose-lines arg))
+       (forward-line -1)))))
+
+(defun move-text-down (arg)
+   "Move region (transient-mark-mode active) or current line
+  arg lines down."
+   (interactive "*p")
+   (move-text-internal arg))
+
+(defun move-text-up (arg)
+   "Move region (transient-mark-mode active) or current line
+  arg lines up."
+   (interactive "*p")
+   (move-text-internal (- arg)))
+
 (defun decode-hex-string (hex-string)
   "Decode HEX-STRING in hex to human readable format."
   (apply #'concat

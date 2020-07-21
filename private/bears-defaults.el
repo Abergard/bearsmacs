@@ -22,7 +22,7 @@
                           stickyfunc
                           which-key
                           yasnippet
-                          
+
                           perspective
                           projectile
                           persp-projectile
@@ -36,7 +36,7 @@
                           ;; C++ IDE
                           ;; -------------------
                           ;; clang-format
-                          
+
                           rtags
                           flycheck-rtags
                           ;; company-rtags
