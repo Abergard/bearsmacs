@@ -3,6 +3,9 @@
 
 ;;; Code:
 
+(require 'cl-lib)
+(require 'bears-style)
+
 (defun bears-get-packages-names(packages-dir)
   "Function return all packages names located in packages directory"
   (let ((bears-packages-names nil))
@@ -18,7 +21,7 @@
 
 (defun bears-mark-default-packages(packages)
   "Function mark default packages with tag (default)"
-    (let ((packages (set-difference packages bears-default-packages)))
+    (let ((packages (cl-set-difference packages bears-default-packages)))
       (let ((bears-default-tmp bears-default-packages))
         (while bears-default-tmp
           (push (concat (symbol-name (pop bears-default-tmp)) " [default]")
@@ -224,6 +227,45 @@
   arg lines up."
    (interactive "*p")
    (move-text-internal (- arg)))
+
+(defun decode-hex-string (hex-string)
+  "Decode HEX-STRING in hex to human readable format."
+  (apply #'concat
+     (loop for i from 0 to (- (/ (length hex-string) 2) 1)
+           for hex-byte = (substring hex-string (* 2 i) (* 2 (+ i 1)))
+           collect (format "%c" (string-to-number hex-byte 16)))))
+
+(defun bears-eval-and-replace ()
+  "Replace the preceding sexp with its value."
+  (interactive)
+  (backward-kill-sexp)
+  (condition-case nil
+      (prin1 (eval (read (current-kill 0)))
+             (current-buffer))
+    (error (message "Invalid expression")
+           (insert (current-kill 0)))))
+
+(defun remove-from-buffer (regex)
+  "Remove lines from buffer which match REGEX."
+  (interactive "sRemove: ")
+  (let (tmp-read-only buffer-read-only)
+    (read-only-mode -1)
+    (flush-lines regex)
+    (read-only-mode tmp-read-only))
+  )
+
+(defun remove-ut-grep ()
+  "Remove lines from UT directory for grep results."
+  (interactive)
+  (remove-from-buffer "UT")
+  )
+
+(defun remove-ut-grep-and-self (self)
+  "Remove lines from UT (SELF) directory for grep results."
+  (interactive "sWrite search item: ")
+  (remove-ut-grep)
+  (remove-from-buffer self)
+  )
 
 (provide 'bears-functions)
 

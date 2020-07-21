@@ -50,8 +50,8 @@
   (setq bears-packages (append bears-packages bears-default-packages))
   )
 
-(require 'cl)
-(setq bears-packages (set-difference bears-packages bears-disabled-packages))
+(require 'cl-lib)
+(setq bears-packages (cl-set-difference bears-packages bears-disabled-packages))
 
 (while bears-packages
   (load-file
@@ -71,5 +71,3 @@
 ;; (load custom-file 'noerror 'nomessage)
 
 ;;; init.el ends here
-(put 'narrow-to-region 'disabled nil)
-(put 'scroll-left 'disabled nil)

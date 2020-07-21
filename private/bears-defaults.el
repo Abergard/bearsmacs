@@ -11,38 +11,60 @@
  auto-save-timeout 20
  backup-by-copying t
  backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups"))
- bears-default-packages '(
-                          ;; diminish
+ bears-default-packages '(;; -------------------
+                          avy
+                          diminish
+                          git-gutter-fringe
+                          god-mode
+                          ido
+                          iedit
+                          nxml
+                          stickyfunc
+                          which-key
+                          yasnippet
+                          
+                          perspective
+                          projectile
+                          persp-projectile
+
+                          ;; general IDE engines
+                          ;; -------------------
+                          flycheck
+                          company
+                          lsp
+
+                          ;; C++ IDE
+                          ;; -------------------
+                          ;; clang-format
+                          
+                          rtags
+                          flycheck-rtags
+                          ;; company-rtags
+
+                          ;; irony
+                          ;; flycheck-irony
+                          ;; company-irony
+                          ;; irony-eldoc
+
+                          ;; -------------------
                           ;; async
                           ;; paradox
                           ;; volatile-highlights
                           ;; popup
-                          clang-format
-                          company
-                          flycheck
-                          ido
-                          yasnippet
                           ;; yasnippet-snippets
                           ;; rainbow-delimiters
                           ;; powerline
-                          ;; git-gutter-fringe
                           ;; anzu
-                          avy
                           ;; cmake
                           ;; whitespace
                           ;; git-mode
                           ;; vdiff
-                          perspective
-                          projectile
-                          persp-projectile
                           ;; treemacs
                           ;;multiple-cursors
                           ;;beacon
                           ;;vlf
                           ;;latex-preview-pane
-                          ;;which-key
                           ;;window-numbering
-                          iedit
                           )
  ;; compilation-scroll-output 'first-error
  custom-file "~/.emacs.d/custom.el"

@@ -9,6 +9,7 @@
     (ignore-errors
       (semantic-mode 1)
       (semantic-stickyfunc-mode 1)
+      (semantic-highlight-func-mode 1)
       (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
       )
     )

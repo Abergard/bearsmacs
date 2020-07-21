@@ -4,7 +4,7 @@
 ;;; Code:
 
 (when (require 'company nil 'noerror)
-  (add-to-list 'load-path "~/.emacs.d/elpa/company-rtags")
+  ;; (add-to-list 'load-path "~/.emacs.d/elpa/company-rtags")
   (when (require 'company-rtags nil 'noerror)
     (setq rtags-autostart-diagnostics t
           rtags-completions-enabled t)
