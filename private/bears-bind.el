@@ -16,6 +16,8 @@
 (global-set-key "\M-p" "\C-u8\M-v")
 (global-set-key (kbd "C-c SPC") 'rotate-windows)
 (global-set-key (kbd "C-c C-SPC ") 'toggle-window-split)
+(global-set-key [\M-\S-up] 'move-text-up)
+(global-set-key [\M-\S-down] 'move-text-down)
 
 (provide 'bears-bind)
 
