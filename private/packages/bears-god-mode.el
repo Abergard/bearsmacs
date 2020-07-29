@@ -32,6 +32,9 @@
 
   (define-key god-local-mode-map (kbd ".") 'repeat)
 
+  (when (require 'which-key nil 'noerror)
+    (which-key-enable-god-mode-support))
+
   :diminish god-local-mode
   )
 

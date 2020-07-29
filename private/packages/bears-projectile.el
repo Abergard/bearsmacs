@@ -14,7 +14,7 @@
   ;;   (toggle-maximize-buffer))
   :diminish projectile-mode
   :bind-keymap
-  ("C-c C-p" .  projectile-command-map)
+  ("C-c p" .  projectile-command-map)
   :bind (:map projectile-command-map
               ("<f5>" . projectile-compile-project)
               ("<f7>" . projectile-run-project))

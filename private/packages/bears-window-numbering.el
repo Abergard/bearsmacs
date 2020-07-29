@@ -3,7 +3,9 @@
 
 ;;; Code:
 
-(use-package window-numbering)
+(use-package window-numbering
+  :ensure t
+  )
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars callargs)

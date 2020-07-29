@@ -6,11 +6,7 @@
 (use-package which-key
   :ensure t
   :commands which-key
-  :config
-  (which-key-mode 1)
-
-  (when (require 'vlf nil 'noerror)
-    (which-key-enable-god-mode-support))
+  :config (which-key-mode)
   :diminish which-key-mode
   )
 

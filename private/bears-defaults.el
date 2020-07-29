@@ -22,6 +22,8 @@
                           stickyfunc
                           which-key
                           yasnippet
+                          volatile-highlights
+                          window-numbering
 
                           perspective
                           projectile
@@ -37,6 +39,7 @@
                           ;; -------------------
                           ;; clang-format
 
+                          ccls
                           rtags
                           flycheck-rtags
                           ;; company-rtags
@@ -49,7 +52,7 @@
                           ;; -------------------
                           ;; async
                           ;; paradox
-                          ;; volatile-highlights
+                          ;; 
                           ;; popup
                           ;; yasnippet-snippets
                           ;; rainbow-delimiters
@@ -64,7 +67,6 @@
                           ;;beacon
                           ;;vlf
                           ;;latex-preview-pane
-                          ;;window-numbering
                           )
  ;; compilation-scroll-output 'first-error
  custom-file "~/.emacs.d/custom.el"

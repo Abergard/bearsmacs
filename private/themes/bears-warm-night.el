@@ -5,7 +5,7 @@
 
 (use-package warm-night-theme
   :config
-  (load-theme 'warm-night)
+  (load-theme 'warm-night t)
   (let ((class '((class color) (min-colors 89))))
     (custom-set-faces
      '(powerline-active1                ((,class (:inherit mode-line :foreground nil :background "grey17"))))
