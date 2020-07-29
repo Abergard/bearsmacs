@@ -14,18 +14,12 @@
 (require 'bears-packages)
 
 ;;; == user config file ==
-(load-file "~/.emacs.d/private/bears-user-file.el")
-
-(defvar-local bears--current-user-file-version bears--user-file-version)
-(setq bears--user-file-version "")
+(defvar bears--user-file-version "")
 
 (unless (file-exists-p "~/.bearsmacs.el")
   (copy-file "~/.emacs.d/private/bears-user-file.el" "~/.bearsmacs.el"))
 
 (load-file "~/.bearsmacs.el")
-
-(if nil (string= bears--current-user-file-version bears--user-file-version)
-  (display-warning :warning "Mismatch in a .bearsmacs file version! Please check changes."))
 
 (bears-configurations)
 (bears-user-init)
@@ -37,18 +31,20 @@
 (require 'bears-configuration)
 
 (when use-bears-default-configurations
+  (bears-common-configuration)
+  ;; (add-hook 'fundamental-mode-hook 'bears-common-configuration)
   (add-hook 'prog-mode-hook 'bears-prog-configuration)
   (add-hook 'markdown-mode-hook 'bears-prog-configuration)
-  (add-hook 'lisp-interaction-mode-hook 'bears-common-configuration)
+  ;; (add-hook 'lisp-interaction-mode-hook 'bears-common-configuration)
   (add-hook 'emacs-lisp-mode-hook 'bears-prog-configuration)
-  (add-hook 'text-mode-hook 'bears-common-configuration)
-  (add-hook 'sh-mode-hook 'bears-common-configuration)
+  ;; (add-hook 'text-mode-hook 'bears-common-configuration)
+  ;; (add-hook 'sh-mode-hook 'bears-common-configuration)
   (add-hook 'c++-mode-hook 'bears-c++-configuration)
   (add-hook 'c-mode-hook 'bears-c-configuration)
   (add-hook 'python-mode-hook 'bears-python-configuration)
-  (add-hook 'gitignore-mode-hook 'bears-common-configuration)
-  (add-hook 'gitattributes-mode-hook 'bears-common-configuration)
-  (add-hook 'gitconfig-mode-hook 'bears-common-configuration)
+  ;; (add-hook 'gitignore-mode-hook 'bears-common-configuration)
+  ;; (add-hook 'gitattributes-mode-hook 'bears-common-configuration)
+  ;; (add-hook 'gitconfig-mode-hook 'bears-common-configuration)
   (add-hook 'cmake-mode-hook 'bears-prog-configuration)
   (add-hook 'ninja-mode-hook 'bears-prog-configuration)
   (add-hook 'ttcn-3-mode-hook 'bears-ttcn3-configuration)
@@ -62,7 +58,7 @@
 (setq bears-packages (cl-set-difference bears-packages bears-disabled-packages))
 
 (while bears-packages
-  (load-file
+  (load
    (format "~/.emacs.d/private/packages/bears-%s.el" (pop bears-packages))))
 
 (bears-user-config)
@@ -77,5 +73,10 @@
 ;;   )
 
 ;; (load custom-file 'noerror 'nomessage)
+
+;; (defvar-local bears--local-user-file-version bears--user-file-version)
+;; (load-file "~/.emacs.d/private/bears-user-file.el")
+;; (if (eq (string= bears--local-user-file-version bears--user-file-version) nil)
+;;   (display-warning :warning "Mismatch in a .bearsmacs file version! Please check changes."))
 
 ;;; init.el ends here

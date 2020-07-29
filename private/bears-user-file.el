@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defvar bears--user-file-version "1.1.0")
+(setq bears--user-file-version "1.1.0")
 
 (defun bears-configurations ()
   "Bearsmacs configuration.  Do not add own new configuration here.

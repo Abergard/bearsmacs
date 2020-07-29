@@ -4,7 +4,6 @@
 ;;; Code:
 
 (use-package lsp-mode
-  :ensure t
   :commands lsp
   :init (setq lsp-auto-execute-action            nil
               lsp-auto-guess-root                nil
@@ -40,7 +39,6 @@
 
 ;; (use-package lsp-ui
 ;;   :after lsp-mode
-;;   :ensure t
 ;;   :commands lsp-ui
 ;;   :config
 ;;   ;; (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
@@ -49,7 +47,6 @@
 
 (use-package company-lsp
   :after company
-  :ensure t
   :commands company-lsp
   :init
   (setq company-minimum-prefix-length 1
@@ -57,7 +54,6 @@
   )
 ;; (use-package lsp-treemacs
 ;;   :after treemacs
-;;   :ensure t
 ;;   )
 
 ;; Local Variables:

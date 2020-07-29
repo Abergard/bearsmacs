@@ -5,13 +5,11 @@
 ;;; Code:
 
 (use-package rust-mode
-  :ensure t
   :config
   )
 
 (use-package cargo
   :after rust-mode
-  :ensure t
   :hook (rust-mode . cargo-minor-mode)
   )
 
@@ -24,7 +22,6 @@
 
 (use-package flycheck-rust
   :after rust-mode flycheck-mode
-  :ensure t
   :hook (flycheck-mode . flycheck-rust-setup)
   )
 

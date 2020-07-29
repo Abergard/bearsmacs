@@ -4,7 +4,6 @@
 ;;; Code:
 
 (use-package treemacs
-  :ensure t
   :config
   (progn
     (setq treemacs-follow-after-init          t
@@ -35,14 +34,12 @@
 
 (use-package treemacs-projectile
   :after treemacs projectile
-  :ensure t
   :bind (:map global-map
               ("C-c tp" . treemacs-projectile)
               ("C-c tP" . treemacs-projectile-toggle)))
 
 (use-package treemacs-icons-dired
   :after treemacs dired
-  :ensure t
   :config (treemacs-icons-dired-mode))
 
 ;; Local Variables:

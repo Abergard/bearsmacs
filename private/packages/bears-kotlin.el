@@ -5,13 +5,11 @@
 ;;; Code:
 
 (use-package kotlin-mode
-  :ensure t
   :config
   )
 
 (use-package flycheck-kotlin
   :after kotlin-mode flycheck-mode
-  :ensure t
   :hook (flycheck-mode . flycheck-kotlin-setup)
   )
 

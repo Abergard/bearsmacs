@@ -4,7 +4,7 @@
 ;;; Code:
 
 (use-package which-key
-  :ensure t
+  :demand
   :commands which-key
   :config (which-key-mode)
   :diminish which-key-mode

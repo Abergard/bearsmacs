@@ -4,6 +4,7 @@
 ;;; Code:
 
 (use-package god-mode
+  :after which-key
   :demand
   :bind (("M-i" . god-mode-all)
          ("<escape>" . god-mode-all)

@@ -3,9 +3,7 @@
 
 ;;; Code:
 
-(use-package ccls
-  :ensure t
-  )
+(use-package ccls)
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)

@@ -13,6 +13,8 @@
  backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups"))
  bears-default-packages '(;; General
                           ;; ----------
+                          auto-update
+
                           avy
                           diminish
                           git-gutter-fringe
@@ -26,6 +28,7 @@
                           whitespace
                           window-numbering
                           yasnippet
+                          wgrep
 
                           ;; IDE/project
                           ;; -------------------
@@ -43,7 +46,7 @@
                           clang-format
                           flycheck-rtags
                           gtest
-                          modern-cpp-font-lock
+                          modern-c++
                           rtags
                           ;; company-rtags
 

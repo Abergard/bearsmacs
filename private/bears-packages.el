@@ -21,6 +21,7 @@
 (eval-when-compile
   (require 'use-package))
 
+(require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
 (let ((default-directory  "~/.emacs.d/github/"))
