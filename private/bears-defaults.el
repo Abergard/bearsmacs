@@ -11,7 +11,8 @@
  auto-save-timeout 20
  backup-by-copying t
  backup-directory-alist '((".*" . "~/.emacs.d/emacs-backups"))
- bears-default-packages '(;; -------------------
+ bears-default-packages '(;; General
+                          ;; ----------
                           avy
                           diminish
                           git-gutter-fringe
@@ -20,53 +21,54 @@
                           iedit
                           nxml
                           stickyfunc
-                          which-key
-                          yasnippet
                           volatile-highlights
+                          which-key
+                          whitespace
                           window-numbering
+                          yasnippet
 
+                          ;; IDE/project
+                          ;; -------------------
+                          company
+                          flycheck
+                          lsp
+                          persp-projectile
                           perspective
                           projectile
-                          persp-projectile
-
-                          ;; general IDE engines
-                          ;; -------------------
-                          flycheck
-                          company
-                          lsp
+                          treemacs
 
                           ;; C++ IDE
                           ;; -------------------
-                          ;; clang-format
-
                           ccls
-                          rtags
+                          clang-format
                           flycheck-rtags
+                          gtest
+                          modern-cpp-font-lock
+                          rtags
                           ;; company-rtags
+
+                          ;;
+                          ;; -------------------
 
                           ;; irony
                           ;; flycheck-irony
                           ;; company-irony
                           ;; irony-eldoc
-
-                          ;; -------------------
                           ;; async
                           ;; paradox
-                          ;; 
                           ;; popup
                           ;; yasnippet-snippets
                           ;; rainbow-delimiters
                           ;; powerline
                           ;; anzu
                           ;; cmake
-                          ;; whitespace
                           ;; git-mode
                           ;; vdiff
                           ;; treemacs
-                          ;;multiple-cursors
-                          ;;beacon
-                          ;;vlf
-                          ;;latex-preview-pane
+                          ;; multiple-cursors
+                          ;; beacon
+                          ;; vlf
+                          ;; latex-preview-pane
                           )
  ;; compilation-scroll-output 'first-error
  custom-file "~/.emacs.d/custom.el"

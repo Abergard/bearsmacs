@@ -3,7 +3,7 @@
 
 ;;; Code:
 
-(add-to-list 'load-path "~/.emacs.d/elpa/gtest-mode")
+
 (require 'gtest-mode)
 
 ;; Local Variables:

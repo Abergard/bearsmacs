@@ -4,6 +4,7 @@
 ;;; Code:
 
 (use-package modern-cpp-font-lock
+  :ensure t
   :config
   (add-to-list 'modern-c++-operators "=")
   (setq modern-c++-literal-integer t

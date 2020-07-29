@@ -14,10 +14,18 @@
 (require 'bears-packages)
 
 ;;; == user config file ==
+(load-file "~/.emacs.d/private/bears-user-file.el")
+
+(defvar-local bears--current-user-file-version bears--user-file-version)
+(setq bears--user-file-version "")
+
 (unless (file-exists-p "~/.bearsmacs.el")
   (copy-file "~/.emacs.d/private/bears-user-file.el" "~/.bearsmacs.el"))
 
 (load-file "~/.bearsmacs.el")
+
+(if nil (string= bears--current-user-file-version bears--user-file-version)
+  (display-warning :warning "Mismatch in a .bearsmacs file version! Please check changes."))
 
 (bears-configurations)
 (bears-user-init)

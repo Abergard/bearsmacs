@@ -23,6 +23,9 @@
 
 (setq use-package-always-ensure t)
 
+(let ((default-directory  "~/.emacs.d/github/"))
+  (normal-top-level-add-subdirs-to-load-path))
+
 (provide 'bears-packages)
 
 ;; Local Variables:

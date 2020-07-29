@@ -38,14 +38,14 @@
          (lsp-mode . lsp-enable-which-key-integration))
   )
 
-(use-package lsp-ui
-  :after lsp-mode
-  :ensure t
-  :commands lsp-ui
-  :config
-  ;; (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-  ;; (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-  )
+;; (use-package lsp-ui
+;;   :after lsp-mode
+;;   :ensure t
+;;   :commands lsp-ui
+;;   :config
+;;   ;; (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+;;   ;; (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+;;   )
 
 (use-package company-lsp
   :after company
