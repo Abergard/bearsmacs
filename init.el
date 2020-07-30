@@ -30,29 +30,22 @@
 (require 'bears-bind)
 (require 'bears-configuration)
 
+(when use-bears-default-packages
+  (setq bears-packages (append bears-packages bears-default-packages))
+  )
+
 (when use-bears-default-configurations
   (bears-common-configuration)
-  ;; (add-hook 'fundamental-mode-hook 'bears-common-configuration)
   (add-hook 'prog-mode-hook 'bears-prog-configuration)
   (add-hook 'markdown-mode-hook 'bears-prog-configuration)
-  ;; (add-hook 'lisp-interaction-mode-hook 'bears-common-configuration)
   (add-hook 'emacs-lisp-mode-hook 'bears-prog-configuration)
-  ;; (add-hook 'text-mode-hook 'bears-common-configuration)
-  ;; (add-hook 'sh-mode-hook 'bears-common-configuration)
   (add-hook 'c++-mode-hook 'bears-c++-configuration)
   (add-hook 'c-mode-hook 'bears-c-configuration)
   (add-hook 'python-mode-hook 'bears-python-configuration)
-  ;; (add-hook 'gitignore-mode-hook 'bears-common-configuration)
-  ;; (add-hook 'gitattributes-mode-hook 'bears-common-configuration)
-  ;; (add-hook 'gitconfig-mode-hook 'bears-common-configuration)
   (add-hook 'cmake-mode-hook 'bears-prog-configuration)
   (add-hook 'ninja-mode-hook 'bears-prog-configuration)
   (add-hook 'ttcn-3-mode-hook 'bears-ttcn3-configuration)
   (add-hook 'glsl-mode-hook 'bears-c-configuration))
-
-(when use-bears-default-packages
-  (setq bears-packages (append bears-packages bears-default-packages))
-  )
 
 (require 'cl-lib)
 (setq bears-packages (cl-set-difference bears-packages bears-disabled-packages))

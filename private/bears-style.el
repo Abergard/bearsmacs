@@ -10,14 +10,10 @@
 (defun bears-common-style()
   "Base style for all kinds of files."
   (show-paren-mode t)
-  (volatile-highlights-mode t)
   (electric-pair-mode t)
   (column-number-mode t)
   (hl-line-mode t)
   (abbrev-mode 1)
-  (window-numbering-mode 1)
-  (diminish 'hs-minor-mode)
-  (diminish 'abbrev-mode)
   (bears-color-style)
   )
 
