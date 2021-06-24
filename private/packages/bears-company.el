@@ -11,7 +11,7 @@
   (global-company-mode 1)
 
   (setq
-   company-idle-delay              0
+   company-idle-delay              0.0
    company-echo-delay              0
    company-minimum-prefix-length   0
    company-show-numbers            t

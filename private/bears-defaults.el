@@ -22,7 +22,7 @@
                           ido
                           iedit
                           nxml
-                          stickyfunc
+                          ;; stickyfunc
                           volatile-highlights
                           which-key
                           whitespace
@@ -34,7 +34,7 @@
                           ;; -------------------
                           company
                           flycheck
-                          lsp
+                          ;; lsp
                           persp-projectile
                           perspective
                           projectile
@@ -42,12 +42,13 @@
 
                           ;; C++ IDE
                           ;; -------------------
-                          ccls
+                          ;; ccls
                           clang-format
-                          flycheck-rtags
+                          ;; flycheck-clangd
+                          ;; flycheck-rtags
                           gtest
                           modern-c++
-                          rtags
+                          ;; rtags
                           ;; company-rtags
 
                           ;;

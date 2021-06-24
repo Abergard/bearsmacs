@@ -6,7 +6,7 @@
 (use-package avy
 
   :config
-  (use-package avy-flycheck)
+  (use-package avy-flycheck :demand :after flycheck)
   (setq avy-timeout-seconds 0.3)
   :bind
   ("M-g M-l" . avy-goto-line)
