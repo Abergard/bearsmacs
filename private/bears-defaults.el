@@ -46,6 +46,7 @@
                           clang-format
                           ;; flycheck-clangd
                           ;; flycheck-rtags
+                          cmake-mode
                           gtest
                           modern-c++
                           ;; rtags

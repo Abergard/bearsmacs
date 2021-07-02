@@ -11,9 +11,12 @@
                                                     "--background-index"
                                                     "-j=8")))
 
-  :hook (c++-mode . eglot-ensure)
-  )
+  (when (require 'flycheck nil 'noerror)
+    (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-gcc))
+    )
 
+  :hook ((c++-mode . eglot-ensure))
+  )
 
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars)
