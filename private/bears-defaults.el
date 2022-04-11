@@ -14,7 +14,7 @@
  bears-default-packages '(;; General
                           ;; ----------
                           auto-update
-
+                          unicode
                           avy
                           diminish
                           git-gutter-fringe

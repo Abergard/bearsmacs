@@ -6,10 +6,11 @@
 (use-package eglot
   :config
   (add-to-list 'eglot-server-programs '(c++-mode . ("clangd"
-                                                    "--clang-tidy"
-                                                    "--clang-tidy-checks=*,-fuchsia-*,-modernize-use-trailing-return-type,-llvm-*,-llvmlibc-*"
                                                     "--background-index"
-                                                    "-j=8")))
+                                                    "-j=8"
+                                                    "--header-insertion=iwyu"
+                                                    "--pch-storage=memory"
+                                                    "--clang-tidy")))
 
   (when (require 'flycheck nil 'noerror)
     (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-gcc))
