@@ -29,6 +29,7 @@
                           window-numbering
                           yasnippet
                           wgrep
+                          multiple-cursors
 
                           ;; IDE/project
                           ;; -------------------
@@ -43,14 +44,14 @@
                           ;; C++ IDE
                           ;; -------------------
                           ;; ccls
-                          clang-format
+                          ;; rtags
+                          ;; company-rtags
                           ;; flycheck-clangd
                           ;; flycheck-rtags
                           cmake-mode
+                          clang-format
                           gtest
                           modern-c++
-                          ;; rtags
-                          ;; company-rtags
 
                           ;;
                           ;; -------------------
@@ -70,7 +71,6 @@
                           ;; git-mode
                           ;; vdiff
                           ;; treemacs
-                          ;; multiple-cursors
                           ;; beacon
                           ;; vlf
                           ;; latex-preview-pane
