@@ -127,8 +127,11 @@
 ;; (prefer-coding-system 'utf-8)
 
 (fset 'yes-or-no-p 'y-or-n-p) ;Short confirm
+;; transparent
 ;; (set-frame-parameter (selected-frame) 'alpha '(100 100)) ;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
-;; (add-to-list 'default-frame-alist '(alpha 100 100))
+(set-frame-parameter nil 'alpha-background 70)
+(add-to-list 'default-frame-alist '(alpha-background . 70))
+;; (add-to-list 'default-frame-alist '(alpha 80 50))
 ;; (add-to-list 'auto-mode-alist '("\\.[ch]\\(pp\\|\\|\\+\\+\\)\\'" . c++-mode)) ;Add .c .h .hpp .cpp files to c++-mode
 (require 'ansi-color)
 (defun my/ansi-colorize-buffer ()
