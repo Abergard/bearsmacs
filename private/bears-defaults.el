@@ -50,7 +50,6 @@
                           ;; flycheck-rtags
                           cmake-mode
                           clang-format
-                          gtest
                           modern-c++
 
                           ;;
