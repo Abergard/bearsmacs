@@ -73,3 +73,4 @@
 ;;   (display-warning :warning "Mismatch in a .bearsmacs file version! Please check changes."))
 
 ;;; init.el ends here
+(put 'narrow-to-region 'disabled nil)

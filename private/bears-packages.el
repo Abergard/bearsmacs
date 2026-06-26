@@ -28,6 +28,11 @@
 (let ((default-directory  "~/.emacs.d/github/"))
   (normal-top-level-add-subdirs-to-load-path))
 
+(unless (package-installed-p 'quelpa)
+  (package-refresh-contents)
+  (package-install 'quelpa)
+  (quelpa-self-upgrade))
+
 (provide 'bears-packages)
 
 ;; Local Variables:
